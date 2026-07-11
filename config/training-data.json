@@ -1,0 +1,51 @@
+{
+  "examples": [
+    {"label": "genai", "text": "foundation model generative AI agents knowledge base embeddings vector search prompt guardrails model inference"},
+    {"label": "genai", "text": "Bedrock agent runtime model evaluation RAG reranking multimodal token streaming"},
+    {"label": "genai", "text": "Azure AI Foundry OpenAI model catalog agent service prompt flow"},
+    {"label": "genai", "text": "Vertex AI Gemini model garden grounding vector search generative AI"},
+    {"label": "genai", "text": "OCI generative AI agents embedding model dedicated AI cluster"},
+
+    {"label": "security", "text": "security IAM identity access policy encryption key vulnerability threat protection private endpoint"},
+    {"label": "security", "text": "zero trust firewall WAF secrets manager KMS audit compliance guardrail PII"},
+    {"label": "security", "text": "Microsoft Defender Entra ID conditional access security center"},
+    {"label": "security", "text": "Security Command Center confidential computing VPC service controls"},
+    {"label": "security", "text": "Cloud Guard vault data safe identity domains security zones"},
+
+    {"label": "data", "text": "database analytics data warehouse lakehouse ETL SQL PostgreSQL streaming table schema"},
+    {"label": "data", "text": "Redshift Aurora DynamoDB Glue Athena Lake Formation Kinesis OpenSearch"},
+    {"label": "data", "text": "Fabric Synapse Cosmos DB SQL Database Event Hubs Data Factory"},
+    {"label": "data", "text": "BigQuery Spanner Bigtable Dataflow Dataproc Pub Sub AlloyDB"},
+    {"label": "data", "text": "Autonomous Database MySQL HeatWave Data Flow GoldenGate Streaming"},
+
+    {"label": "network", "text": "network VPC subnet route load balancer DNS VPN peering connectivity gateway"},
+    {"label": "network", "text": "Transit Gateway Direct Connect Route 53 PrivateLink CloudFront"},
+    {"label": "network", "text": "Virtual Network ExpressRoute Front Door Application Gateway Private Link"},
+    {"label": "network", "text": "Cloud Load Balancing Cloud VPN Interconnect Cloud DNS service mesh"},
+    {"label": "network", "text": "VCN FastConnect DRG load balancer network firewall DNS"},
+
+    {"label": "operations", "text": "monitoring observability logging metrics tracing deployment autoscaling reliability backup disaster recovery"},
+    {"label": "operations", "text": "CloudWatch CloudFormation Lambda Step Functions EventBridge Systems Manager"},
+    {"label": "operations", "text": "Azure Monitor Bicep Functions Logic Apps Automation reliability"},
+    {"label": "operations", "text": "Cloud Monitoring Logging Run functions workflows operations suite"},
+    {"label": "operations", "text": "Monitoring Logging Resource Manager Functions Events DevOps"},
+
+    {"label": "cost", "text": "pricing cost savings discount reservation commitment billing budget free tier optimization"},
+    {"label": "cost", "text": "price reduction Graviton spot savings plans cost explorer"},
+    {"label": "cost", "text": "reserved instances hybrid benefit cost management advisor"},
+    {"label": "cost", "text": "committed use discount billing FinOps price change"},
+    {"label": "cost", "text": "universal credits flexible shapes cost analysis budget"},
+
+    {"label": "certification", "text": "certification exam beta study guide learning credential training retirement replacement"},
+    {"label": "certification", "text": "AWS certified professional specialty associate exam guide"},
+    {"label": "certification", "text": "Microsoft certification exam renewal skills measured retired credential"},
+    {"label": "certification", "text": "Google Cloud certification professional exam guide learning path"},
+    {"label": "certification", "text": "Oracle certification exam MyLearn learning subscription"},
+
+    {"label": "deprecation", "text": "deprecated deprecation retirement retired end of support end of life migration required breaking change"},
+    {"label": "deprecation", "text": "service discontinued feature removed legacy API shutdown upgrade deadline"},
+    {"label": "deprecation", "text": "will no longer be supported migrate before deadline replacement version"},
+    {"label": "deprecation", "text": "breaking change unavailable after date action required transition"},
+    {"label": "deprecation", "text": "sunset obsolete end support retire old version"}
+  ]
+}

@@ -1,0 +1,1300 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-11T03:39:07.249516Z",
+  "analyzer": {
+    "name": "tiny-naive-bayes-plus-rules",
+    "version": "1.0",
+    "privacy": "公式フィードのタイトルと概要だけをローカル処理。外部AI APIへの送信なし。"
+  },
+  "source_status": [
+    {
+      "vendor": "aws",
+      "status": "ok",
+      "items": 12,
+      "message": ""
+    },
+    {
+      "vendor": "azure",
+      "status": "ok",
+      "items": 12,
+      "message": ""
+    },
+    {
+      "vendor": "gcp",
+      "status": "ok",
+      "items": 12,
+      "message": ""
+    },
+    {
+      "vendor": "oci",
+      "status": "ok",
+      "items": 12,
+      "message": ""
+    }
+  ],
+  "summary": {
+    "total_items": 48,
+    "source_success": 4,
+    "source_total": 4,
+    "priorities": {
+      "今すぐ確認": 3,
+      "今週確認": 32,
+      "記録のみ": 13
+    },
+    "categories": {
+      "deprecation": 13,
+      "genai": 13,
+      "data": 8,
+      "security": 5,
+      "operations": 5,
+      "network": 4
+    },
+    "vendors": {
+      "gcp": 12,
+      "azure": 12,
+      "aws": 12,
+      "oci": 12
+    },
+    "top_actions": [
+      {
+        "id": "ca542f7fc1a9a7fb",
+        "vendor": "gcp",
+        "title": "Gemini Enterprise Agent Platform — Feature: Retirement for preview models for 2.5 Flash, 2.5 Flash-Lite, and 3.1 Flash-Lite",
+        "action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      },
+      {
+        "id": "9553dd8fdf5219e3",
+        "vendor": "gcp",
+        "title": "Gemini Enterprise Agent Platform — Deprecated: Grok 4.1 models deprecation",
+        "action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      },
+      {
+        "id": "df4ea41bbbe20752",
+        "vendor": "azure",
+        "title": "Retirement: Support for Python-2.7; 3.8 and PowerShell- 7.1; 7.2 will be retired on September 30, 2026",
+        "action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      }
+    ]
+  },
+  "items": [
+    {
+      "id": "ca542f7fc1a9a7fb",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Gemini Enterprise Agent Platform — Feature: Retirement for preview models for 2.5 Flash, 2.5 Flash-Lite, and 3.1 Flash-Lite",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-07-09T07:00:00Z",
+      "excerpt": "Feature Retirement for preview models for 2.5 Flash, 2.5 Flash-Lite, and 3.1 Flash-Lite The following preview model endpoints have been retired and are no longer accessible: gemini-2.5-flash-lite-preview-09-2025 gemini-2.5-flash-preview-05-2025 gemini-3.1-flash-lite-preview See M",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation",
+        "genai"
+      ],
+      "priority": "今すぐ確認",
+      "score": 80,
+      "confidence": "高",
+      "signals": [
+        "retired",
+        "retirement",
+        "agent",
+        "gemini"
+      ],
+      "why_it_matters": "「retired、retirement、agent、gemini」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "9553dd8fdf5219e3",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Gemini Enterprise Agent Platform — Deprecated: Grok 4.1 models deprecation",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-07-08T07:00:00Z",
+      "excerpt": "Deprecated Grok 4.1 models deprecation The Grok 4.1 model family (including xai/grok-4.1-fast-reasoning and xai/grok-4.1-fast-non-reasoning ) on the Gemini Enterprise Agent Platform is deprecated and will be shut down on August 20, 2026. After this date, Google Agent Platform Mod",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation",
+        "genai"
+      ],
+      "priority": "今すぐ確認",
+      "score": 80,
+      "confidence": "高",
+      "signals": [
+        "deprecated",
+        "deprecation",
+        "agent",
+        "gemini"
+      ],
+      "why_it_matters": "「deprecated、deprecation、agent、gemini」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "df4ea41bbbe20752",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "Retirement: Support for Python-2.7; 3.8 and PowerShell- 7.1; 7.2 will be retired on September 30, 2026",
+      "url": "https://azure.microsoft.com/updates?id=567556",
+      "published_at": "2026-07-10T21:33:34Z",
+      "excerpt": "Starting October 1, 2026, the specified runtime versions Python 2.7, Python 3.8, and PowerShell 7.1 & 7.2. will no longer be supported by Automation. Runbooks using these versions may continue to run but will not receive security updates, bug fixes, or o",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation",
+        "security"
+      ],
+      "priority": "今すぐ確認",
+      "score": 75,
+      "confidence": "高",
+      "signals": [
+        "retired",
+        "retirement"
+      ],
+      "why_it_matters": "「retired、retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "fafbe346e112e5e4",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Apigee Advanced API Security — Deprecated: Deprecation and shutdown of GenAI Incident Summary (generative AI Insights)",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-07-10T07:00:00Z",
+      "excerpt": "Deprecated Deprecation and shutdown of GenAI Incident Summary (generative AI Insights) The standalone GenAI Incident Summary (generative AI Insights) feature in Apigee Advanced API Security Abuse Detection, currently in Preview, is deprecated and shut down as of July 9, 2026. Thi",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation",
+        "genai",
+        "security"
+      ],
+      "priority": "今週確認",
+      "score": 71,
+      "confidence": "高",
+      "signals": [
+        "deprecated",
+        "deprecation",
+        "generative ai"
+      ],
+      "why_it_matters": "「deprecated、deprecation、generative ai」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "94dea4b9e697c721",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Apigee X — Security: An Improper Input Validation vulnerability in BigQuery DAO in Google Cloud Apigee versions prior to 2026-06-12 on Google Cloud Platform allo",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-07-08T07:00:00Z",
+      "excerpt": "Security An Improper Input Validation vulnerability in BigQuery DAO in Google Cloud Apigee versions prior to 2026-06-12 on Google Cloud Platform allowed an authenticated attacker to exfiltrate cross-tenant data. This vulnerability was patched on 12 June 2026 on the Apigee Servers",
+      "category": "security",
+      "category_label": "セキュリティ",
+      "tags": [
+        "security",
+        "data"
+      ],
+      "priority": "今週確認",
+      "score": 68,
+      "confidence": "高",
+      "signals": [
+        "vulnerability",
+        "security"
+      ],
+      "why_it_matters": "「vulnerability、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
+      "study_impact": "対象: PDE, PCA, PMLE。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
+      "recommended_action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。"
+    },
+    {
+      "id": "d4d791c814fba512",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "Retirement: Azure Synapse Link for Azure Cosmos DB NoSQL",
+      "url": "https://azure.microsoft.com/updates?id=558560",
+      "published_at": "2026-06-10T17:00:06Z",
+      "excerpt": "As of March 31, 2026, new Azure Cosmos DB NoSQL accounts can no longer enable Azure Synapse Link. Existing customers will remain fully supported until March 31, 2029, when Azure Synapse Link will reach end of life.We encourage all customers to begin migra",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation",
+        "data",
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 67,
+      "confidence": "高",
+      "signals": [
+        "retirement",
+        "end of life"
+      ],
+      "why_it_matters": "「retirement、end of life」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "5e79ef5c8d3b79e9",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Gemini Enterprise Agent Platform — Feature: AlphaGenome released for Gemini Enterprise Agent Platform",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-07-06T07:00:00Z",
+      "excerpt": "Feature AlphaGenome released for Gemini Enterprise Agent Platform AlphaGenome, Google DeepMind's state-of-the-art genomics foundation model, is now available for deployment and use with Gemini Enterprise Agent Platform. Designed to decipher the functional regulatory code of the h",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai",
+        "operations"
+      ],
+      "priority": "今週確認",
+      "score": 63,
+      "confidence": "高",
+      "signals": [
+        "now available",
+        "agent",
+        "gemini",
+        "foundation model"
+      ],
+      "why_it_matters": "「now available、agent、gemini、foundation model」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "f9f6c445e09b9b7d",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "Retirement: Azure Load Balancer Inbound NAT rule version 1 for Azure VMSS (aka Inbound NAT Pools)",
+      "url": "https://azure.microsoft.com/updates?id=565482",
+      "published_at": "2026-06-11T16:15:07Z",
+      "excerpt": "Update to our previous communication: We previously announced the retirement of all Inbound NAT rules version 1 resources, which included both single-VM NAT rules and NAT pools for Virtual Machine Scale Sets. We have narrowed the scope of this retirement",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation",
+        "network"
+      ],
+      "priority": "今週確認",
+      "score": 63,
+      "confidence": "高",
+      "signals": [
+        "retirement"
+      ],
+      "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "676d2a524e1ad61e",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "Retirement: Azure VPN Client for Linux (Preview) will be retired on August 31, 2026",
+      "url": "https://azure.microsoft.com/updates?id=565393",
+      "published_at": "2026-06-10T16:15:16Z",
+      "excerpt": "The Azure VPN Client for Linux (Preview) has remained in public preview and does not have a path to general availability (GA). As part of our ongoing efforts to align Azure networking services with current security and reliability standards, this preview",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation",
+        "operations",
+        "network"
+      ],
+      "priority": "今週確認",
+      "score": 63,
+      "confidence": "高",
+      "signals": [
+        "retired",
+        "retirement",
+        "general availability"
+      ],
+      "why_it_matters": "「retired、retirement、general availability」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "75b5ebe96982b690",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Gemini Enterprise Agent Platform — Feature: Gemini 3.5 Flash default model for Memory Bank",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-06-29T07:00:00Z",
+      "excerpt": "Feature Gemini 3.5 Flash default model for Memory Bank The default model used for Memory Bank generation is now Gemini 3.5 Flash instead of Gemini 2.5 Flash. For information, see Set up Memory Bank . Feature Semantic Governance Policies available in Public Preview Semantic Govern",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai",
+        "security"
+      ],
+      "priority": "今週確認",
+      "score": 62,
+      "confidence": "高",
+      "signals": [
+        "now available",
+        "agent",
+        "gemini"
+      ],
+      "why_it_matters": "「now available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "66503e788d6c5713",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "Retirement: GPv1 and Legacy Blob storage account creation",
+      "url": "https://azure.microsoft.com/updates?id=564441",
+      "published_at": "2026-06-11T19:00:41Z",
+      "excerpt": "As part of our ongoing efforts to streamline the Azure Storage portfolio and deliver enhanced performance, scalability, and cost efficiency, we are announcing the retirement of all General purpose v1 (GPv1) storage accounts. This includes legacy blob stor",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation",
+        "cost",
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 62,
+      "confidence": "高",
+      "signals": [
+        "retirement"
+      ],
+      "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "7f4d54798fc9c6e4",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "Retirement: Azure VMware Solution AV36 Node Retirement now on September 30, 2027",
+      "url": "https://azure.microsoft.com/updates?id=503883",
+      "published_at": "2025-09-27T00:30:39Z",
+      "excerpt": "Microsoft announced the retirement of the AV36 node type on June 30, 2028, that date has changed to align with VMware’s roadmap. Broadcom will end support for the current AV36 version with vSphere 8 on September 30, 2027, and the AV36 SKU is not compatibl",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation"
+      ],
+      "priority": "今週確認",
+      "score": 62,
+      "confidence": "高",
+      "signals": [
+        "retirement"
+      ],
+      "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "34900720dd7d0c1f",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "AWS Security Hub extends unified security management to Microsoft Azure",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/06/aws-security-hub-supports-monitoring-microsoft-azure/",
+      "published_at": "2026-07-07T18:21:00Z",
+      "excerpt": "Today, AWS announces that AWS Security Hub now monitors Microsoft Azure resources, extending risk analytics, cloud security posture management, vulnerability management, and security response management across both clouds. Many AWS customers running workloads in AWS and Azure hav",
+      "category": "security",
+      "category_label": "セキュリティ",
+      "tags": [
+        "security",
+        "operations",
+        "data"
+      ],
+      "priority": "今週確認",
+      "score": 60,
+      "confidence": "高",
+      "signals": [
+        "vulnerability",
+        "security"
+      ],
+      "why_it_matters": "「vulnerability、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
+      "recommended_action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。"
+    },
+    {
+      "id": "e5a004d04cabb4da",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Gemini Enterprise Agent Platform — Feature: Provisioned Throughput: Multiple pending new orders GA",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-07-01T07:00:00Z",
+      "excerpt": "Feature Provisioned Throughput: Multiple pending new orders GA The ability to submit multiple pending orders is generally available. you can submit up to seven Google model orders for the same model and region. See Multiple pending orders .",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 60,
+      "confidence": "高",
+      "signals": [
+        "generally available",
+        "agent",
+        "gemini"
+      ],
+      "why_it_matters": "「generally available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "b824121b4a5e653a",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Gemini Enterprise — Feature: Gemini Enterprise: Governance for agents and MCP servers",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-06-25T07:00:00Z",
+      "excerpt": "Feature Gemini Enterprise: Governance for agents and MCP servers You can access Agent Registry from within Gemini Enterprise. Agent Registry provides a catalog of agents and custom Model Context Protocol (MCP) servers. From the catalog, you can select A2A agents or MCP servers to",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 59,
+      "confidence": "高",
+      "signals": [
+        "generally available",
+        "agent",
+        "gemini"
+      ],
+      "why_it_matters": "「generally available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "18f1f03abce76eef",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "Amazon Bedrock AgentCore now available in four additional AWS Regions",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/06/amazon-bedrock-agentcore-four-additional-regions/",
+      "published_at": "2026-07-01T17:00:00Z",
+      "excerpt": "Amazon Bedrock AgentCore is now available in four additional AWS Regions: Asia Pacific (Bangkok), Asia Pacific (Malaysia), Europe (Milan), and Europe (Spain). Amazon Bedrock AgentCore is the platform to build, connect, and optimize agents. It helps engineers ship agents fast with",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai",
+        "security"
+      ],
+      "priority": "今週確認",
+      "score": 58,
+      "confidence": "高",
+      "signals": [
+        "now available",
+        "agent",
+        "bedrock"
+      ],
+      "why_it_matters": "「now available、agent、bedrock」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "1f6b3ddee6d7b8de",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "AWS Security Hub CSPM launches AI Security Best Practices standard with 31 automated controls",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/06/aws-security-hub-cspm-ai-security/",
+      "published_at": "2026-06-30T16:17:00Z",
+      "excerpt": "Today, AWS Security Hub CSPM announces the AI Security Best Practices standard, a set of 31 automated security controls that detect when your deployed AI resources do not align with security best practices. Developed by AWS security experts, this standard helps you continuously e",
+      "category": "security",
+      "category_label": "セキュリティ",
+      "tags": [
+        "security",
+        "genai",
+        "network"
+      ],
+      "priority": "今週確認",
+      "score": 58,
+      "confidence": "高",
+      "signals": [
+        "launches",
+        "agent",
+        "bedrock",
+        "security"
+      ],
+      "why_it_matters": "「launches、agent、bedrock、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
+      "recommended_action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。"
+    },
+    {
+      "id": "3c641a73b2a5a882",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Managed Service for Apache Airflow — Change: The apache-airflow-providers-google package was upgraded to version 22.1.0. For more information about changes, see the apache-airflow-provi",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-06-26T07:00:00Z",
+      "excerpt": "Change The apache-airflow-providers-google package was upgraded to version 22.1.0. For more information about changes, see the apache-airflow-providers-google changelog . Change New Airflow builds are available in Managed Airflow (Gen 3): composer-3-airflow-3.1.7-build.11 compose",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation"
+      ],
+      "priority": "今週確認",
+      "score": 58,
+      "confidence": "高",
+      "signals": [
+        "deprecated",
+        "end of support"
+      ],
+      "why_it_matters": "「deprecated、end of support」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "0aea19aff78deb93",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "BigQuery — Feature: You can use the BigQuery Data Transfer Service to transfer metadata from the following data sources into Knowledge Catalog:",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-07-09T07:00:00Z",
+      "excerpt": "Feature You can use the BigQuery Data Transfer Service to transfer metadata from the following data sources into Knowledge Catalog: PostgreSQL Microsoft SQL Server This feature is in Preview . Feature The Data Agent Kit extension is an extension for agent coding tools, such as VS",
+      "category": "data",
+      "category_label": "データ",
+      "tags": [
+        "data",
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 57,
+      "confidence": "高",
+      "signals": [
+        "agent",
+        "sql",
+        "bigquery"
+      ],
+      "why_it_matters": "「agent、sql、bigquery」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
+      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+    },
+    {
+      "id": "e379a4d0b5e1f3b8",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "Amazon Bedrock AgentCore increases default runtime quota limits",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/amazon-bedrock-agentcore-increases-default-runtime-quota-limits/",
+      "published_at": "2026-07-01T22:00:00Z",
+      "excerpt": "Amazon Bedrock AgentCore has increased the default runtime quota limits, giving customers greater capacity to scale their agent-based workloads. AgentCore is the platform for developers to build, connect, and optimize AI agents. The new default limits support up to 5,000 active c",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 57,
+      "confidence": "高",
+      "signals": [
+        "agent",
+        "bedrock"
+      ],
+      "why_it_matters": "「agent、bedrock」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "62fbe1439783be69",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "Announcing general availability of Amazon WorkSpaces for AI agents",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/06/amazon-workspaces-ai/",
+      "published_at": "2026-06-30T17:28:00Z",
+      "excerpt": "Amazon WorkSpaces for agents is now generally available, enabling AI agents to securely access and operate desktop applications through managed WorkSpaces environments. Enterprises run critical business processes on desktop applications (ERP systems, CRMs, mainframes, and proprie",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai",
+        "security",
+        "cost"
+      ],
+      "priority": "今週確認",
+      "score": 57,
+      "confidence": "高",
+      "signals": [
+        "generally available",
+        "general availability",
+        "agent"
+      ],
+      "why_it_matters": "「generally available、general availability、agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "6cb4e8eacdb5a511",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "Retirement: Migrate from Azure Blueprints by January 31, 2027",
+      "url": "https://azure.microsoft.com/updates?id=564806",
+      "published_at": "2026-06-25T16:00:03Z",
+      "excerpt": "In September 2023, we announced Azure Blueprints would retire on July 11, 2026. We're extending that timeline to January 31, 2027, with phased retirement beginning July 31, 2026.What's changing?July 31, 2026, you won't be able to create new blueprint defi",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation"
+      ],
+      "priority": "今週確認",
+      "score": 57,
+      "confidence": "高",
+      "signals": [
+        "retirement"
+      ],
+      "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "da28658f91aa57b7",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "Retirement: D-series, Ds-series, Dv2-series, Dsv2-series, and Ls-series Virtual Machines for Azure Batch pools",
+      "url": "https://azure.microsoft.com/updates?id=564772",
+      "published_at": "2026-06-11T19:00:41Z",
+      "excerpt": "Azure Compute will retire the following Virtual Machine series on May 1, 2028, impacting Azure Batch pools that rely on them:D-series, Ds-seriesDv2-series, Dsv2-seriesLs-seriesAfter this date:New Batch pools using these VM series cannot be createdExisting",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation"
+      ],
+      "priority": "今週確認",
+      "score": 57,
+      "confidence": "高",
+      "signals": [
+        "retirement"
+      ],
+      "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "a310df381dbbf64f",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "AWS Client VPN extends availability to four additional AWS Regions",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/aws-client-vpn-four-additional-regions/",
+      "published_at": "2026-07-09T17:08:00Z",
+      "excerpt": "AWS Client VPN is now available in four new regions: Canada West (Calgary), Mexico (Central) and two in Asia Pacific - New Zealand and Taipei. This fully managed service enables customers to securely connect their remote workforce to resources in AWS or on-premises networks. AWS ",
+      "category": "network",
+      "category_label": "ネットワーク",
+      "tags": [
+        "network",
+        "operations"
+      ],
+      "priority": "今週確認",
+      "score": 56,
+      "confidence": "高",
+      "signals": [
+        "now available",
+        "network",
+        "vpn"
+      ],
+      "why_it_matters": "「now available、network、vpn」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。L4/L7、公開/非公開、リージョナル/グローバルの軸で既存サービスとの違いを整理します。",
+      "recommended_action": "通信経路と障害ドメインを図にし、4クラウド対応表で同等機能との差を更新します。"
+    },
+    {
+      "id": "d31dc0d67ea7c1e0",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "AWS Security Hub now offers Network Scanning to identify publicly reachable resources",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/aws-security-hub-network-scanning/",
+      "published_at": "2026-07-08T21:00:00Z",
+      "excerpt": "Today, AWS Security Hub introduces Network Scanning, a capability that identifies resources in your environment that are reachable from the public internet. Network Scanning probes your resources from the internet to detect actual reachability, not just what could be reachable ba",
+      "category": "network",
+      "category_label": "ネットワーク",
+      "tags": [
+        "network",
+        "security"
+      ],
+      "priority": "今週確認",
+      "score": 56,
+      "confidence": "高",
+      "signals": [
+        "introduces",
+        "network",
+        "load balancer"
+      ],
+      "why_it_matters": "「introduces、network、load balancer」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。L4/L7、公開/非公開、リージョナル/グローバルの軸で既存サービスとの違いを整理します。",
+      "recommended_action": "通信経路と障害ドメインを図にし、4クラウド対応表で同等機能との差を更新します。"
+    },
+    {
+      "id": "b00155bb6b98f812",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "AWS Security Agent now available in Asia Pacific (Mumbai), Asia Pacific (Singapore), and South America (São Paulo)",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/aws-security-agent-asia-pacific/",
+      "published_at": "2026-07-01T15:26:00Z",
+      "excerpt": "Starting today, AWS Security Agent (now part of AWS Continuum ) is available in three additional AWS Regions: Asia Pacific (Mumbai), Asia Pacific (Singapore), and South America (São Paulo). Customers in these Regions can now access core capabilities of Security Agent to proactive",
+      "category": "security",
+      "category_label": "セキュリティ",
+      "tags": [
+        "security",
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 56,
+      "confidence": "高",
+      "signals": [
+        "now available",
+        "agent",
+        "security",
+        "threat"
+      ],
+      "why_it_matters": "「now available、agent、security、threat」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
+      "recommended_action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。"
+    },
+    {
+      "id": "176d615997678a2d",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "Amazon S3 Vectors is now available in AWS GovCloud (US) Regions",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/s3-vectors-available-aws-govcloud-regions/",
+      "published_at": "2026-07-07T19:00:00Z",
+      "excerpt": "Amazon S3 Vectors is now available in AWS GovCloud (US-East) and AWS GovCloud (US-West). Amazon S3 Vectors is purpose-built vector storage for AI agents, inference, Retrieval Augmented Generation (RAG), and semantic search at billion-vector scale. S3 Vectors is designed to provid",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 55,
+      "confidence": "高",
+      "signals": [
+        "now available",
+        "agent",
+        "rag"
+      ],
+      "why_it_matters": "「now available、agent、rag」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "3e58d739e0916ef9",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "Amazon ECS now provides real-time deployment observability in the AWS Management Console",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/amazon-ecs-aws-management-console/",
+      "published_at": "2026-07-01T20:48:00Z",
+      "excerpt": "Amazon Elastic Container Service (Amazon ECS) now provides real-time deployment observability in the Amazon ECS Console. With this launch, customers can track deployment progress, monitor deployment health, and diagnose failures directly from the console, and understand exactly w",
+      "category": "operations",
+      "category_label": "運用・信頼性",
+      "tags": [
+        "operations"
+      ],
+      "priority": "今週確認",
+      "score": 55,
+      "confidence": "高",
+      "signals": [
+        "introduces",
+        "monitor",
+        "observability",
+        "deployment"
+      ],
+      "why_it_matters": "「introduces、monitor、observability、deployment」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
+      "recommended_action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。"
+    },
+    {
+      "id": "0199b0a10bffeab1",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "AWS announces AWS Interconnect - last mile new partner with AT&T in gated preview",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/06/aws-announces-AWS-interconnect-last-mile-ATT-gated-preview/",
+      "published_at": "2026-06-30T15:00:00Z",
+      "excerpt": "AWS launches AWS Interconnect - last mile, a fully managed connectivity offering that allows customers to connect their branch offices, data centers, and remote locations to AWS with just a few clicks, eliminating the friction and complexity of network setup. Now with AT&T in gat",
+      "category": "network",
+      "category_label": "ネットワーク",
+      "tags": [
+        "network"
+      ],
+      "priority": "今週確認",
+      "score": 55,
+      "confidence": "高",
+      "signals": [
+        "launches",
+        "network",
+        "interconnect",
+        "direct connect"
+      ],
+      "why_it_matters": "「launches、network、interconnect、direct connect」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。L4/L7、公開/非公開、リージョナル/グローバルの軸で既存サービスとの違いを整理します。",
+      "recommended_action": "通信経路と障害ドメインを図にし、4クラウド対応表で同等機能との差を更新します。"
+    },
+    {
+      "id": "204603139e5d79eb",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Gemini Enterprise Agent Platform — Announcement: Administrative correction to Gemini Online Inference API on Gemini Enterprise Agent Platform SLA",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-06-25T07:00:00Z",
+      "excerpt": "Announcement Administrative correction to Gemini Online Inference API on Gemini Enterprise Agent Platform SLA We made an administrative correction to the Gemini Online Inference API on Gemini Enterprise Agent Platform Service Level Agreement (SLA) , addressing a clerical issue.",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 55,
+      "confidence": "高",
+      "signals": [
+        "agent",
+        "gemini"
+      ],
+      "why_it_matters": "「agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "7e5ecf7759c46f26",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "Retirement: Av2-series, F-series, Fs-series, Fsv2-series, G-series, Gs-series, and Lsv2-series Virtual Machines for Azure Batch pools",
+      "url": "https://azure.microsoft.com/updates?id=564774",
+      "published_at": "2026-06-11T19:00:41Z",
+      "excerpt": "Azure Compute will retire the following Virtual Machine series on November 15, 2028, impacting Azure Batch pools that rely on them:Av2-seriesF-series, Fs-series, Fsv2-seriesG-series, Gs-seriesLsv2-seriesAfter this date:New Batch pools using these VM serie",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation"
+      ],
+      "priority": "今週確認",
+      "score": 55,
+      "confidence": "高",
+      "signals": [
+        "retirement"
+      ],
+      "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+    },
+    {
+      "id": "fc6729c8c32883f4",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "AWS introduces declarative controls for VPC Encryption Controls",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/vpc-encryption-controls-declarative-controls/",
+      "published_at": "2026-07-06T18:19:00Z",
+      "excerpt": "You can now use declarative policies to turn on VPC Encryption Controls in monitor or enforce mode across all VPCs in your environment. This enhancement allows you to centrally define and manage your desired VPC Encryption Controls settings and apply it everywhere. You can exerci",
+      "category": "security",
+      "category_label": "セキュリティ",
+      "tags": [
+        "security",
+        "network",
+        "operations"
+      ],
+      "priority": "今週確認",
+      "score": 54,
+      "confidence": "高",
+      "signals": [
+        "introduces",
+        "encryption",
+        "compliance"
+      ],
+      "why_it_matters": "「introduces、encryption、compliance」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
+      "recommended_action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。"
+    },
+    {
+      "id": "9d3882eeffe17a0e",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Oracle Data Science Agent",
+      "url": "https://docs.oracle.com/iaas/releasenotes/autonomous-database-serverless/2026-06-data-science-agent.htm",
+      "published_at": "2026-06-30T12:00:00Z",
+      "excerpt": "Oracle Data Science Agent is supported with Oracle Autonomous AI Database Serverless 26ai. With Oracle Data Science Agent, you can profile data, prepare features, train models, evaluate results, and generate inference SQL through a guided chat experience in Oracle Machine Learnin",
+      "category": "data",
+      "category_label": "データ",
+      "tags": [
+        "data",
+        "operations",
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 54,
+      "confidence": "高",
+      "signals": [
+        "agent",
+        "database",
+        "sql"
+      ],
+      "why_it_matters": "「agent、database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
+      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+    },
+    {
+      "id": "c062a33dea0f244d",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Gemini Enterprise Agent Platform — Feature: Anthropic's Claude Sonnet 5",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-06-30T07:00:00Z",
+      "excerpt": "Feature Anthropic's Claude Sonnet 5 Claude Sonnet 5 is available in Model Garden.",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 54,
+      "confidence": "高",
+      "signals": [
+        "agent",
+        "gemini"
+      ],
+      "why_it_matters": "「agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "fce0470068edccf0",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "External Authentication Support for Database Tools in Autonomous AI Database",
+      "url": "https://docs.oracle.com/iaas/releasenotes/autonomous-database-serverless/2026-07-external-authentication.htm",
+      "published_at": "2026-07-07T12:00:00Z",
+      "excerpt": "Autonomous AI Database extends external authentication support to Database Tools. You can sign in to Database Actions and supported tools using Oracle Cloud Infrastructure IAM, Microsoft Entra ID, Google Cloud Platform, AWS Cognito, Okta, as a globally identified database user, e",
+      "category": "data",
+      "category_label": "データ",
+      "tags": [
+        "data",
+        "security",
+        "genai"
+      ],
+      "priority": "今週確認",
+      "score": 53,
+      "confidence": "高",
+      "signals": [
+        "database",
+        "sql"
+      ],
+      "why_it_matters": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
+      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+    },
+    {
+      "id": "b3c17146d9fd2ddd",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "[Launched] Generally Available: OpenTelemetry Metrics, Visualizations, and Enhanced Monitoring in Azure Monitor for Azure VMs and Arc Servers",
+      "url": "https://azure.microsoft.com/updates?id=564802",
+      "published_at": "2026-06-02T19:30:20Z",
+      "excerpt": "OpenTelemetry metrics and visualizations in Azure Monitor are generally available, delivering an enhanced, unified monitoring experience for Azure Virtual Machines and Arc Servers. This release consolidates key monitoring capabilities into a single experi",
+      "category": "operations",
+      "category_label": "運用・信頼性",
+      "tags": [
+        "operations"
+      ],
+      "priority": "記録のみ",
+      "score": 51,
+      "confidence": "高",
+      "signals": [
+        "generally available",
+        "monitor",
+        "metric"
+      ],
+      "why_it_matters": "「generally available、monitor、metric」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
+      "recommended_action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。"
+    },
+    {
+      "id": "1c5e6b4fac2b3a9d",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "[Launched] Generally Available: Azure Red Hat OpenShift in Chile Central",
+      "url": "https://azure.microsoft.com/updates?id=566732",
+      "published_at": "2026-07-07T17:31:55Z",
+      "excerpt": "Azure Red Hat OpenShift (ARO) is now generally available in Azure Chile Central, expanding regional availability for OpenShift deployments across South America. With the launch of Microsoft’s first Azure region in Chile, customers can now run fully manage",
+      "category": "operations",
+      "category_label": "運用・信頼性",
+      "tags": [
+        "operations"
+      ],
+      "priority": "記録のみ",
+      "score": 50,
+      "confidence": "高",
+      "signals": [
+        "generally available",
+        "deployment"
+      ],
+      "why_it_matters": "「generally available、deployment」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
+      "recommended_action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。"
+    },
+    {
+      "id": "8a499a772eb17fa6",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "[Launched] Generally Available: Support 5x churn in Azure Site Recovery",
+      "url": "https://azure.microsoft.com/updates?id=566966",
+      "published_at": "2026-07-06T15:00:33Z",
+      "excerpt": "Azure Site Recovery now supports up to 5x churn (500 MB/s per VM). This major enhancement empowers customers to confidently run high IOPS workloads with Azure Site Recovery, ensuring robust disaster recovery for even the most demanding applications like d",
+      "category": "operations",
+      "category_label": "運用・信頼性",
+      "tags": [
+        "operations"
+      ],
+      "priority": "記録のみ",
+      "score": 50,
+      "confidence": "高",
+      "signals": [
+        "generally available",
+        "disaster recovery"
+      ],
+      "why_it_matters": "「generally available、disaster recovery」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
+      "recommended_action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。"
+    },
+    {
+      "id": "a878a139de4c7311",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Import NVIDIA Nemotron 3 Ultra in OCI Generative AI",
+      "url": "https://docs.oracle.com/iaas/releasenotes/generative-ai/nvidia-nemotron-3-ultra-nvfp4.htm",
+      "published_at": "2026-06-05T12:00:00Z",
+      "excerpt": "The NVIDIA Nemotron 3 Ultra model is now compatible for import in OCI Generative AI, following NVIDIA’s release of the model. NVIDIA describes Nemotron 3 Ultra as a frontier-scale open model optimized for complex agentic workflows, long-context analysis, tool use, and high-accura",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai",
+        "operations"
+      ],
+      "priority": "記録のみ",
+      "score": 49,
+      "confidence": "高",
+      "signals": [
+        "agent",
+        "generative ai"
+      ],
+      "why_it_matters": "「agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "876dc012790e0968",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Use Deep Data Security in Autonomous AI Database",
+      "url": "https://docs.oracle.com/iaas/releasenotes/autonomous-database-serverless/2026-06-deep-data-security.htm",
+      "published_at": "2026-06-30T12:00:00Z",
+      "excerpt": "Oracle Deep Data Security in Autonomous AI Database provides identity-aware, fine-grained authorization by enforcing row-level and column-level access controls directly within the database. Authorization policies are evaluated based on the authenticated end-user identity and are ",
+      "category": "data",
+      "category_label": "データ",
+      "tags": [
+        "data",
+        "security"
+      ],
+      "priority": "記録のみ",
+      "score": 48,
+      "confidence": "高",
+      "signals": [
+        "database",
+        "analytics"
+      ],
+      "why_it_matters": "「database、analytics」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
+      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+    },
+    {
+      "id": "14782c48cdc4662e",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Public connectivity for Kafka clusters",
+      "url": "https://docs.oracle.com/iaas/releasenotes/kafka/public-connectivity.htm",
+      "published_at": "2026-06-15T12:00:00Z",
+      "excerpt": "By default, all Kafka clusters are created with private connectivity and can be accessed only from within the VCN and subnet specified during cluster creation. You now have the option to make active Kafka clusters accessible over the public internet by configuring and installing ",
+      "category": "network",
+      "category_label": "ネットワーク",
+      "tags": [
+        "network",
+        "security"
+      ],
+      "priority": "記録のみ",
+      "score": 48,
+      "confidence": "高",
+      "signals": [
+        "network",
+        "vcn",
+        "subnet"
+      ],
+      "why_it_matters": "「network、vcn、subnet」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。",
+      "study_impact": "対象: OCI Architect Professional。L4/L7、公開/非公開、リージョナル/グローバルの軸で既存サービスとの違いを整理します。",
+      "recommended_action": "通信経路と障害ドメインを図にし、4クラウド対応表で同等機能との差を更新します。"
+    },
+    {
+      "id": "c80aa12aba136c83",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Expose Select AI Agent team as agent through A2A protocol",
+      "url": "https://docs.oracle.com/iaas/releasenotes/autonomous-database-serverless/2026-07-expose-select-ai.htm",
+      "published_at": "2026-07-07T12:00:00Z",
+      "excerpt": "Oracle Autonomous AI Database now supports a managed Agent2Agent (A2A) server that exposes Select AI agent teams through the open standard A2A protocol. This feature allows external A2A-compatible client agents to discover and call published Select AI agent teams by using standar",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai",
+        "data",
+        "operations"
+      ],
+      "priority": "記録のみ",
+      "score": 47,
+      "confidence": "高",
+      "signals": [
+        "agent"
+      ],
+      "why_it_matters": "「agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "007deb29c4dc31a1",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Expanded OCI Functions support in Fn Project CLI now available",
+      "url": "https://docs.oracle.com/iaas/releasenotes/functions/functions-enhanced-fnproject-cli.htm",
+      "published_at": "2026-06-25T12:00:00Z",
+      "excerpt": "An expanded set of OCI Functions workflows are now directly supported by the Fn Project CLI, reducing the need to switch between the Fn Project CLI and the OCI CLI when creating, updating, listing, inspecting, and invoking OCI Functions resources. You can now use Fn Project CLI o",
+      "category": "operations",
+      "category_label": "運用・信頼性",
+      "tags": [
+        "operations",
+        "network"
+      ],
+      "priority": "記録のみ",
+      "score": 47,
+      "confidence": "高",
+      "signals": [
+        "now available",
+        "workflow"
+      ],
+      "why_it_matters": "「now available、workflow」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "study_impact": "対象: OCI Architect Professional。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
+      "recommended_action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。"
+    },
+    {
+      "id": "0814baf35c102a65",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Lake Cache for Mounted Catalog Tables",
+      "url": "https://docs.oracle.com/iaas/releasenotes/autonomous-database-serverless/2026-06-lake-cache-mounted-catalogs.htm",
+      "published_at": "2026-06-17T12:00:00Z",
+      "excerpt": "Lake Cache in Oracle Autonomous AI Database supports mounted catalog tables. You can cache catalog-backed tables accessed through Catalog SQL syntax, such as schema.table@catalog_name , by passing the catalog-qualified reference to DBMS_EXT_TABLE_CACHE.CREATE_CACHE . This enables",
+      "category": "data",
+      "category_label": "データ",
+      "tags": [
+        "data",
+        "cost"
+      ],
+      "priority": "記録のみ",
+      "score": 47,
+      "confidence": "高",
+      "signals": [
+        "database",
+        "sql"
+      ],
+      "why_it_matters": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
+      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+    },
+    {
+      "id": "07e9e1b94bcb71a7",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "New Features in OCI Database with PostgreSQL",
+      "url": "https://docs.oracle.com/iaas/releasenotes/postgresql/june16-new-features.htm",
+      "published_at": "2026-06-16T12:00:00Z",
+      "excerpt": "The following features are available in this release: Stopping and starting a database system: You can now stop and start OCI Database with PostgreSQL database systems to optimize resource usage and reduce costs. When you stop a system, OCI halts Compute billing and preserves sto",
+      "category": "data",
+      "category_label": "データ",
+      "tags": [
+        "data",
+        "cost",
+        "network"
+      ],
+      "priority": "記録のみ",
+      "score": 47,
+      "confidence": "高",
+      "signals": [
+        "database",
+        "sql"
+      ],
+      "why_it_matters": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
+      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+    },
+    {
+      "id": "b9e6d2c959c9ae6a",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Use Query Insights to Understand OCI Database with PostgreSQL Performance",
+      "url": "https://docs.oracle.com/iaas/releasenotes/postgresql/query-insights.htm",
+      "published_at": "2026-06-16T12:00:00Z",
+      "excerpt": "You can use query insights to gain valuable information about performance and monitoring for tasks such as capacity planning, forecasting, query tuning, and general database administration. Query insights is a PostgreSQL feature that provides visibility into database query perfor",
+      "category": "data",
+      "category_label": "データ",
+      "tags": [
+        "data",
+        "operations"
+      ],
+      "priority": "記録のみ",
+      "score": 47,
+      "confidence": "高",
+      "signals": [
+        "database",
+        "sql"
+      ],
+      "why_it_matters": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
+      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+    },
+    {
+      "id": "87a445d866a968be",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Import DeepSeek V4 Flash and DeepSeek V4 Pro in OCI Generative AI",
+      "url": "https://docs.oracle.com/iaas/releasenotes/generative-ai/deepseek-v4.htm",
+      "published_at": "2026-06-15T12:00:00Z",
+      "excerpt": "The DeepSeek V4 Flash and DeepSeek V4 Pro models are now compatible for import in OCI Generative AI. The DeepSeek V4 series consists of Mixture-of-Experts (MoE) text-to-text language models optimized for reasoning, coding, and agentic workflows. The models support context lengths",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai",
+        "operations"
+      ],
+      "priority": "記録のみ",
+      "score": 45,
+      "confidence": "高",
+      "signals": [
+        "agent",
+        "generative ai"
+      ],
+      "why_it_matters": "「agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+    },
+    {
+      "id": "b386ba204c64198b",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Autonomous AI Database Serverless on Oracle AI Database@AWS",
+      "url": "https://docs.oracle.com/iaas/releasenotes/autonomous-database-serverless/2026-06-adbs-on-aws.htm",
+      "published_at": "2026-06-12T12:00:00Z",
+      "excerpt": "Oracle Autonomous AI Database Serverless is available on Oracle AI Database@AWS, enabling you to deploy Autonomous AI Database workloads in selected AWS Regions while continuing to manage and operate them through Oracle Cloud Infrastructure (OCI). You can run Autonomous AI Lakeho",
+      "category": "data",
+      "category_label": "データ",
+      "tags": [
+        "data",
+        "operations",
+        "security"
+      ],
+      "priority": "記録のみ",
+      "score": 45,
+      "confidence": "高",
+      "signals": [
+        "database",
+        "lakehouse"
+      ],
+      "why_it_matters": "「database、lakehouse」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
+      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+    }
+  ]
+}

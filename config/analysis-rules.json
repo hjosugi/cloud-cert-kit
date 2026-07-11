@@ -1,0 +1,42 @@
+{
+  "priority_terms": {
+    "critical": [
+      "deprecated", "deprecation", "retired", "retirement", "end of support",
+      "end of life", "breaking change", "security advisory", "vulnerability", "action required"
+    ],
+    "high": [
+      "generally available", "general availability", "now available", "launches",
+      "introduces", "new certification", "exam", "guardrails", "agent", "bedrock",
+      "gemini", "vertex ai", "azure ai", "generative ai"
+    ],
+    "low": ["preview", "beta", "coming soon"]
+  },
+  "category_terms": {
+    "genai": ["bedrock", "generative ai", "foundation model", "agent", "rag", "embedding", "vector", "prompt", "guardrail", "gemini", "openai"],
+    "security": ["security", "iam", "identity", "encryption", "kms", "key vault", "vulnerability", "threat", "firewall", "private endpoint", "compliance", "pii"],
+    "data": ["database", "analytics", "sql", "warehouse", "lakehouse", "dataflow", "bigquery", "spanner", "aurora", "redshift", "dynamodb", "autonomous database"],
+    "network": ["network", "vpc", "vcn", "subnet", "load balancer", "dns", "vpn", "interconnect", "expressroute", "direct connect", "privatelink"],
+    "operations": ["monitor", "logging", "metric", "observability", "deployment", "autoscaling", "backup", "disaster recovery", "reliability", "workflow", "serverless"],
+    "cost": ["pricing", "price", "cost", "saving", "discount", "billing", "budget", "free tier"],
+    "certification": ["certification", "certified", "exam", "study guide", "credential", "learning path"],
+    "deprecation": ["deprecated", "deprecation", "retired", "retirement", "end of support", "end of life", "discontinued", "breaking change", "sunset"]
+  },
+  "focus": {
+    "aws": {
+      "exams": ["AIP-C01", "SAP-C02", "SCS-C03"],
+      "boost_categories": ["genai", "security", "network", "operations"]
+    },
+    "azure": {
+      "exams": ["AZ-305", "SC-100", "AZ-700"],
+      "boost_categories": ["security", "network", "operations", "certification"]
+    },
+    "gcp": {
+      "exams": ["PDE", "PCA", "PMLE"],
+      "boost_categories": ["data", "genai", "network", "operations"]
+    },
+    "oci": {
+      "exams": ["OCI Architect Professional"],
+      "boost_categories": ["data", "network", "operations", "certification"]
+    }
+  }
+}

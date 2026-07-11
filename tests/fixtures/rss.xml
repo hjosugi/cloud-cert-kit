@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Test Cloud Updates</title>
+    <item>
+      <title>Service announces end of support for legacy API</title>
+      <link>https://example.com/legacy-api</link>
+      <pubDate>Fri, 10 Jul 2026 08:00:00 GMT</pubDate>
+      <description><![CDATA[Customers must migrate before the retirement deadline.]]></description>
+    </item>
+    <item>
+      <title>Generative AI agent capability is now generally available</title>
+      <link>https://example.com/genai-agent</link>
+      <pubDate>Thu, 9 Jul 2026 08:00:00 GMT</pubDate>
+      <description><![CDATA[The agent works with vector search and guardrails.]]></description>
+    </item>
+  </channel>
+</rss>
