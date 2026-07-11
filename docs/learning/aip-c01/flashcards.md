@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](flashcards.md) | [日本語](flashcards.ja.md)
+
 # AIP-C01 頻出比較とフラッシュカード
 
 答えを隠して1問10秒。説明できなかったカードだけを [間違い問題ノート](wrong-answers.md) へ追加する。

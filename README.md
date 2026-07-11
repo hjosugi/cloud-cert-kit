@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](README.en.md) | [日本語](README.md)
+
 # cloud-hub
 
 AWS / Azure / Google Cloud / OCIを、サービス名の対応ではなく、**思想・resource boundary・failure domain・operator responsibility**の違いから理解するためのマルチクラウド設計・運用サイトです。

@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](multicloud-design.md) | [日本語](multicloud-design.ja.md)
+
 # マルチクラウド設計判断ガイド
 
 「全cloudで同じ構成」を目標にしない。business requirementを共通化し、各cloudではnativeな実装を選ぶ。

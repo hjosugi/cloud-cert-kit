@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](feed-intelligence.en.md) | [日本語](feed-intelligence.md)
+
 # Feed intelligence architecture
 
 ## 目的

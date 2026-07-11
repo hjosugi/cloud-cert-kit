@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](README.en.md) | [日本語](README.md)
+
 # 学習コンテンツ
 
 模試の点数を追うのではなく、間違えた判断を修正するための教材。

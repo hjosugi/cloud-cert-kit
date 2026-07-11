@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](domain-1-notes.en.md) | [日本語](domain-1-notes.md)
+
 # PDE Domain 1: Design Data Processing Systems — 50問圧縮ノート
 
 対象: Udemy模試 Domain 1 (Architecture & Planning) 50問

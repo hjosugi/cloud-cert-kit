@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](operations-comparison.md) | [日本語](operations-comparison.ja.md)
+
 # マルチクラウド運用モデル比較
 
 運用で最も危険なのは、同じ単語を同じ責任範囲だと思うこと。`monitoring`、`HA`、`backup`、`policy`の中身を分解する。

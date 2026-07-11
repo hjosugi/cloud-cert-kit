@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](wrong-answers.en.md) | [日本語](wrong-answers.md)
+
 # AIP-C01 間違い問題
 
 参照: [模試#1 75問圧縮ノート](exam-1-notes.md) / [ドメインガイド](domain-guide.md)

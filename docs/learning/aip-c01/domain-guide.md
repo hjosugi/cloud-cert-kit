@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](domain-guide.md) | [日本語](domain-guide.ja.md)
+
 # AIP-C01 ドメイン別判断ガイド
 
 公式ブループリントは D1 31%、D2 26%、D3 20%、D4 12%、D5 11%。合格には全サービスの暗記より、要件語から設計パターンを固定する力が必要になる。

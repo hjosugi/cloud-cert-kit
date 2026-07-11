@@ -5,7 +5,7 @@
 
 ## マルチクラウド設計・運用ガイド
 
-サービス名の対応ではなく、各cloudのresource boundary、control plane、failure domain、operating modelの違いから設計する。
+サービス名の対応ではなく、各クラウドのリソース境界、コントロールプレーン、障害ドメイン、運用モデルの違いから設計する。
 
 1. [4クラウドの思想](guides/cloud-philosophies.md)
 2. [マルチクラウド設計判断](guides/multicloud-design.md)

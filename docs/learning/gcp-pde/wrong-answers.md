@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](wrong-answers.en.md) | [日本語](wrong-answers.md)
+
 # GCP PDE 間違い問題
 
 参照: [Domain 1 50問圧縮ノート](domain-1-notes.md)

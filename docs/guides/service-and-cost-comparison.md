@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](service-and-cost-comparison.md) | [日本語](service-and-cost-comparison.ja.md)
+
 # 用途検索と費用比較の方法
 
 ## 用途から探す

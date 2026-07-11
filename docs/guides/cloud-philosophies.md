@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](cloud-philosophies.md) | [日本語](cloud-philosophies.ja.md)
+
 # 4クラウドの思想を比較する
 
 これは優劣表ではない。各社の公式landing zone、resource hierarchy、Well-Architected guidanceから、設計時に現れやすい傾向を抽出したもの。個々のserviceは例外を持つため、最終判断はresource scopeとSLAを確認する。

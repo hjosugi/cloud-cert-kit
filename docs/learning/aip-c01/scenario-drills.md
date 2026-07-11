@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](scenario-drills.md) | [日本語](scenario-drills.ja.md)
+
 # AIP-C01 シナリオ演習
 
 既存模試の転載ではないオリジナル演習。各問で「要件語→候補→消去理由」を声に出してから答えを開く。

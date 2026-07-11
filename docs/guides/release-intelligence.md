@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](release-intelligence.md) | [日本語](release-intelligence.ja.md)
+
 # クラウドリリースを設計・運用の観点で読む
 
 新機能の件数ではなく、既存architectureの前提が変わるreleaseを拾う。
