@@ -5,7 +5,7 @@
 
 - Repository: https://github.com/hjosugi/cloud-cert-kit
 - Site: https://hjosugi.github.io/cloud-cert-kit/
-- Issues: CERT-001〜012を登録済み。CERT-010は実装完了としてclose済み。
+- Issues: CERT-011/012は不採用としてclose。CERT-013〜015で間違い復習、教材増補、Releaseを管理。
 
 ## 1. プロジェクト目的
 
@@ -23,6 +23,8 @@
 | site/quad-cloud-ops.html | 完成 | GitHub Pages対応。分析済み静的JSONを表示 |
 | scripts/build_feed_digest.py | 完成 | 公式4フィードを依存ゼロの小型ML+ルールで日次分析 |
 | .github/workflows/site.yml | 完成 | テスト、データ更新、Pages配信を自動化 |
+| study/aip-c01/ | 完成 | 5ドメインguide、50 cards、20 original drills |
+| wrong-answers/ | 完成 | AIP-C01/PDEの誤答だけを翌日・3日後・7日後に反復 |
 | notes/pde-domain1-design-notes.md | 完成 | Udemy PDE模試 Domain1 (50問) |
 | notes/aip-c01-exam1-notes.md | 完成 | Kane/Maarek AIP-C01 模試#1 (75問) |
 | AIP-C01 模試#2 ノート | **ブロック中** | 添付アップロードが2回連続で空 (0バイト)。本文のチャット直貼りで解除 |
@@ -65,8 +67,15 @@
 2. PDE Domain2〜5: 各50問の結果ページを貼る → 同上。
 3. 月次: issues/CERT-009 の定点観測URLを巡回し、サイトの資格表とPROGRESS.mdを更新。
 4. ノート追加時は README.md の構成ツリーと PROGRESS.md の表も更新する。
-5. フィード分析の月次校正は CERT-012 に従い、上位20件の誤分類と緊急項目の見逃しを記録する。
+5. 模試後は誤答・迷った問題だけを `wrong-answers/` に追加し、対応する `study/` の判断軸へ戻る。
 
-## 6. 検証済みファクトの一次情報
+## 6. 学習コンテンツ更新規則
+
+- 模試の設問全文は転載せず、要件語と一行ルールへ圧縮する。
+- 新しい誤答パターンが既存guide/cardにない場合だけ教材へ追加する。
+- 生成AI機能の挙動はAWS公式documentationで確認する。
+- Automated Reasoning checksはdetect mode。content/topic filterのような自動blockとして説明しない。
+
+## 7. 検証済みファクトの一次情報
 
 PROGRESS.md の「検証済みファクト」節を参照。すべて2026-07-11に公式ページ/公式発表と照合済み。

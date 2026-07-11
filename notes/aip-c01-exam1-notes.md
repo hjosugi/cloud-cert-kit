@@ -24,7 +24,7 @@ D1=FM統合・データ管理 / D2=実装・統合 / D3=安全・セキュリテ
 | Athena経由の列レベル制御 (PHI除外) | Lake Formation data filters |
 | 有害入力/出力・PII・禁止トピック | Bedrock Guardrails (リアルタイム、入出力両方) |
 | 幻覚検出+confidence signal | Guardrails contextual grounding check |
-| ポリシー文書由来のルール強制 | Guardrails automated reasoning policy + Lambda最終チェック + model card |
+| ポリシー文書由来の論理検証 | Guardrails Automated Reasoning finding (detect mode) + Lambdaでblock/rewrite判断 + model card |
 | PII: 会話のリアルタイム | Comprehend (前処理placeholder置換) / Guardrails masking |
 | PII: S3蓄積データの発見 | Macie (※リアルタイムマスキング不可) |
 | SSO+短期クレデンシャル+推論のみ | IAM Identity Center + IdP連携 + InvokeModel/Converse限定policy |
@@ -229,11 +229,16 @@ D1=FM統合・データ管理 / D2=実装・統合 / D3=安全・セキュリテ
 CountTokens API / Bedrock Data Automation / AgentCore (Runtime, Memory, Evaluations) / Strands Agents / Agent Squad / Intelligent Prompt Routing / latency-optimized inference / geographic inference profile / automated reasoning checks / S3 Vectors (低コスト・低性能側の選択肢として登場)。
 ※「Prompt Flows」は現行名 **Bedrock Flows**。模試内の旧称は読み替え。
 
+### 2026-07 公式仕様の重要補正
+- Automated Reasoning checksはcontent/topic filterのような自動blockではなく、policyとの整合性を検証してfindingを返す **detect mode**。applicationがserve / rewrite / clarification / fallbackを決める。
+- Automated Reasoning checks単独ではprompt injection、off-topic、streamingを扱わない。content filter・topic policy・application validationと組み合わせる。
+- AIP-C01公式配分はD1 31% / D2 26% / D3 20% / D4 12% / D5 11%。この模試は75問中D2が20問のため見かけ上26.7%になる。
+
 ---
 
 ## 5. 復習の回し方
 
 1. セクション1の即応表を暗記 (特にGuardrails機能セットとキャッシュ/スループットのマップ)。
 2. セクション2の表で正解列を隠して即答 → 75問20分。
-3. 間違えた問題はドメイン列で集計し、弱いドメインだけ講義に戻る。
+3. 間違えた問題だけ `wrong-answers/aip-c01.md` に「要件語→一行ルール」で記録し、対応するドメインガイドへ戻る。
 4. 模試#2を解いたら同形式で追記。

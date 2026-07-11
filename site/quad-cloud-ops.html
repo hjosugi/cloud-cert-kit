@@ -108,6 +108,10 @@ button.act:hover{opacity:.85}
 .tag{display:inline-block;font-family:var(--mono);font-size:9px;background:#EEF2F5;padding:1px 5px;margin:0 3px 3px 0;color:var(--sub)}
 .method{background:var(--panel);border:1px solid var(--line);padding:10px 14px;margin:14px 0;font-size:12px}
 .method summary{cursor:pointer;font-family:var(--mono);font-size:11px}
+.study-link{display:block;border:1px solid var(--line);background:var(--panel);padding:14px 16px;height:100%}
+.study-link:hover{border-color:var(--ink)}
+.study-link b{display:block;font-family:var(--mono);font-size:12px;margin-bottom:4px}
+.study-link span{font-size:12px;color:var(--sub)}
 .small{font-size:12px;color:var(--sub)}
 footer{border-top:1px solid var(--line);background:var(--panel)}
 .fwrap{max-width:1180px;margin:0 auto;padding:16px 20px;font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:.05em}
@@ -129,6 +133,7 @@ footer{border-top:1px solid var(--line);background:var(--panel)}
   <button data-t="svc">サービス対応表</button>
   <button data-t="net">ネットワーク</button>
   <button data-t="iam">IAM / ロール</button>
+  <button data-t="learn">AIP-C01 学習</button>
   <button data-t="study">最小努力学習法</button>
 </div></nav>
 <main>
@@ -415,6 +420,47 @@ footer{border-top:1px solid var(--line);background:var(--panel)}
 <tr><td class="cat">障害情報</td><td class="c-aws"><a href="https://health.aws.amazon.com/health/status">Health Dashboard</a></td><td class="c-azure"><a href="https://azure.status.microsoft/">Status</a></td><td class="c-gcp"><a href="https://status.cloud.google.com/">Status</a></td><td class="c-oci"><a href="https://ocistatus.oraclecloud.com/">OCI Status</a></td></tr>
 <tr><td class="cat">SDK/API</td><td class="c-aws"><a href="https://docs.aws.amazon.com/sdk-for-java/">SDK for Java</a></td><td class="c-azure"><a href="https://learn.microsoft.com/azure/developer/java/">Azure for Java</a></td><td class="c-gcp"><a href="https://cloud.google.com/java/docs">GCP for Java</a></td><td class="c-oci"><a href="https://docs.oracle.com/en-us/iaas/tools/java/latest/">SDK for Java</a></td></tr>
 </tbody></table></div>
+</section>
+<!-- ================= AIP-C01 LEARNING HUB ================= -->
+<section id="learn" class="panel">
+<h2>AIP-C01 学習ハブ</h2>
+<p class="lead">全範囲の動画を繰り返さず、間違えた問題から判断軸へ戻る。教材はドメインガイド、頻出比較、50枚のフラッシュカード、20問のオリジナル演習、75問圧縮ノートで構成する。</p>
+
+<div class="killer"><b>間違い問題だけを回す</b>
+<ol>
+<li>誤答、勘で正解、2択までしか絞れなかった問題だけを<a href="https://github.com/hjosugi/cloud-cert-kit/blob/main/wrong-answers/aip-c01.md">AIP-C01間違いノート</a>へ1行追加する。</li>
+<li>「誤答原因」「見落とした要件語」「次回の一行ルール」を書く。設問全文は転載しない。</li>
+<li>翌日、3日後、7日後に一行ルールを隠して説明し、3回連続で説明できたら定着済みへ移す。</li>
+</ol>
+</div>
+
+<div class="grid2">
+  <a class="study-link" href="https://github.com/hjosugi/cloud-cert-kit/blob/main/study/aip-c01/domain-guide.md"><b>ドメイン別判断ガイド</b><span>D1〜D5をサービス暗記ではなく要件→設計判断として整理。</span></a>
+  <a class="study-link" href="https://github.com/hjosugi/cloud-cert-kit/blob/main/study/aip-c01/flashcards.md"><b>50フラッシュカード</b><span>RAG、agent、Guardrails、性能、評価の頻出比較を10秒回答。</span></a>
+  <a class="study-link" href="https://github.com/hjosugi/cloud-cert-kit/blob/main/study/aip-c01/scenario-drills.md"><b>20シナリオ演習</b><span>オリジナル設問で要件語、消去理由、正解patternを確認。</span></a>
+  <a class="study-link" href="https://github.com/hjosugi/cloud-cert-kit/blob/main/notes/aip-c01-exam1-notes.md"><b>模試#1 75問圧縮</b><span>全問一行要約、ひっかけ、横断判断軸を20分で周回。</span></a>
+</div>
+
+<h2>公式ドメイン配分</h2>
+<div class="tbl"><table>
+<thead><tr><th>Domain</th><th>比率</th><th>最優先の判断軸</th><th>教材</th></tr></thead>
+<tbody>
+<tr><td>D1 FM統合・データ管理</td><td>31%</td><td>RAG、embedding、chunking、metadata、data preparation</td><td>Guide D1 / Cards 1〜10</td></tr>
+<tr><td>D2 実装・統合</td><td>26%</td><td>同期/非同期、Step Functions/EventBridge/SQS、tool境界</td><td>Guide D2 / Cards 11〜20</td></tr>
+<tr><td>D3 安全・セキュリティ</td><td>20%</td><td>Guardrails、PII、private access、audit、deterministic tool</td><td>Guide D3 / Cards 21〜30</td></tr>
+<tr><td>D4 運用効率・最適化</td><td>12%</td><td>cache、streaming、batch、provisioned、token budget</td><td>Guide D4 / Cards 31〜40</td></tr>
+<tr><td>D5 テスト・検証</td><td>11%</td><td>model/RAG/agent評価、quality gate、canary、rollback</td><td>Guide D5 / Cards 41〜50</td></tr>
+</tbody></table></div>
+
+<h2>頻出の4択</h2>
+<div class="grid2">
+<div class="card"><h3>ORCHESTRATION</h3><ul><li>状態・分岐・待機: Step Functions</li><li>fan-out: EventBridge</li><li>buffer: SQS</li><li>prompt workflow: Bedrock Flows</li></ul></div>
+<div class="card"><h3>INFERENCE CAPACITY</h3><ul><li>体感遅延: streaming</li><li>予測peak: Provisioned Throughput</li><li>夜間大量: batch inference</li><li>Region耐性: cross-Region inference</li></ul></div>
+<div class="card"><h3>CACHE</h3><ul><li>FMを呼ばない: edge cache</li><li>共通prefix: prompt caching</li><li>意味的類似: semantic cache</li><li>context超過: CountTokens+prune</li></ul></div>
+<div class="card"><h3>SAFETY</h3><ul><li>有害内容: content/topic/word filters</li><li>PII: sensitive information filter</li><li>source根拠: contextual grounding</li><li>policy論理: Automated Reasoning finding+app判断</li></ul></div>
+</div>
+
+<p class="small">公式: <a href="https://docs.aws.amazon.com/aws-certification/latest/ai-professional-01.html">AIP-C01 Exam Guide</a>。Automated Reasoning checksはdetect modeであり、applicationがfindingを処理する。</p>
 </section>
 </main>
 <footer><div class="rail"><i></i><i></i><i></i><i></i></div>
