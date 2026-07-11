@@ -1,0 +1,34 @@
+{
+  "vendors": {
+    "aws": {
+      "philosophy": "service primitivesをaccount/Region境界で組み合わせる",
+      "boundary": "Account / OU / Region / VPCとservice固有resource policy",
+      "operations": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認"
+    },
+    "azure": {
+      "philosophy": "Entra・ARM・Policyによるenterprise control planeへworkloadを統合する",
+      "boundary": "Entra tenant / Management Group / Subscription / Resource Group",
+      "operations": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認"
+    },
+    "gcp": {
+      "philosophy": "project境界、global platform、managed data、SRE原則から設計する",
+      "boundary": "Organization / Folder / Projectとzonal・regional・global resource scope",
+      "operations": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認"
+    },
+    "oci": {
+      "philosophy": "compartment governanceとdatabase-centered enterprise workloadを明示的に構成する",
+      "boundary": "Tenancy / Compartment / Region / Availability Domain / Fault Domain",
+      "operations": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認"
+    }
+  },
+  "category_equivalents": {
+    "genai": {"aws": "Amazon Bedrock / AgentCore", "azure": "Azure AI Foundry", "gcp": "Vertex AI / Gemini Enterprise", "oci": "OCI Generative AI"},
+    "security": {"aws": "Security Hub / GuardDuty / IAM", "azure": "Defender for Cloud / Entra / Policy", "gcp": "Security Command Center / Cloud IAM", "oci": "Cloud Guard / Security Zones / IAM"},
+    "data": {"aws": "S3 / Glue / Redshift / Aurora", "azure": "ADLS / Fabric / Azure SQL", "gcp": "Cloud Storage / BigQuery / Spanner", "oci": "Object Storage / Autonomous Database / MySQL HeatWave"},
+    "network": {"aws": "VPC / Transit Gateway / PrivateLink", "azure": "VNet / Virtual WAN / Private Link", "gcp": "VPC / Network Connectivity Center / Private Service Connect", "oci": "VCN / DRG / Private Endpoint"},
+    "operations": {"aws": "CloudWatch / CloudTrail / Config", "azure": "Azure Monitor / Activity Log / Policy", "gcp": "Cloud Operations / Cloud Audit Logs", "oci": "Monitoring / Logging / Audit"},
+    "cost": {"aws": "Cost Explorer / Savings Plans", "azure": "Cost Management / Reservations", "gcp": "Cloud Billing / CUD", "oci": "Cost Analysis / Universal Credits"},
+    "certification": {"aws": "AWS Certification", "azure": "Microsoft Credentials", "gcp": "Google Cloud Certification", "oci": "Oracle Certification"},
+    "deprecation": {"aws": "Health/What's New/API lifecycle", "azure": "Service Health/retirements/API versions", "gcp": "Deprecations/release notes", "oci": "Release notes/upgrade notices"}
+  }
+}

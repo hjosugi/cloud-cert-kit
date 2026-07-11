@@ -6,7 +6,9 @@
 
 | ID | 項目 | 状態 | 完了日/期限 |
 |---|---|---|---|
-| — | quad-cloud-ops.html 構築 + 一次情報検証 | 完了 | 2026-07-11 |
+| — | cloud-hubサイト基盤構築 + 一次情報検証 | 完了 | 2026-07-11 |
+| HUB-001 | cloud-hubへrename・multi-cloud設計運用へ再定義 | 完了 | 2026-07-11 |
+| HUB-002 | cloud-hub v2.0.0 Release | 完了 | 2026-07-11 |
 | CERT-010 | 静的フィード分析 + GitHub Pages自動運用 | 完了 | 2026-07-11 |
 | — | GitHub public repository作成、Issue #1〜#12登録 | 完了 | 2026-07-11 |
 | CERT-013 | 間違い問題だけの復習導線 | 完了 | 2026-07-11 |
@@ -61,4 +63,5 @@
 - AIP-C01 と Google面接 (2026-08) の学習時間が競合。面接優先、AIP-C01は面接後に受験予約が現実的
 - Udemy PDE模試は名称・仕様が一部古い (Data Studio旧称、CSR終了、Datastream×Teradata誤り、Spannerテーブル単位write設定は非実在)。ノートのセクション5参照
 - 2024年改訂のPDE本番はDataform / BigLake / Icebergの比重増。Udemy模試では薄い
-- フィード分類は補助機能。学習時間は間違い問題と公式Exam Guideの差分へ優先配分する
+- フィード分類は読む順序を決める補助機能。採用判断は公式情報、対象inventory、実環境の検証結果で行う
+- 対応表は機能の完全互換を意味しない。resource scope、failure behavior、IAM、SLAを必ず個別確認する

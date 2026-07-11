@@ -9,7 +9,7 @@ Labels: ops,recurring,P2
 - [ ] Azure: https://learn.microsoft.com/credentials/certifications/retired-certification-exams
 - [ ] GCP: https://cloud.google.com/learn/certification (上部の改訂告知)
 - [ ] OCI: https://education.oracle.com/certification (-26系コードへの移行時期)
-- [ ] 変更があれば site/quad-cloud-ops.html の資格表と PROGRESS.md を更新
+- [ ] 変更があれば `site/cloud-hub.html` の資格表とPROGRESS.mdを更新
 
 ## 直近の既知期限
 - 2026-07-31: AZ-204 廃止 (→AI-200) ※AZ-104保有のため影響なし

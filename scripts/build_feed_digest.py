@@ -28,7 +28,7 @@ from urllib.parse import urlsplit, urlunsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
-USER_AGENT = "cloud-cert-kit/1.0 (+https://github.com/hjosugi/cloud-cert-kit)"
+USER_AGENT = "cloud-hub/2.0 (+https://github.com/hjosugi/cloud-hub)"
 TOKEN_RE = re.compile(r"[a-z0-9][a-z0-9.+#/-]*", re.IGNORECASE)
 TAG_RE = re.compile(r"<[^>]+>")
 SPACE_RE = re.compile(r"\s+")
@@ -48,32 +48,32 @@ IMPLICATIONS = {
     "genai": {
         "meaning": "生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
         "study": "生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-        "action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。",
+        "action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。",
     },
     "security": {
         "meaning": "権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
         "study": "IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
-        "action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。",
+        "action": "既存構成への適用範囲、既定値、監査証跡を確認し、必要なら統制と例外手順を更新します。",
     },
     "data": {
         "meaning": "保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
         "study": "データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
-        "action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。",
+        "action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。",
     },
     "network": {
         "meaning": "接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。",
         "study": "L4/L7、公開/非公開、リージョナル/グローバルの軸で既存サービスとの違いを整理します。",
-        "action": "通信経路と障害ドメインを図にし、4クラウド対応表で同等機能との差を更新します。",
+        "action": "通信経路、名前解決、到達性、障害ドメインを図にし、同等機能との差と切戻し方法を更新します。",
     },
     "operations": {
         "meaning": "可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
         "study": "最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
-        "action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。",
+        "action": "SLI、ログ、失敗時動作、quota、料金を確認し、監視とランブックの変更要否を記録します。",
     },
     "cost": {
         "meaning": "継続費用または価格性能比を変える可能性がある更新です。",
         "study": "オンデマンド、予約・コミット、バッチ、サーバーレスの利用率別トレードオフを整理します。",
-        "action": "料金表と無料枠の適用条件を確認し、代表ワークロードで月額差を試算します。",
+        "action": "料金表、commitment、データ転送、運用工数を確認し、代表ワークロードで総費用差を試算します。",
     },
     "certification": {
         "meaning": "試験範囲、受験期限、教材の鮮度または資格ロードマップに直接影響する更新です。",
@@ -83,7 +83,7 @@ IMPLICATIONS = {
     "deprecation": {
         "meaning": "互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
         "study": "旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-        "action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。",
+        "action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。",
     },
 }
 
@@ -274,7 +274,13 @@ def category_scores(text: str, model: TinyNaiveBayes, rules: dict[str, Any]) -> 
     return scores
 
 
-def analyze(item: FeedItem, model: TinyNaiveBayes, rules: dict[str, Any], now: datetime) -> dict[str, Any]:
+def analyze(
+    item: FeedItem,
+    model: TinyNaiveBayes,
+    rules: dict[str, Any],
+    now: datetime,
+    perspectives: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     text = f"{item.title} {item.summary}"
     scores = category_scores(text, model, rules)
     ranked = sorted(scores.items(), key=lambda pair: (-pair[1], pair[0]))
@@ -327,6 +333,39 @@ def analyze(item: FeedItem, model: TinyNaiveBayes, rules: dict[str, Any], now: d
     if signal_text:
         why = f"「{signal_text}」が検出されました。{why}"
 
+    title_lower = item.title.lower()
+    text_lower = text.lower()
+    if any(term in text_lower for term in ("retirement", "retire", "end of support", "sunset", "shut down")):
+        release_stage = "retirement"
+    elif any(term in text_lower for term in ("deprecation", "deprecated", "deprecate")):
+        release_stage = "deprecation"
+    elif any(term in text_lower for term in ("security advisory", "vulnerability", "cve-")):
+        release_stage = "security"
+    elif any(term in text_lower for term in ("generally available", "general availability", "now available")):
+        release_stage = "ga"
+    elif any(term in text_lower for term in ("preview", "beta", "alpha")):
+        release_stage = "preview"
+    else:
+        release_stage = "update"
+
+    perspective_data = perspectives or {}
+    platform = perspective_data.get("vendors", {}).get(item.vendor, {})
+    comparison_category = next(
+        (label for label, _score in ranked if label not in {"deprecation", "certification"}),
+        category,
+    )
+    equivalents = perspective_data.get("category_equivalents", {}).get(comparison_category, {})
+    boundary = platform.get("boundary", "resource scopeとfailure domain")
+    operations = platform.get("operations", "metric、log、quota、runbookへの影響を確認")
+    philosophy = platform.get("philosophy", "cloud固有の責任境界から設計する")
+    equivalent_text = " / ".join(f"{vendor.upper()}: {service}" for vendor, service in equivalents.items())
+    design_perspective = f"{why} {item.vendor.upper()}では「{philosophy}」前提で、{boundary}のどこが変わるかを確認します。"
+    operations_perspective = f"{operations}。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。"
+    cross_cloud_context = (
+        f"{CATEGORY_LABELS[comparison_category]}領域の比較起点: {equivalent_text}。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。"
+        if equivalent_text else "他cloudの同領域とresource scope、IAM、HA、運用者責任を比較します。"
+    )
+
     # Some official feeds (notably GCP) publish many product updates under one
     # day-level URL, so the title is part of the stable identity.
     uid_source = f"{item.vendor}:{item.link}:{item.title}"
@@ -342,10 +381,15 @@ def analyze(item: FeedItem, model: TinyNaiveBayes, rules: dict[str, Any], now: d
         "category_label": CATEGORY_LABELS[category],
         "tags": tags,
         "priority": priority,
+        "release_stage": release_stage,
+        "comparison_category": comparison_category,
         "score": score,
         "confidence": confidence,
         "signals": list(dict.fromkeys(evidence)),
         "why_it_matters": why,
+        "design_perspective": design_perspective,
+        "operations_perspective": operations_perspective,
+        "cross_cloud_context": cross_cloud_context,
         "study_impact": f"対象: {', '.join(focus['exams']) or '共通基礎'}。{implications['study']}",
         "recommended_action": implications["action"],
     }
@@ -364,6 +408,7 @@ def summarize(items: list[dict[str, Any]], source_status: list[dict[str, Any]]) 
     priorities = Counter(item["priority"] for item in items)
     categories = Counter(item["category"] for item in items)
     vendors = Counter(item["vendor"] for item in items)
+    stages = Counter(item.get("release_stage", "update") for item in items)
     urgent = [item for item in items if item["priority"] == "今すぐ確認"][:5]
     return {
         "total_items": len(items),
@@ -372,6 +417,7 @@ def summarize(items: list[dict[str, Any]], source_status: list[dict[str, Any]]) 
         "priorities": dict(priorities),
         "categories": dict(categories.most_common()),
         "vendors": dict(vendors),
+        "stages": dict(stages),
         "top_actions": [
             {"id": item["id"], "vendor": item["vendor"], "title": item["title"], "action": item["recommended_action"]}
             for item in urgent
@@ -383,6 +429,7 @@ def build_digest(args: argparse.Namespace) -> dict[str, Any]:
     sources = json.loads(args.sources.read_text(encoding="utf-8"))["sources"]
     training = json.loads(args.training.read_text(encoding="utf-8"))["examples"]
     rules = json.loads(args.rules.read_text(encoding="utf-8"))
+    perspectives = json.loads(args.perspectives.read_text(encoding="utf-8"))
     previous = load_previous(args.output)
     model = TinyNaiveBayes(training)
     now = datetime.now(timezone.utc)
@@ -396,7 +443,7 @@ def build_digest(args: argparse.Namespace) -> dict[str, Any]:
             parsed = parse_feed(xml_text, vendor, source["name"])
             if not parsed:
                 raise ValueError("feed contained no entries")
-            candidates = [analyze(item, model, rules, now) for item in parsed[:120]]
+            candidates = [analyze(item, model, rules, now, perspectives) for item in parsed[:120]]
             candidates = sorted(candidates, key=lambda item: item["published_at"] or "", reverse=True)
             candidates = sorted(candidates, key=lambda item: item["score"], reverse=True)
             vendor_items = candidates[: args.per_source]
@@ -433,11 +480,11 @@ def build_digest(args: argparse.Namespace) -> dict[str, Any]:
         raise RuntimeError("no feed items available and no cached digest found")
 
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at": now.isoformat().replace("+00:00", "Z"),
         "analyzer": {
             "name": "tiny-naive-bayes-plus-rules",
-            "version": "1.0",
+            "version": "2.0",
             "privacy": "公式フィードのタイトルと概要だけをローカル処理。外部AI APIへの送信なし。",
         },
         "source_status": statuses,
@@ -449,25 +496,37 @@ def build_digest(args: argparse.Namespace) -> dict[str, Any]:
 def to_markdown(digest: dict[str, Any]) -> str:
     summary = digest["summary"]
     lines = [
-        "# Cloud feed intelligence digest",
+        "# Cloud Hub release intelligence",
         "",
         f"生成日時: {digest['generated_at']}",
         f"取得元: {summary['source_success']}/{summary['source_total']}、分析件数: {summary['total_items']}",
         "",
         "## 優先項目",
         "",
-        "| 優先度 | Cloud | 分類 | 更新 | 意味 / 次の行動 |",
-        "|---|---|---|---|---|",
     ]
     for item in digest["items"]:
         if item["priority"] == "記録のみ":
             continue
         title = item["title"].replace("|", "\\|")
         link = f"[{title}]({item['url']})" if item["url"] else title
-        detail = f"{item['why_it_matters']} {item['recommended_action']}".replace("|", "\\|")
         date = item["published_at"][:10] if item["published_at"] else "—"
-        lines.append(f"| {item['priority']} ({item['score']}) | {item['vendor'].upper()} | {item['category_label']} | {date} {link} | {detail} |")
-    lines.extend(["", "## 判定方式", "", "小型Naive Bayes分類器と期限・GA・セキュリティ等の明示ルールを併用。最終判断はリンク先の公式情報で確認する。", ""])
+        lines.extend([
+            f"### {item['priority']} ({item['score']}) — {item['vendor'].upper()} / {item['category_label']} / {item.get('release_stage', 'update')}",
+            "",
+            f"{date} {link}",
+            "",
+            f"- 設計観点: {item['design_perspective']}",
+            f"- 運用観点: {item['operations_perspective']}",
+            f"- Cross-cloud: {item['cross_cloud_context']}",
+            f"- 次の行動: {item['recommended_action']}",
+            "",
+        ])
+    lines.extend([
+        "## 判定方式",
+        "",
+        "小型Naive Bayes分類器と期限・GA・セキュリティ等の明示ルールを併用し、設計・運用・cross-cloudの観点を付与する。最終判断はリンク先の公式情報で確認する。",
+        "",
+    ])
     return "\n".join(lines)
 
 
@@ -476,6 +535,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sources", type=Path, default=ROOT / "config/feed-sources.json")
     parser.add_argument("--training", type=Path, default=ROOT / "config/training-data.json")
     parser.add_argument("--rules", type=Path, default=ROOT / "config/analysis-rules.json")
+    parser.add_argument("--perspectives", type=Path, default=ROOT / "config/cloud-perspectives.json")
     parser.add_argument("--output", type=Path, default=ROOT / "site/data/feed-digest.json")
     parser.add_argument("--markdown", type=Path, default=ROOT / "site/data/feed-digest.md")
     parser.add_argument("--per-source", type=int, default=12)

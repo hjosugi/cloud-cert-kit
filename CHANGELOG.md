@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.0.0 — 2026-07-11
+
+### Changed
+
+- projectとrepositoryを`cloud-hub`へrename
+- 資格中心からマルチクラウド設計・運用者向けへ目的を再定義
+- siteをCLOUD HUBブランドと比較中心navigationへ変更
+- release digestを設計・運用・cross-cloudの3観点へ拡張
+
+### Added
+
+- 4クラウドの思想・resource hierarchy比較
+- multi-cloud design decision guideとADR template
+- telemetry、availability、alert、costの運用比較
+- releaseをstage/scope/default/data plane/control planeで読むguide
+- cloud perspective設定とschema v2 digest
+- 旧`quad-cloud-ops.html`からの互換redirect
+
 ## 1.0.0 — 2026-07-11
 
 ### Added

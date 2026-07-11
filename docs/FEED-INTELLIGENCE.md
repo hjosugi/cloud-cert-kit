@@ -2,7 +2,7 @@
 
 ## 目的
 
-4クラウドの公式リリースを列挙するだけでなく、資格学習と実務への意味を短時間で判断できる静的ダイジェストにする。常時稼働サービスと有料推論APIを使わず、GitHub上で完結させる。
+4クラウドの公式リリースを列挙するだけでなく、設計変更・運用変更・他クラウドとの比較起点を短時間で判断できる静的ダイジェストにする。常時稼働サービスと有料推論APIを使わず、GitHub上で完結させる。
 
 ## 処理フロー
 
@@ -15,7 +15,7 @@ AWS / Azure / GCP / OCI 公式RSS・Atom
                   |
  小型Naive Bayes分類器 + 明示ルール
                   |
- 重要度 / 意味 / 試験影響 / 次の行動
+ stage / 設計影響 / 運用影響 / 比較起点 / 次の行動
                   |
  site/data/feed-digest.{json,md}
                   |
@@ -29,7 +29,7 @@ AWS / Azure / GCP / OCI 公式RSS・Atom
 - 判定根拠を `signals` として返せる。期限・廃止・GAなどは確率判定に任せず明示ルールで上書きする。
 - Python標準ライブラリだけなので、依存パッケージの脆弱性対応と利用料金が発生しない。
 
-分類器は「意味を理解するLLM」ではなく、読む順序を決める一次スクリーナーである。生成された説明はカテゴリ別テンプレートなので、必ず公式リンクで最終確認する。
+分類器は「意味を理解するLLM」ではなく、読む順序を決める一次スクリーナーである。カテゴリ別テンプレートは比較観点を漏らさないための補助であり、機能の同等性や影響を断定しない。必ず公式リンク、対象resource、Region、既存構成で最終確認する。
 
 ## スコア
 
@@ -39,7 +39,7 @@ AWS / Azure / GCP / OCI 公式RSS・Atom
 - カテゴリ固有語の一致
 - 廃止・終了・脆弱性などの緊急語
 - GA・新機能・生成AIなどの高関心語
-- 現在の学習対象 (`AIP-C01`, `PDE`, `PCA` など) との一致
+- security、deprecation、現在注目している技術領域との一致
 - 公開からの日数
 
 表示は `72以上=今すぐ確認`、`52以上=今週確認`、それ未満を`記録のみ`とする。閾値と語彙は `config/analysis-rules.json` で変更できる。
@@ -68,6 +68,16 @@ python3 -m http.server -d site 8000
 ```
 
 ブラウザで `http://localhost:8000/` を開く。`file://` ではブラウザの制限によりJSONの取得に失敗する場合がある。
+
+## 出力schema v2
+
+各項目には通常の分類と優先度に加えて、次を格納する。
+
+- `release_stage`: preview / ga / deprecation / retirement / security / update
+- `comparison_category`: 廃止情報でも対象技術領域を比較するための副分類
+- `design_perspective`: resource scopeや統制境界への確認観点
+- `operations_perspective`: inventory、既定値、Region、quota、metric、料金、rollback
+- `cross_cloud_context`: 同等性を断定しない比較の起点
 
 ## 将来の拡張判断
 

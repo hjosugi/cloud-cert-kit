@@ -55,10 +55,30 @@ class FeedDigestTests(unittest.TestCase):
             "2026-07-10T08:00:00Z",
             "Customers must migrate before retirement.",
         )
-        result = analyze(item, self.model, self.rules, datetime(2026, 7, 11, tzinfo=timezone.utc))
+        perspectives = json.loads((ROOT / "config/cloud-perspectives.json").read_text())
+        result = analyze(item, self.model, self.rules, datetime(2026, 7, 11, tzinfo=timezone.utc), perspectives)
         self.assertEqual("deprecation", result["category"])
         self.assertEqual("今すぐ確認", result["priority"])
         self.assertIn("AIP-C01", result["study_impact"])
+        self.assertEqual("retirement", result["release_stage"])
+        self.assertEqual("genai", result["comparison_category"])
+        self.assertIn("Amazon Bedrock", result["cross_cloud_context"])
+        self.assertIn("resource scope", result["cross_cloud_context"])
+
+    def test_perspectives_add_vendor_boundary_and_comparison_starting_point(self):
+        perspectives = json.loads((ROOT / "config/cloud-perspectives.json").read_text())
+        item = FeedItem(
+            "gcp",
+            "Fixture",
+            "Cloud VPN routing update",
+            "https://example.com/network",
+            "2026-07-10T08:00:00Z",
+            "New network routing behavior is generally available.",
+        )
+        result = analyze(item, self.model, self.rules, datetime(2026, 7, 11, tzinfo=timezone.utc), perspectives)
+        self.assertEqual("ga", result["release_stage"])
+        self.assertIn("Organization / Folder / Project", result["design_perspective"])
+        self.assertIn("同等性を示す一覧ではありません", result["cross_cloud_context"])
 
     def test_cached_data_is_used_when_one_feed_fails(self):
         prior = {
@@ -94,6 +114,7 @@ class FeedDigestTests(unittest.TestCase):
                 sources=sources,
                 training=ROOT / "config/training-data.json",
                 rules=ROOT / "config/analysis-rules.json",
+                perspectives=ROOT / "config/cloud-perspectives.json",
                 output=output,
                 per_source=10,
                 timeout=1,

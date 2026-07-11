@@ -31,10 +31,31 @@ class LearningContentTests(unittest.TestCase):
         self.assertEqual([], missing)
 
     def test_site_exposes_learning_hub(self):
-        html = (ROOT / "site/quad-cloud-ops.html").read_text(encoding="utf-8")
+        html = (ROOT / "site/cloud-hub.html").read_text(encoding="utf-8")
         self.assertIn('data-t="learn"', html)
         self.assertIn('id="learn"', html)
         self.assertIn("50フラッシュカード", html)
+
+    def test_site_leads_with_design_operations_and_release_views(self):
+        html = (ROOT / "site/cloud-hub.html").read_text(encoding="utf-8")
+        for expected in (
+            'id="philosophy"',
+            'id="ops"',
+            "同等サービス比較の5点",
+            "DESIGN VIEW",
+            "OPERATIONS VIEW",
+            "CROSS-CLOUD",
+        ):
+            self.assertIn(expected, html)
+
+    def test_multicloud_guides_exist(self):
+        expected = (
+            "cloud-philosophies.md",
+            "multicloud-design.md",
+            "operations-comparison.md",
+            "release-intelligence.md",
+        )
+        self.assertEqual(expected, tuple(path.name for path in sorted((ROOT / "guide").glob("*.md")) if path.name != "README.md"))
 
 
 if __name__ == "__main__":

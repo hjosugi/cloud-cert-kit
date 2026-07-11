@@ -1,9 +1,9 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-07-11T03:39:07.249516Z",
+  "schema_version": 2,
+  "generated_at": "2026-07-11T07:06:07.750205Z",
   "analyzer": {
     "name": "tiny-naive-bayes-plus-rules",
-    "version": "1.0",
+    "version": "2.0",
     "privacy": "公式フィードのタイトルと概要だけをローカル処理。外部AI APIへの送信なし。"
   },
   "source_status": [
@@ -55,24 +55,31 @@
       "aws": 12,
       "oci": 12
     },
+    "stages": {
+      "retirement": 13,
+      "security": 2,
+      "ga": 13,
+      "update": 18,
+      "preview": 2
+    },
     "top_actions": [
       {
         "id": "ca542f7fc1a9a7fb",
         "vendor": "gcp",
         "title": "Gemini Enterprise Agent Platform — Feature: Retirement for preview models for 2.5 Flash, 2.5 Flash-Lite, and 3.1 Flash-Lite",
-        "action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+        "action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
       },
       {
         "id": "9553dd8fdf5219e3",
         "vendor": "gcp",
         "title": "Gemini Enterprise Agent Platform — Deprecated: Grok 4.1 models deprecation",
-        "action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+        "action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
       },
       {
         "id": "df4ea41bbbe20752",
         "vendor": "azure",
         "title": "Retirement: Support for Python-2.7; 3.8 and PowerShell- 7.1; 7.2 will be retired on September 30, 2026",
-        "action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+        "action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
       }
     ]
   },
@@ -92,6 +99,8 @@
         "genai"
       ],
       "priority": "今すぐ確認",
+      "release_stage": "retirement",
+      "comparison_category": "genai",
       "score": 80,
       "confidence": "高",
       "signals": [
@@ -101,8 +110,11 @@
         "gemini"
       ],
       "why_it_matters": "「retired、retirement、agent、gemini」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「retired、retirement、agent、gemini」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "9553dd8fdf5219e3",
@@ -119,6 +131,8 @@
         "genai"
       ],
       "priority": "今すぐ確認",
+      "release_stage": "retirement",
+      "comparison_category": "genai",
       "score": 80,
       "confidence": "高",
       "signals": [
@@ -128,8 +142,11 @@
         "gemini"
       ],
       "why_it_matters": "「deprecated、deprecation、agent、gemini」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「deprecated、deprecation、agent、gemini」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "df4ea41bbbe20752",
@@ -146,6 +163,8 @@
         "security"
       ],
       "priority": "今すぐ確認",
+      "release_stage": "retirement",
+      "comparison_category": "security",
       "score": 75,
       "confidence": "高",
       "signals": [
@@ -153,8 +172,11 @@
         "retirement"
       ],
       "why_it_matters": "「retired、retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「retired、retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "セキュリティ領域の比較起点: AWS: Security Hub / GuardDuty / IAM / AZURE: Defender for Cloud / Entra / Policy / GCP: Security Command Center / Cloud IAM / OCI: Cloud Guard / Security Zones / IAM。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "fafbe346e112e5e4",
@@ -172,6 +194,8 @@
         "security"
       ],
       "priority": "今週確認",
+      "release_stage": "retirement",
+      "comparison_category": "genai",
       "score": 71,
       "confidence": "高",
       "signals": [
@@ -180,8 +204,11 @@
         "generative ai"
       ],
       "why_it_matters": "「deprecated、deprecation、generative ai」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「deprecated、deprecation、generative ai」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "94dea4b9e697c721",
@@ -198,6 +225,8 @@
         "data"
       ],
       "priority": "今週確認",
+      "release_stage": "security",
+      "comparison_category": "security",
       "score": 68,
       "confidence": "高",
       "signals": [
@@ -205,8 +234,11 @@
         "security"
       ],
       "why_it_matters": "「vulnerability、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
+      "design_perspective": "「vulnerability、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "セキュリティ領域の比較起点: AWS: Security Hub / GuardDuty / IAM / AZURE: Defender for Cloud / Entra / Policy / GCP: Security Command Center / Cloud IAM / OCI: Cloud Guard / Security Zones / IAM。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
-      "recommended_action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。"
+      "recommended_action": "既存構成への適用範囲、既定値、監査証跡を確認し、必要なら統制と例外手順を更新します。"
     },
     {
       "id": "d4d791c814fba512",
@@ -224,6 +256,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "retirement",
+      "comparison_category": "data",
       "score": 67,
       "confidence": "高",
       "signals": [
@@ -231,8 +265,11 @@
         "end of life"
       ],
       "why_it_matters": "「retirement、end of life」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「retirement、end of life」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "5e79ef5c8d3b79e9",
@@ -249,6 +286,8 @@
         "operations"
       ],
       "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "genai",
       "score": 63,
       "confidence": "高",
       "signals": [
@@ -258,8 +297,11 @@
         "foundation model"
       ],
       "why_it_matters": "「now available、agent、gemini、foundation model」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「now available、agent、gemini、foundation model」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "f9f6c445e09b9b7d",
@@ -276,14 +318,19 @@
         "network"
       ],
       "priority": "今週確認",
+      "release_stage": "retirement",
+      "comparison_category": "network",
       "score": 63,
       "confidence": "高",
       "signals": [
         "retirement"
       ],
       "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "ネットワーク領域の比較起点: AWS: VPC / Transit Gateway / PrivateLink / AZURE: VNet / Virtual WAN / Private Link / GCP: VPC / Network Connectivity Center / Private Service Connect / OCI: VCN / DRG / Private Endpoint。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "676d2a524e1ad61e",
@@ -301,6 +348,8 @@
         "network"
       ],
       "priority": "今週確認",
+      "release_stage": "retirement",
+      "comparison_category": "operations",
       "score": 63,
       "confidence": "高",
       "signals": [
@@ -309,8 +358,11 @@
         "general availability"
       ],
       "why_it_matters": "「retired、retirement、general availability」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「retired、retirement、general availability」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "75b5ebe96982b690",
@@ -327,6 +379,8 @@
         "security"
       ],
       "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "genai",
       "score": 62,
       "confidence": "高",
       "signals": [
@@ -335,8 +389,11 @@
         "gemini"
       ],
       "why_it_matters": "「now available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「now available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "66503e788d6c5713",
@@ -354,14 +411,19 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "retirement",
+      "comparison_category": "cost",
       "score": 62,
       "confidence": "高",
       "signals": [
         "retirement"
       ],
       "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "コスト領域の比較起点: AWS: Cost Explorer / Savings Plans / AZURE: Cost Management / Reservations / GCP: Cloud Billing / CUD / OCI: Cost Analysis / Universal Credits。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "7f4d54798fc9c6e4",
@@ -377,14 +439,19 @@
         "deprecation"
       ],
       "priority": "今週確認",
+      "release_stage": "retirement",
+      "comparison_category": "operations",
       "score": 62,
       "confidence": "高",
       "signals": [
         "retirement"
       ],
       "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "34900720dd7d0c1f",
@@ -402,6 +469,8 @@
         "data"
       ],
       "priority": "今週確認",
+      "release_stage": "security",
+      "comparison_category": "security",
       "score": 60,
       "confidence": "高",
       "signals": [
@@ -409,8 +478,11 @@
         "security"
       ],
       "why_it_matters": "「vulnerability、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
+      "design_perspective": "「vulnerability、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "セキュリティ領域の比較起点: AWS: Security Hub / GuardDuty / IAM / AZURE: Defender for Cloud / Entra / Policy / GCP: Security Command Center / Cloud IAM / OCI: Cloud Guard / Security Zones / IAM。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
-      "recommended_action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。"
+      "recommended_action": "既存構成への適用範囲、既定値、監査証跡を確認し、必要なら統制と例外手順を更新します。"
     },
     {
       "id": "e5a004d04cabb4da",
@@ -426,6 +498,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "genai",
       "score": 60,
       "confidence": "高",
       "signals": [
@@ -434,8 +508,11 @@
         "gemini"
       ],
       "why_it_matters": "「generally available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「generally available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "b824121b4a5e653a",
@@ -451,6 +528,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "genai",
       "score": 59,
       "confidence": "高",
       "signals": [
@@ -459,8 +538,11 @@
         "gemini"
       ],
       "why_it_matters": "「generally available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「generally available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "18f1f03abce76eef",
@@ -477,6 +559,8 @@
         "security"
       ],
       "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "genai",
       "score": 58,
       "confidence": "高",
       "signals": [
@@ -485,8 +569,11 @@
         "bedrock"
       ],
       "why_it_matters": "「now available、agent、bedrock」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「now available、agent、bedrock」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "1f6b3ddee6d7b8de",
@@ -504,6 +591,8 @@
         "network"
       ],
       "priority": "今週確認",
+      "release_stage": "update",
+      "comparison_category": "security",
       "score": 58,
       "confidence": "高",
       "signals": [
@@ -513,32 +602,11 @@
         "security"
       ],
       "why_it_matters": "「launches、agent、bedrock、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
+      "design_perspective": "「launches、agent、bedrock、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "セキュリティ領域の比較起点: AWS: Security Hub / GuardDuty / IAM / AZURE: Defender for Cloud / Entra / Policy / GCP: Security Command Center / Cloud IAM / OCI: Cloud Guard / Security Zones / IAM。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
-      "recommended_action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。"
-    },
-    {
-      "id": "3c641a73b2a5a882",
-      "vendor": "gcp",
-      "source": "Google Cloud Release Notes",
-      "title": "Managed Service for Apache Airflow — Change: The apache-airflow-providers-google package was upgraded to version 22.1.0. For more information about changes, see the apache-airflow-provi",
-      "url": "https://docs.cloud.google.com/release-notes",
-      "published_at": "2026-06-26T07:00:00Z",
-      "excerpt": "Change The apache-airflow-providers-google package was upgraded to version 22.1.0. For more information about changes, see the apache-airflow-providers-google changelog . Change New Airflow builds are available in Managed Airflow (Gen 3): composer-3-airflow-3.1.7-build.11 compose",
-      "category": "deprecation",
-      "category_label": "廃止・移行",
-      "tags": [
-        "deprecation"
-      ],
-      "priority": "今週確認",
-      "score": 58,
-      "confidence": "高",
-      "signals": [
-        "deprecated",
-        "end of support"
-      ],
-      "why_it_matters": "「deprecated、end of support」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
-      "study_impact": "対象: PDE, PCA, PMLE。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "既存構成への適用範囲、既定値、監査証跡を確認し、必要なら統制と例外手順を更新します。"
     },
     {
       "id": "0aea19aff78deb93",
@@ -555,6 +623,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "preview",
+      "comparison_category": "data",
       "score": 57,
       "confidence": "高",
       "signals": [
@@ -563,8 +633,11 @@
         "bigquery"
       ],
       "why_it_matters": "「agent、sql、bigquery」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "design_perspective": "「agent、sql、bigquery」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
-      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+      "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
       "id": "e379a4d0b5e1f3b8",
@@ -580,6 +653,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "update",
+      "comparison_category": "genai",
       "score": 57,
       "confidence": "高",
       "signals": [
@@ -587,8 +662,11 @@
         "bedrock"
       ],
       "why_it_matters": "「agent、bedrock」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「agent、bedrock」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "62fbe1439783be69",
@@ -606,6 +684,8 @@
         "cost"
       ],
       "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "genai",
       "score": 57,
       "confidence": "高",
       "signals": [
@@ -614,8 +694,11 @@
         "agent"
       ],
       "why_it_matters": "「generally available、general availability、agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「generally available、general availability、agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "6cb4e8eacdb5a511",
@@ -631,14 +714,19 @@
         "deprecation"
       ],
       "priority": "今週確認",
+      "release_stage": "retirement",
+      "comparison_category": "operations",
       "score": 57,
       "confidence": "高",
       "signals": [
         "retirement"
       ],
       "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "da28658f91aa57b7",
@@ -654,14 +742,19 @@
         "deprecation"
       ],
       "priority": "今週確認",
+      "release_stage": "retirement",
+      "comparison_category": "operations",
       "score": 57,
       "confidence": "高",
       "signals": [
         "retirement"
       ],
       "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "a310df381dbbf64f",
@@ -678,6 +771,8 @@
         "operations"
       ],
       "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "network",
       "score": 56,
       "confidence": "高",
       "signals": [
@@ -686,8 +781,11 @@
         "vpn"
       ],
       "why_it_matters": "「now available、network、vpn」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。",
+      "design_perspective": "「now available、network、vpn」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "ネットワーク領域の比較起点: AWS: VPC / Transit Gateway / PrivateLink / AZURE: VNet / Virtual WAN / Private Link / GCP: VPC / Network Connectivity Center / Private Service Connect / OCI: VCN / DRG / Private Endpoint。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。L4/L7、公開/非公開、リージョナル/グローバルの軸で既存サービスとの違いを整理します。",
-      "recommended_action": "通信経路と障害ドメインを図にし、4クラウド対応表で同等機能との差を更新します。"
+      "recommended_action": "通信経路、名前解決、到達性、障害ドメインを図にし、同等機能との差と切戻し方法を更新します。"
     },
     {
       "id": "d31dc0d67ea7c1e0",
@@ -704,6 +802,8 @@
         "security"
       ],
       "priority": "今週確認",
+      "release_stage": "update",
+      "comparison_category": "network",
       "score": 56,
       "confidence": "高",
       "signals": [
@@ -712,8 +812,11 @@
         "load balancer"
       ],
       "why_it_matters": "「introduces、network、load balancer」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。",
+      "design_perspective": "「introduces、network、load balancer」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "ネットワーク領域の比較起点: AWS: VPC / Transit Gateway / PrivateLink / AZURE: VNet / Virtual WAN / Private Link / GCP: VPC / Network Connectivity Center / Private Service Connect / OCI: VCN / DRG / Private Endpoint。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。L4/L7、公開/非公開、リージョナル/グローバルの軸で既存サービスとの違いを整理します。",
-      "recommended_action": "通信経路と障害ドメインを図にし、4クラウド対応表で同等機能との差を更新します。"
+      "recommended_action": "通信経路、名前解決、到達性、障害ドメインを図にし、同等機能との差と切戻し方法を更新します。"
     },
     {
       "id": "b00155bb6b98f812",
@@ -730,6 +833,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "security",
       "score": 56,
       "confidence": "高",
       "signals": [
@@ -739,8 +844,11 @@
         "threat"
       ],
       "why_it_matters": "「now available、agent、security、threat」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
+      "design_perspective": "「now available、agent、security、threat」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "セキュリティ領域の比較起点: AWS: Security Hub / GuardDuty / IAM / AZURE: Defender for Cloud / Entra / Policy / GCP: Security Command Center / Cloud IAM / OCI: Cloud Guard / Security Zones / IAM。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
-      "recommended_action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。"
+      "recommended_action": "既存構成への適用範囲、既定値、監査証跡を確認し、必要なら統制と例外手順を更新します。"
     },
     {
       "id": "176d615997678a2d",
@@ -756,6 +864,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "genai",
       "score": 55,
       "confidence": "高",
       "signals": [
@@ -764,8 +874,11 @@
         "rag"
       ],
       "why_it_matters": "「now available、agent、rag」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「now available、agent、rag」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "3e58d739e0916ef9",
@@ -781,6 +894,8 @@
         "operations"
       ],
       "priority": "今週確認",
+      "release_stage": "update",
+      "comparison_category": "operations",
       "score": 55,
       "confidence": "高",
       "signals": [
@@ -790,8 +905,11 @@
         "deployment"
       ],
       "why_it_matters": "「introduces、monitor、observability、deployment」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "design_perspective": "「introduces、monitor、observability、deployment」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
-      "recommended_action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。"
+      "recommended_action": "SLI、ログ、失敗時動作、quota、料金を確認し、監視とランブックの変更要否を記録します。"
     },
     {
       "id": "0199b0a10bffeab1",
@@ -807,6 +925,8 @@
         "network"
       ],
       "priority": "今週確認",
+      "release_stage": "preview",
+      "comparison_category": "network",
       "score": 55,
       "confidence": "高",
       "signals": [
@@ -816,8 +936,40 @@
         "direct connect"
       ],
       "why_it_matters": "「launches、network、interconnect、direct connect」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。",
+      "design_perspective": "「launches、network、interconnect、direct connect」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "ネットワーク領域の比較起点: AWS: VPC / Transit Gateway / PrivateLink / AZURE: VNet / Virtual WAN / Private Link / GCP: VPC / Network Connectivity Center / Private Service Connect / OCI: VCN / DRG / Private Endpoint。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。L4/L7、公開/非公開、リージョナル/グローバルの軸で既存サービスとの違いを整理します。",
-      "recommended_action": "通信経路と障害ドメインを図にし、4クラウド対応表で同等機能との差を更新します。"
+      "recommended_action": "通信経路、名前解決、到達性、障害ドメインを図にし、同等機能との差と切戻し方法を更新します。"
+    },
+    {
+      "id": "3c641a73b2a5a882",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Managed Service for Apache Airflow — Change: The apache-airflow-providers-google package was upgraded to version 22.1.0. For more information about changes, see the apache-airflow-provi",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-06-26T07:00:00Z",
+      "excerpt": "Change The apache-airflow-providers-google package was upgraded to version 22.1.0. For more information about changes, see the apache-airflow-providers-google changelog . Change New Airflow builds are available in Managed Airflow (Gen 3): composer-3-airflow-3.1.7-build.11 compose",
+      "category": "deprecation",
+      "category_label": "廃止・移行",
+      "tags": [
+        "deprecation"
+      ],
+      "priority": "今週確認",
+      "release_stage": "retirement",
+      "comparison_category": "cost",
+      "score": 55,
+      "confidence": "高",
+      "signals": [
+        "deprecated",
+        "end of support"
+      ],
+      "why_it_matters": "「deprecated、end of support」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「deprecated、end of support」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "コスト領域の比較起点: AWS: Cost Explorer / Savings Plans / AZURE: Cost Management / Reservations / GCP: Cloud Billing / CUD / OCI: Cost Analysis / Universal Credits。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: PDE, PCA, PMLE。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "204603139e5d79eb",
@@ -833,6 +985,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "update",
+      "comparison_category": "genai",
       "score": 55,
       "confidence": "高",
       "signals": [
@@ -840,8 +994,11 @@
         "gemini"
       ],
       "why_it_matters": "「agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "7e5ecf7759c46f26",
@@ -857,14 +1014,19 @@
         "deprecation"
       ],
       "priority": "今週確認",
+      "release_stage": "retirement",
+      "comparison_category": "operations",
       "score": 55,
       "confidence": "高",
       "signals": [
         "retirement"
       ],
       "why_it_matters": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。",
+      "design_perspective": "「retirement」が検出されました。互換性喪失や期限付き移行につながるため、通常の新機能より優先度が高い更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。旧名称・旧方式を正解として覚えないよう、後継サービスと期限を対で記録します。",
-      "recommended_action": "終了日、影響対象、代替手段、移行手順を公式情報で確認し、期限付きIssueを作成します。"
+      "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
       "id": "fc6729c8c32883f4",
@@ -882,6 +1044,8 @@
         "operations"
       ],
       "priority": "今週確認",
+      "release_stage": "update",
+      "comparison_category": "security",
       "score": 54,
       "confidence": "高",
       "signals": [
@@ -890,8 +1054,11 @@
         "compliance"
       ],
       "why_it_matters": "「introduces、encryption、compliance」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
+      "design_perspective": "「introduces、encryption、compliance」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "セキュリティ領域の比較起点: AWS: Security Hub / GuardDuty / IAM / AZURE: Defender for Cloud / Entra / Policy / GCP: Security Command Center / Cloud IAM / OCI: Cloud Guard / Security Zones / IAM。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
-      "recommended_action": "既存構成の適用範囲とデフォルト動作を確認し、必要ならセキュリティ設計チェックリストを更新します。"
+      "recommended_action": "既存構成への適用範囲、既定値、監査証跡を確認し、必要なら統制と例外手順を更新します。"
     },
     {
       "id": "9d3882eeffe17a0e",
@@ -909,6 +1076,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "update",
+      "comparison_category": "data",
       "score": 54,
       "confidence": "高",
       "signals": [
@@ -917,8 +1086,11 @@
         "sql"
       ],
       "why_it_matters": "「agent、database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "design_perspective": "「agent、database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
-      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+      "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
       "id": "c062a33dea0f244d",
@@ -934,6 +1106,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "update",
+      "comparison_category": "genai",
       "score": 54,
       "confidence": "高",
       "signals": [
@@ -941,8 +1115,11 @@
         "gemini"
       ],
       "why_it_matters": "「agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "fce0470068edccf0",
@@ -960,6 +1137,8 @@
         "genai"
       ],
       "priority": "今週確認",
+      "release_stage": "update",
+      "comparison_category": "data",
       "score": 53,
       "confidence": "高",
       "signals": [
@@ -967,8 +1146,11 @@
         "sql"
       ],
       "why_it_matters": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "design_perspective": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
-      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+      "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
       "id": "b3c17146d9fd2ddd",
@@ -984,6 +1166,8 @@
         "operations"
       ],
       "priority": "記録のみ",
+      "release_stage": "ga",
+      "comparison_category": "operations",
       "score": 51,
       "confidence": "高",
       "signals": [
@@ -992,8 +1176,11 @@
         "metric"
       ],
       "why_it_matters": "「generally available、monitor、metric」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "design_perspective": "「generally available、monitor、metric」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
-      "recommended_action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。"
+      "recommended_action": "SLI、ログ、失敗時動作、quota、料金を確認し、監視とランブックの変更要否を記録します。"
     },
     {
       "id": "1c5e6b4fac2b3a9d",
@@ -1009,6 +1196,8 @@
         "operations"
       ],
       "priority": "記録のみ",
+      "release_stage": "ga",
+      "comparison_category": "operations",
       "score": 50,
       "confidence": "高",
       "signals": [
@@ -1016,8 +1205,11 @@
         "deployment"
       ],
       "why_it_matters": "「generally available、deployment」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "design_perspective": "「generally available、deployment」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
-      "recommended_action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。"
+      "recommended_action": "SLI、ログ、失敗時動作、quota、料金を確認し、監視とランブックの変更要否を記録します。"
     },
     {
       "id": "8a499a772eb17fa6",
@@ -1033,6 +1225,8 @@
         "operations"
       ],
       "priority": "記録のみ",
+      "release_stage": "ga",
+      "comparison_category": "operations",
       "score": 50,
       "confidence": "高",
       "signals": [
@@ -1040,8 +1234,11 @@
         "disaster recovery"
       ],
       "why_it_matters": "「generally available、disaster recovery」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "design_perspective": "「generally available、disaster recovery」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AZ-305, SC-100, AZ-700。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
-      "recommended_action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。"
+      "recommended_action": "SLI、ログ、失敗時動作、quota、料金を確認し、監視とランブックの変更要否を記録します。"
     },
     {
       "id": "a878a139de4c7311",
@@ -1058,6 +1255,8 @@
         "operations"
       ],
       "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "genai",
       "score": 49,
       "confidence": "高",
       "signals": [
@@ -1065,8 +1264,11 @@
         "generative ai"
       ],
       "why_it_matters": "「agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "876dc012790e0968",
@@ -1083,6 +1285,8 @@
         "security"
       ],
       "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "data",
       "score": 48,
       "confidence": "高",
       "signals": [
@@ -1090,8 +1294,11 @@
         "analytics"
       ],
       "why_it_matters": "「database、analytics」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "design_perspective": "「database、analytics」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
-      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+      "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
       "id": "14782c48cdc4662e",
@@ -1108,6 +1315,8 @@
         "security"
       ],
       "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "network",
       "score": 48,
       "confidence": "高",
       "signals": [
@@ -1116,8 +1325,11 @@
         "subnet"
       ],
       "why_it_matters": "「network、vcn、subnet」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。",
+      "design_perspective": "「network、vcn、subnet」が検出されました。接続経路、到達性、負荷分散、名前解決またはハイブリッド接続に関わる更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "ネットワーク領域の比較起点: AWS: VPC / Transit Gateway / PrivateLink / AZURE: VNet / Virtual WAN / Private Link / GCP: VPC / Network Connectivity Center / Private Service Connect / OCI: VCN / DRG / Private Endpoint。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。L4/L7、公開/非公開、リージョナル/グローバルの軸で既存サービスとの違いを整理します。",
-      "recommended_action": "通信経路と障害ドメインを図にし、4クラウド対応表で同等機能との差を更新します。"
+      "recommended_action": "通信経路、名前解決、到達性、障害ドメインを図にし、同等機能との差と切戻し方法を更新します。"
     },
     {
       "id": "c80aa12aba136c83",
@@ -1135,14 +1347,19 @@
         "operations"
       ],
       "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "genai",
       "score": 47,
       "confidence": "高",
       "signals": [
         "agent"
       ],
       "why_it_matters": "「agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "007deb29c4dc31a1",
@@ -1159,6 +1376,8 @@
         "network"
       ],
       "priority": "記録のみ",
+      "release_stage": "ga",
+      "comparison_category": "operations",
       "score": 47,
       "confidence": "高",
       "signals": [
@@ -1166,8 +1385,11 @@
         "workflow"
       ],
       "why_it_matters": "「now available、workflow」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "design_perspective": "「now available、workflow」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
-      "recommended_action": "メトリクス、失敗時動作、料金を確認し、既存ランブックに採用判断を記録します。"
+      "recommended_action": "SLI、ログ、失敗時動作、quota、料金を確認し、監視とランブックの変更要否を記録します。"
     },
     {
       "id": "0814baf35c102a65",
@@ -1184,6 +1406,8 @@
         "cost"
       ],
       "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "data",
       "score": 47,
       "confidence": "高",
       "signals": [
@@ -1191,8 +1415,11 @@
         "sql"
       ],
       "why_it_matters": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "design_perspective": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
-      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+      "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
       "id": "07e9e1b94bcb71a7",
@@ -1210,6 +1437,8 @@
         "network"
       ],
       "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "data",
       "score": 47,
       "confidence": "高",
       "signals": [
@@ -1217,8 +1446,11 @@
         "sql"
       ],
       "why_it_matters": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "design_perspective": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
-      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+      "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
       "id": "b9e6d2c959c9ae6a",
@@ -1235,6 +1467,8 @@
         "operations"
       ],
       "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "data",
       "score": 47,
       "confidence": "高",
       "signals": [
@@ -1242,8 +1476,11 @@
         "sql"
       ],
       "why_it_matters": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "design_perspective": "「database、sql」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
-      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+      "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
       "id": "87a445d866a968be",
@@ -1260,6 +1497,8 @@
         "operations"
       ],
       "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "genai",
       "score": 45,
       "confidence": "高",
       "signals": [
@@ -1267,8 +1506,11 @@
         "generative ai"
       ],
       "why_it_matters": "「agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "公式ページでGA/Preview、対応リージョン、料金、制限事項を確認し、AIP-C01の対応表へ追記します。"
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "b386ba204c64198b",
@@ -1286,6 +1528,8 @@
         "security"
       ],
       "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "data",
       "score": 45,
       "confidence": "高",
       "signals": [
@@ -1293,8 +1537,11 @@
         "lakehouse"
       ],
       "why_it_matters": "「database、lakehouse」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "design_perspective": "「database、lakehouse」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
-      "recommended_action": "対象ワークロード、上限、互換性を確認し、PDE/PCAのサービス選択表へ差分を反映します。"
+      "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     }
   ]
 }
