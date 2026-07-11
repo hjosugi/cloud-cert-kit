@@ -61,14 +61,16 @@ class LearningContentTests(unittest.TestCase):
             self.assertIn(expected, html)
 
     def test_multicloud_guides_exist(self):
-        expected = (
+        canonical = {
             "cloud-philosophies.md",
             "multicloud-design.md",
             "operations-comparison.md",
             "release-intelligence.md",
             "service-and-cost-comparison.md",
-        )
-        self.assertEqual(expected, tuple(path.name for path in sorted((ROOT / "docs/guides").glob("*.md"))))
+        }
+        localized = {name.removesuffix(".md") + ".ja.md" for name in canonical}
+        actual = {path.name for path in (ROOT / "docs/guides").glob("*.md")}
+        self.assertEqual(canonical | localized, actual)
 
     def test_purpose_catalog_has_four_clouds_and_official_links(self):
         data = json.loads((ROOT / "site/data/service-catalog.json").read_text(encoding="utf-8"))
