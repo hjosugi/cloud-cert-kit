@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-07-18T21:35:22.870972Z",
+  "generated_at": "2026-07-19T21:35:57.759033Z",
   "analyzer": {
     "name": "tiny-naive-bayes-plus-rules",
     "version": "2.0",
@@ -38,16 +38,16 @@
     "source_total": 4,
     "priorities": {
       "今すぐ確認": 3,
-      "今週確認": 30,
-      "記録のみ": 15
+      "今週確認": 28,
+      "記録のみ": 17
     },
     "categories": {
-      "genai": 16,
+      "genai": 14,
       "deprecation": 13,
       "data": 8,
-      "security": 6,
+      "security": 5,
       "network": 4,
-      "operations": 1
+      "operations": 4
     },
     "vendors": {
       "gcp": 12,
@@ -57,10 +57,10 @@
     },
     "stages": {
       "retirement": 13,
-      "security": 5,
+      "security": 4,
       "ga": 13,
       "preview": 2,
-      "update": 15
+      "update": 16
     },
     "top_actions": [
       {
@@ -332,36 +332,6 @@
       "recommended_action": "既存構成への適用範囲、既定値、監査証跡を確認し、必要なら統制と例外手順を更新します。"
     },
     {
-      "id": "57366b92999d1476",
-      "vendor": "aws",
-      "source": "AWS What's New",
-      "title": "Amazon EC2 G7e instances now available in additional regions",
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/amazon-g7e-additional-regions/",
-      "published_at": "2026-07-15T18:04:00Z",
-      "excerpt": "Starting today, Amazon Elastic Compute Cloud (Amazon EC2) G7e instances accelerated by NVIDIA RTX PRO 6000 Blackwell Server Edition GPUs are now available in the AWS Europe (Frankfurt, Stockholm) and Asia Pacific (Mumbai) Regions. G7e instances offer up to 2.3x inference performa",
-      "category": "genai",
-      "category_label": "生成AI",
-      "tags": [
-        "genai"
-      ],
-      "priority": "今週確認",
-      "release_stage": "ga",
-      "comparison_category": "genai",
-      "score": 63,
-      "confidence": "高",
-      "signals": [
-        "now available",
-        "agent",
-        "generative ai"
-      ],
-      "why_it_matters": "「now available、agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
-      "design_perspective": "「now available、agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
-      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
-      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
-      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
-    },
-    {
       "id": "5e79ef5c8d3b79e9",
       "vendor": "gcp",
       "source": "Google Cloud Release Notes",
@@ -513,6 +483,36 @@
       "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
+      "id": "57366b92999d1476",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "Amazon EC2 G7e instances now available in additional regions",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/amazon-g7e-additional-regions/",
+      "published_at": "2026-07-15T18:04:00Z",
+      "excerpt": "Starting today, Amazon Elastic Compute Cloud (Amazon EC2) G7e instances accelerated by NVIDIA RTX PRO 6000 Blackwell Server Edition GPUs are now available in the AWS Europe (Frankfurt, Stockholm) and Asia Pacific (Mumbai) Regions. G7e instances offer up to 2.3x inference performa",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai"
+      ],
+      "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "genai",
+      "score": 60,
+      "confidence": "高",
+      "signals": [
+        "now available",
+        "agent",
+        "generative ai"
+      ],
+      "why_it_matters": "「now available、agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「now available、agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
+    },
+    {
       "id": "e7878d081774d484",
       "vendor": "gcp",
       "source": "Google Cloud Release Notes",
@@ -659,36 +659,6 @@
       "recommended_action": "終了日、影響inventory、代替手段、移行検証、rollbackを公式情報で確認し、ownerと期限付きIssueを作成します。"
     },
     {
-      "id": "e71e36b4e1aa9237",
-      "vendor": "gcp",
-      "source": "Google Cloud Release Notes",
-      "title": "Cloud Data Fusion — Feature: Cloud Data Fusion version 6.11.1.4 is generally available ( GA ).",
-      "url": "https://docs.cloud.google.com/release-notes",
-      "published_at": "2026-07-15T07:00:00Z",
-      "excerpt": "Feature Cloud Data Fusion version 6.11.1.4 is generally available ( GA ). Fixed Fixed in Cloud Data Fusion 6.11.1.4: Fixed a race condition where successfully completed Dataproc jobs were incorrectly marked as failed on the Dataproc console due to premature program cancellation (",
-      "category": "security",
-      "category_label": "セキュリティ",
-      "tags": [
-        "security"
-      ],
-      "priority": "今週確認",
-      "release_stage": "security",
-      "comparison_category": "security",
-      "score": 55,
-      "confidence": "高",
-      "signals": [
-        "vulnerability",
-        "generally available",
-        "security"
-      ],
-      "why_it_matters": "「vulnerability、generally available、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。",
-      "design_perspective": "「vulnerability、generally available、security」が検出されました。権限境界、データ保護、プライベート接続または監査設計を変える可能性があります。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
-      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
-      "cross_cloud_context": "セキュリティ領域の比較起点: AWS: Security Hub / GuardDuty / IAM / AZURE: Defender for Cloud / Entra / Policy / GCP: Security Command Center / Cloud IAM / OCI: Cloud Guard / Security Zones / IAM。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
-      "study_impact": "対象: PDE, PCA, PMLE。IAM・暗号化・ネットワーク境界のどの層で効く統制かを整理すると、横断的な設計問題に効きます。",
-      "recommended_action": "既存構成への適用範囲、既定値、監査証跡を確認し、必要なら統制と例外手順を更新します。"
-    },
-    {
       "id": "adf8d244657acc06",
       "vendor": "gcp",
       "source": "Google Cloud Release Notes",
@@ -778,36 +748,6 @@
       "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
-      "id": "1ce7287d3470ac3d",
-      "vendor": "gcp",
-      "source": "Google Cloud Release Notes",
-      "title": "Gemini Enterprise Agent Platform — Feature: Memory Bank memory profiles are generally available (GA)",
-      "url": "https://docs.cloud.google.com/release-notes",
-      "published_at": "2026-07-15T07:00:00Z",
-      "excerpt": "Feature Memory Bank memory profiles are generally available (GA) Memory profiles in Memory Bank are generally available (GA). Memory profiles allow you to generate structured profiles, which are data structures with static schemas populated and updated using LLMs. By defining a f",
-      "category": "genai",
-      "category_label": "生成AI",
-      "tags": [
-        "genai"
-      ],
-      "priority": "今週確認",
-      "release_stage": "ga",
-      "comparison_category": "genai",
-      "score": 54,
-      "confidence": "高",
-      "signals": [
-        "generally available",
-        "agent",
-        "gemini"
-      ],
-      "why_it_matters": "「generally available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
-      "design_perspective": "「generally available、agent、gemini」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
-      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
-      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
-      "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
-    },
-    {
       "id": "685a4f058de5a546",
       "vendor": "aws",
       "source": "AWS What's New",
@@ -868,6 +808,66 @@
       "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
       "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
+    },
+    {
+      "id": "5e056bd9b3371d79",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "Bigtable — Feature: AI agents can use the list_hot_tablets Model Context Protocol (MCP) tool to programmatically query Bigtable cluster health to isolate resour",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-07-14T07:00:00Z",
+      "excerpt": "Feature AI agents can use the list_hot_tablets Model Context Protocol (MCP) tool to programmatically query Bigtable cluster health to isolate resource-intensive tablets (hot tablets) and detect overutilized node CPUs. This feature is generally available (GA) .",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai"
+      ],
+      "priority": "今週確認",
+      "release_stage": "ga",
+      "comparison_category": "genai",
+      "score": 54,
+      "confidence": "高",
+      "signals": [
+        "generally available",
+        "agent"
+      ],
+      "why_it_matters": "「generally available、agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「generally available、agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: PDE, PCA, PMLE。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
+    },
+    {
+      "id": "0aea19aff78deb93",
+      "vendor": "gcp",
+      "source": "Google Cloud Release Notes",
+      "title": "BigQuery — Feature: You can use the BigQuery Data Transfer Service to transfer metadata from the following data sources into Knowledge Catalog:",
+      "url": "https://docs.cloud.google.com/release-notes",
+      "published_at": "2026-07-09T07:00:00Z",
+      "excerpt": "Feature You can use the BigQuery Data Transfer Service to transfer metadata from the following data sources into Knowledge Catalog: PostgreSQL Microsoft SQL Server This feature is in Preview . Feature The Data Agent Kit extension is an extension for agent coding tools, such as VS",
+      "category": "data",
+      "category_label": "データ",
+      "tags": [
+        "data",
+        "genai"
+      ],
+      "priority": "今週確認",
+      "release_stage": "preview",
+      "comparison_category": "data",
+      "score": 54,
+      "confidence": "高",
+      "signals": [
+        "agent",
+        "sql",
+        "bigquery"
+      ],
+      "why_it_matters": "「agent、sql、bigquery」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
+      "design_perspective": "「agent、sql、bigquery」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。 GCPでは「project境界、global platform、managed data、SRE原則から設計する」前提で、Organization / Folder / Projectとzonal・regional・global resource scopeのどこが変わるかを確認します。",
+      "operations_perspective": "Cloud Operations・Audit Logs・quotaとlaunch stage、model/API versionを確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: PDE, PCA, PMLE。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
+      "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
       "id": "a310df381dbbf64f",
@@ -962,66 +962,6 @@
       "recommended_action": "既存構成への適用範囲、既定値、監査証跡を確認し、必要なら統制と例外手順を更新します。"
     },
     {
-      "id": "1734081569b59ce0",
-      "vendor": "aws",
-      "source": "AWS What's New",
-      "title": "Amazon RDS and Aurora now support R8g and M8g database instances in additional AWS Regions",
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/7/amazon-rds-aurora-r8g-m8g-regions/",
-      "published_at": "2026-07-15T17:00:00Z",
-      "excerpt": "AWS Graviton4-based R8g database instances are now generally available for Amazon Aurora (MySQL and PostgreSQL compatibility) and Amazon RDS for PostgreSQL, MySQL, and MariaDB in Asia Pacific (Hyderabad, Melbourne, Malaysia), Europe (London, Paris, Zurich), AWS GovCloud (US-East)",
-      "category": "data",
-      "category_label": "データ",
-      "tags": [
-        "data"
-      ],
-      "priority": "今週確認",
-      "release_stage": "ga",
-      "comparison_category": "data",
-      "score": 52,
-      "confidence": "高",
-      "signals": [
-        "generally available",
-        "database",
-        "sql",
-        "aurora"
-      ],
-      "why_it_matters": "「generally available、database、sql、aurora」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。",
-      "design_perspective": "「generally available、database、sql、aurora」が検出されました。保存、処理、検索、移行の選択肢または性能・運用特性に関わる更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
-      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
-      "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
-      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
-      "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
-    },
-    {
-      "id": "15be01ecd9346d4b",
-      "vendor": "aws",
-      "source": "AWS What's New",
-      "title": "Amazon OpenSearch Service now supports the Agent Toolkit for AWS with a curated skill",
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/amazon-opensearch-service-agent/",
-      "published_at": "2026-07-15T14:44:00Z",
-      "excerpt": "Amazon OpenSearch Service now integrates with the Agent Toolkit for AWS , enabling you to build, manage, and query OpenSearch Service domains and OpenSearch Serverless collections directly from AI coding agents such as Claude Code, Kiro, and Cursor. The integration is powered by ",
-      "category": "genai",
-      "category_label": "生成AI",
-      "tags": [
-        "genai",
-        "operations"
-      ],
-      "priority": "今週確認",
-      "release_stage": "update",
-      "comparison_category": "genai",
-      "score": 52,
-      "confidence": "高",
-      "signals": [
-        "agent"
-      ],
-      "why_it_matters": "「agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
-      "design_perspective": "「agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
-      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
-      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
-      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
-    },
-    {
       "id": "81489d7668be41dd",
       "vendor": "aws",
       "source": "AWS What's New",
@@ -1083,65 +1023,6 @@
       "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
-      "id": "3b7a9b0c17b9b5a4",
-      "vendor": "oci",
-      "source": "OCI Release Notes",
-      "title": "Expanded On-Demand Model Availability in OCI Generative AI",
-      "url": "https://docs.oracle.com/iaas/releasenotes/generative-ai/expanded-on-demand-model-availability.htm",
-      "published_at": "2026-07-15T12:00:00Z",
-      "excerpt": "On-demand model availability has expanded in OCI Generative AI. Cohere Embed 4 Cohere Embed 4 is now available on-demand in the following regions: Germany Central (Frankfurt, FRA) Brazil East (São Paulo, GRU) India South (Hyderabad, HYD) UK South (London, LHR) Meta Llama 4 Scout ",
-      "category": "genai",
-      "category_label": "生成AI",
-      "tags": [
-        "genai"
-      ],
-      "priority": "記録のみ",
-      "release_stage": "ga",
-      "comparison_category": "genai",
-      "score": 51,
-      "confidence": "高",
-      "signals": [
-        "now available",
-        "generative ai"
-      ],
-      "why_it_matters": "「now available、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
-      "design_perspective": "「now available、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
-      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
-      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
-      "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
-    },
-    {
-      "id": "948e3162ef5500b3",
-      "vendor": "oci",
-      "source": "OCI Release Notes",
-      "title": "H100 Multi-Node Serving Now Available for Model Import in OCI Generative AI",
-      "url": "https://docs.oracle.com/iaas/releasenotes/generative-ai/h100-multinode-imported-models.htm",
-      "published_at": "2026-07-15T12:00:00Z",
-      "excerpt": "H100 multi-node serving is now available for imported models in OCI Generative AI. You can now deploy deepseek-ai/DeepSeek-V4-Pro and zai-org/GLM-5.2-FP8 using the H100_X16 shape. This shape provides 16 H100 GPUs across two nodes, with 8 GPUs per node. For available hardware and ",
-      "category": "genai",
-      "category_label": "生成AI",
-      "tags": [
-        "genai",
-        "operations"
-      ],
-      "priority": "記録のみ",
-      "release_stage": "ga",
-      "comparison_category": "genai",
-      "score": 51,
-      "confidence": "高",
-      "signals": [
-        "now available",
-        "generative ai"
-      ],
-      "why_it_matters": "「now available、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
-      "design_perspective": "「now available、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
-      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
-      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
-      "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
-    },
-    {
       "id": "9d3882eeffe17a0e",
       "vendor": "oci",
       "source": "OCI Release Notes",
@@ -1174,64 +1055,6 @@
       "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
-      "id": "24d98eadcaedf3d9",
-      "vendor": "azure",
-      "source": "Azure Service Updates",
-      "title": "Announcing: Agent Harness in Microsoft Agent Framework",
-      "url": "https://azure.microsoft.com/updates?id=563546",
-      "published_at": "2026-07-15T18:55:40Z",
-      "excerpt": "Microsoft Agent Framework reaches general availability for Agent Harness, the production runtime for agents built with the framework. Customers running pilots on the preview harness can now move the same agent code into production with backwards compatibi",
-      "category": "genai",
-      "category_label": "生成AI",
-      "tags": [
-        "genai"
-      ],
-      "priority": "記録のみ",
-      "release_stage": "ga",
-      "comparison_category": "genai",
-      "score": 50,
-      "confidence": "高",
-      "signals": [
-        "general availability",
-        "agent"
-      ],
-      "why_it_matters": "「general availability、agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
-      "design_perspective": "「general availability、agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
-      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
-      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
-      "study_impact": "対象: AZ-305, SC-100, AZ-700。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
-    },
-    {
-      "id": "648c1af0c572cf82",
-      "vendor": "azure",
-      "source": "Azure Service Updates",
-      "title": "Announcing: DevUI Agent Inspector for Microsoft Agent Framework",
-      "url": "https://azure.microsoft.com/updates?id=563551",
-      "published_at": "2026-07-15T15:15:25Z",
-      "excerpt": "Microsoft Agent Framework adds DevUI Agent Inspector in public preview, a local debugging surface that shows agent runs as a navigable tree of model calls, tool invocations, and intermediate state. Developers can pause, replay, and edit prompts mid-run, s",
-      "category": "genai",
-      "category_label": "生成AI",
-      "tags": [
-        "genai"
-      ],
-      "priority": "記録のみ",
-      "release_stage": "preview",
-      "comparison_category": "genai",
-      "score": 50,
-      "confidence": "高",
-      "signals": [
-        "agent",
-        "prompt"
-      ],
-      "why_it_matters": "「agent、prompt」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
-      "design_perspective": "「agent、prompt」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
-      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
-      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
-      "study_impact": "対象: AZ-305, SC-100, AZ-700。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
-    },
-    {
       "id": "f10f9620aedd122e",
       "vendor": "aws",
       "source": "AWS What's New",
@@ -1244,6 +1067,36 @@
       "tags": [
         "genai",
         "security"
+      ],
+      "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "genai",
+      "score": 50,
+      "confidence": "高",
+      "signals": [
+        "agent"
+      ],
+      "why_it_matters": "「agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「agent」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
+    },
+    {
+      "id": "58c61c3677e8d834",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "AWS DMS Schema Conversion now supports AI agent automation",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/aws-dms-sc-ai-agent-automation-mcp-server/",
+      "published_at": "2026-07-10T07:00:00Z",
+      "excerpt": "AWS Database Migration Service (DMS) Schema Conversion now supports AI agent automation through the AWS MCP Server. You can connect AI coding agents, including Kiro, Claude Code, and Cursor, to DMS Schema Conversion and run complete migration workflows using natural language dire",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai",
+        "data",
+        "operations"
       ],
       "priority": "記録のみ",
       "release_stage": "update",
@@ -1292,6 +1145,154 @@
       "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
     },
     {
+      "id": "a9ce7ef4b735b7a8",
+      "vendor": "aws",
+      "source": "AWS What's New",
+      "title": "AWS Systems Manager simplifies Azure VM management and hybrid node pricing",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/06/aws-systems-manager-multicloud-vm/",
+      "published_at": "2026-07-07T08:00:00Z",
+      "excerpt": "You can now connect and manage Azure Virtual Machines in AWS Systems Manager without manual agent installation or per-instance tier fees. Create a Cloud Connector and automatically deploy the SSM Agent to your Azure VMs at scale. Once connected, Azure VMs appear alongside EC2 ins",
+      "category": "operations",
+      "category_label": "運用・信頼性",
+      "tags": [
+        "operations",
+        "cost",
+        "genai"
+      ],
+      "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "operations",
+      "score": 50,
+      "confidence": "高",
+      "signals": [
+        "agent",
+        "workflow"
+      ],
+      "why_it_matters": "「agent、workflow」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "design_perspective": "「agent、workflow」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。 AWSでは「service primitivesをaccount/Region境界で組み合わせる」前提で、Account / OU / Region / VPCとservice固有resource policyのどこが変わるかを確認します。",
+      "operations_perspective": "CloudWatch・CloudTrail・Configとservice quota、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: AIP-C01, SAP-C02, SCS-C03。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
+      "recommended_action": "SLI、ログ、失敗時動作、quota、料金を確認し、監視とランブックの変更要否を記録します。"
+    },
+    {
+      "id": "8a499a772eb17fa6",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "[Launched] Generally Available: Support 5x churn in Azure Site Recovery",
+      "url": "https://azure.microsoft.com/updates?id=566966",
+      "published_at": "2026-07-06T15:00:33Z",
+      "excerpt": "Azure Site Recovery now supports up to 5x churn (500 MB/s per VM). This major enhancement empowers customers to confidently run high IOPS workloads with Azure Site Recovery, ensuring robust disaster recovery for even the most demanding applications like d",
+      "category": "operations",
+      "category_label": "運用・信頼性",
+      "tags": [
+        "operations"
+      ],
+      "priority": "記録のみ",
+      "release_stage": "ga",
+      "comparison_category": "operations",
+      "score": 50,
+      "confidence": "高",
+      "signals": [
+        "generally available",
+        "disaster recovery"
+      ],
+      "why_it_matters": "「generally available、disaster recovery」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "design_perspective": "「generally available、disaster recovery」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
+      "recommended_action": "SLI、ログ、失敗時動作、quota、料金を確認し、監視とランブックの変更要否を記録します。"
+    },
+    {
+      "id": "e62c9daee6551dde",
+      "vendor": "azure",
+      "source": "Azure Service Updates",
+      "title": "[Launched] Generally Available: Azure Functions support for Python 3.14",
+      "url": "https://azure.microsoft.com/updates?id=567646",
+      "published_at": "2026-07-17T17:47:00Z",
+      "excerpt": "You can now develop functions using Python 3.14 locally and deploy them to Azure Functions plans on Linux. Upgrade your apps to Python 3.14 to take advantage of enhanced security, a longer support window, and continued compatibility with the Azure Functio",
+      "category": "operations",
+      "category_label": "運用・信頼性",
+      "tags": [
+        "operations",
+        "security"
+      ],
+      "priority": "記録のみ",
+      "release_stage": "ga",
+      "comparison_category": "operations",
+      "score": 49,
+      "confidence": "中",
+      "signals": [
+        "generally available"
+      ],
+      "why_it_matters": "「generally available」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。",
+      "design_perspective": "「generally available」が検出されました。可観測性、自動化、デプロイ、復旧またはスケーリングの運用負荷に影響する更新です。 AZUREでは「Entra・ARM・Policyによるenterprise control planeへworkloadを統合する」前提で、Entra tenant / Management Group / Subscription / Resource Groupのどこが変わるかを確認します。",
+      "operations_perspective": "Azure Monitor・Activity Log・PolicyとSKU/API version、subscription展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "運用・信頼性領域の比較起点: AWS: CloudWatch / CloudTrail / Config / AZURE: Azure Monitor / Activity Log / Policy / GCP: Cloud Operations / Cloud Audit Logs / OCI: Monitoring / Logging / Audit。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: AZ-305, SC-100, AZ-700。最小運用負荷、監査可能性、再試行・ロールバックの要件語と結び付けます。",
+      "recommended_action": "SLI、ログ、失敗時動作、quota、料金を確認し、監視とランブックの変更要否を記録します。"
+    },
+    {
+      "id": "3b7a9b0c17b9b5a4",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Expanded On-Demand Model Availability in OCI Generative AI",
+      "url": "https://docs.oracle.com/iaas/releasenotes/generative-ai/expanded-on-demand-model-availability.htm",
+      "published_at": "2026-07-15T12:00:00Z",
+      "excerpt": "On-demand model availability has expanded in OCI Generative AI. Cohere Embed 4 Cohere Embed 4 is now available on-demand in the following regions: Germany Central (Frankfurt, FRA) Brazil East (São Paulo, GRU) India South (Hyderabad, HYD) UK South (London, LHR) Meta Llama 4 Scout ",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai"
+      ],
+      "priority": "記録のみ",
+      "release_stage": "ga",
+      "comparison_category": "genai",
+      "score": 48,
+      "confidence": "高",
+      "signals": [
+        "now available",
+        "generative ai"
+      ],
+      "why_it_matters": "「now available、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「now available、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
+    },
+    {
+      "id": "948e3162ef5500b3",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "H100 Multi-Node Serving Now Available for Model Import in OCI Generative AI",
+      "url": "https://docs.oracle.com/iaas/releasenotes/generative-ai/h100-multinode-imported-models.htm",
+      "published_at": "2026-07-15T12:00:00Z",
+      "excerpt": "H100 multi-node serving is now available for imported models in OCI Generative AI. You can now deploy deepseek-ai/DeepSeek-V4-Pro and zai-org/GLM-5.2-FP8 using the H100_X16 shape. This shape provides 16 H100 GPUs across two nodes, with 8 GPUs per node. For available hardware and ",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai",
+        "operations"
+      ],
+      "priority": "記録のみ",
+      "release_stage": "ga",
+      "comparison_category": "genai",
+      "score": 48,
+      "confidence": "高",
+      "signals": [
+        "now available",
+        "generative ai"
+      ],
+      "why_it_matters": "「now available、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「now available、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
+    },
+    {
       "id": "14782c48cdc4662e",
       "vendor": "oci",
       "source": "OCI Release Notes",
@@ -1321,36 +1322,6 @@
       "cross_cloud_context": "ネットワーク領域の比較起点: AWS: VPC / Transit Gateway / PrivateLink / AZURE: VNet / Virtual WAN / Private Link / GCP: VPC / Network Connectivity Center / Private Service Connect / OCI: VCN / DRG / Private Endpoint。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。L4/L7、公開/非公開、リージョナル/グローバルの軸で既存サービスとの違いを整理します。",
       "recommended_action": "通信経路、名前解決、到達性、障害ドメインを図にし、同等機能との差と切戻し方法を更新します。"
-    },
-    {
-      "id": "c1cb85745163d018",
-      "vendor": "oci",
-      "source": "OCI Release Notes",
-      "title": "Use OCI IAM Authentication for Hosted Application Endpoints in OCI Generative AI",
-      "url": "https://docs.oracle.com/iaas/releasenotes/generative-ai/hosted-applications-iam.htm",
-      "published_at": "2026-07-15T12:00:00Z",
-      "excerpt": "OCI Generative AI hosted application endpoints now support OCI IAM authentication. When you create an application, you can select OCI IAM as the authentication type for requests to the application’s hosted deployment endpoint. With OCI IAM authentication, requests are signed usin",
-      "category": "genai",
-      "category_label": "生成AI",
-      "tags": [
-        "genai",
-        "security",
-        "operations"
-      ],
-      "priority": "記録のみ",
-      "release_stage": "update",
-      "comparison_category": "genai",
-      "score": 47,
-      "confidence": "高",
-      "signals": [
-        "generative ai"
-      ],
-      "why_it_matters": "「generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
-      "design_perspective": "「generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
-      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
-      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
-      "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
-      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     },
     {
       "id": "007deb29c4dc31a1",
@@ -1531,6 +1502,36 @@
       "cross_cloud_context": "データ領域の比較起点: AWS: S3 / Glue / Redshift / Aurora / AZURE: ADLS / Fabric / Azure SQL / GCP: Cloud Storage / BigQuery / Spanner / OCI: Object Storage / Autonomous Database / MySQL HeatWave。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
       "study_impact": "対象: OCI Architect Professional。データ系試験では、整合性・レイテンシ・スケーリング・運用負荷のトレードオフとして整理します。",
       "recommended_action": "対象ワークロード、整合性、上限、互換性、移行と復旧方法を確認し、データ設計の差分をADRへ反映します。"
+    },
+    {
+      "id": "87a445d866a968be",
+      "vendor": "oci",
+      "source": "OCI Release Notes",
+      "title": "Import DeepSeek V4 Flash and DeepSeek V4 Pro in OCI Generative AI",
+      "url": "https://docs.oracle.com/iaas/releasenotes/generative-ai/deepseek-v4.htm",
+      "published_at": "2026-06-15T12:00:00Z",
+      "excerpt": "The DeepSeek V4 Flash and DeepSeek V4 Pro models are now compatible for import in OCI Generative AI. The DeepSeek V4 series consists of Mixture-of-Experts (MoE) text-to-text language models optimized for reasoning, coding, and agentic workflows. The models support context lengths",
+      "category": "genai",
+      "category_label": "生成AI",
+      "tags": [
+        "genai",
+        "operations"
+      ],
+      "priority": "記録のみ",
+      "release_stage": "update",
+      "comparison_category": "genai",
+      "score": 45,
+      "confidence": "高",
+      "signals": [
+        "agent",
+        "generative ai"
+      ],
+      "why_it_matters": "「agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。",
+      "design_perspective": "「agent、generative ai」が検出されました。生成AIの設計選択肢、モデル連携、RAGまたはエージェント構成に影響する更新です。 OCIでは「compartment governanceとdatabase-centered enterprise workloadを明示的に構成する」前提で、Tenancy / Compartment / Region / Availability Domain / Fault Domainのどこが変わるかを確認します。",
+      "operations_perspective": "Monitoring・Logging・Audit・Cloud GuardとDB version、shape、Region展開を確認。既存resourceへの適用、既定値、Region、quota、metric、料金、rollbackを確認します。",
+      "cross_cloud_context": "生成AI領域の比較起点: AWS: Amazon Bedrock / AgentCore / AZURE: Azure AI Foundry / GCP: Vertex AI / Gemini Enterprise / OCI: OCI Generative AI。同等性を示す一覧ではありません。resource scope、IAM、HA、運用者責任を個別に比較します。",
+      "study_impact": "対象: OCI Architect Professional。生成AI系試験では、機能名だけでなく既存方式との使い分けと運用上の制約を確認します。",
+      "recommended_action": "成熟度、対応リージョン、データ境界、評価方法、料金を確認し、採用ADRと運用手順への影響を記録します。"
     }
   ]
 }
