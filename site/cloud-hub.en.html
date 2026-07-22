@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLOUD HUB — AWS / Azure / Google Cloud / OCI design and operations</title>
+<meta name="description" content="Compare AWS, Azure, Google Cloud, and OCI architecture, operations, releases, services, and public-price baselines.">
+<link rel="alternate" hreflang="ja" href="cloud-hub.html">
+<link rel="alternate" hreflang="en" href="cloud-hub.en.html">
+<link rel="alternate" hreflang="x-default" href="index.html">
+<style>
+:root{
+  --paper:#F2F4F6;--panel:#FFF;--ink:#182430;--sub:#5A6B7A;--line:#D7DEE5;
+  --aws:#D97706;--azure:#0369A1;--gcp:#15803D;--oci:#BE3B2A;
+  --mono:"IBM Plex Mono","JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:"Inter","Noto Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font:14.5px/1.65 var(--sans)}
+a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(24,36,48,.28)}a:hover{border-bottom-color:var(--ink)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--azure);outline-offset:2px}
+.rail{display:flex;height:5px}.rail i{flex:1}.rail i:nth-child(1){background:var(--aws)}.rail i:nth-child(2){background:var(--azure)}.rail i:nth-child(3){background:var(--gcp)}.rail i:nth-child(4){background:var(--oci)}
+header,nav,footer{background:var(--panel)}header,nav{border-bottom:1px solid var(--line)}
+.hwrap,main,.tabs,.fwrap{max-width:1180px;margin:auto}.hwrap{padding:26px 20px 18px}.headrow{display:flex;justify-content:space-between;gap:18px}
+.kicker{font:11px var(--mono);letter-spacing:.22em;color:var(--sub)}h1{font:clamp(20px,3.4vw,30px) var(--mono);letter-spacing:.06em;margin:6px 0 4px}.sub{color:var(--sub);font-size:13px;max-width:78ch}
+.lang-switch{display:flex;border:1px solid var(--line);height:max-content;flex:none}.lang-switch a{border:0;padding:5px 9px;font:10.5px var(--mono);color:var(--sub)}.lang-switch a[aria-current="page"]{background:var(--ink);color:#fff}
+nav{position:sticky;top:0;z-index:50}.tabs{display:flex;overflow-x:auto;padding:0 12px}.tabs button{appearance:none;background:none;border:0;border-bottom:3px solid transparent;cursor:pointer;font:12px var(--mono);letter-spacing:.08em;color:var(--sub);padding:13px 14px;white-space:nowrap}.tabs button.on{color:var(--ink);border-bottom-color:var(--ink)}
+main{padding:26px 20px 80px}.panel{display:none}.panel.on{display:block}
+h2{font:17px var(--mono);letter-spacing:.06em;margin:34px 0 6px;display:flex;align-items:center;gap:10px}h2:first-child{margin-top:4px}h2:before{content:"";width:26px;height:14px;flex:none;background:linear-gradient(to bottom,var(--aws) 0 25%,var(--azure) 25% 50%,var(--gcp) 50% 75%,var(--oci) 75%)}
+h3{font-size:14px;margin:18px 0 6px}.lead,.small{color:var(--sub);font-size:13px}.lead{max-width:90ch;margin-bottom:12px}.small{font-size:12px}.code{font:12px var(--mono)}
+.grid2,.grid4,.metrics,.service-quad,.cost-grid{display:grid;gap:12px;margin:12px 0}.grid2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.grid4,.service-quad,.cost-grid{grid-template-columns:repeat(4,1fr)}.metrics{grid-template-columns:repeat(auto-fit,minmax(145px,1fr))}
+.card,.metric,.usecase,.cost-card,.intel,.toolbox{background:var(--panel);border:1px solid var(--line);padding:14px 16px}.card h3{margin:0 0 6px;font:12.5px var(--mono);letter-spacing:.05em}.card.aws,.service-cell.aws,.cost-card.aws,.intel.aws{border-top:3px solid var(--aws)}.card.azure,.service-cell.azure,.cost-card.azure,.intel.azure{border-top:3px solid var(--azure)}.card.gcp,.service-cell.gcp,.cost-card.gcp,.intel.gcp{border-top:3px solid var(--gcp)}.card.oci,.service-cell.oci,.cost-card.oci,.intel.oci{border-top:3px solid var(--oci)}
+ul,ol{padding-left:1.3em}li{margin:3px 0}.callout{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--ink);padding:12px 16px;margin:12px 0}.callout>b{font:12px var(--mono);letter-spacing:.05em}
+.tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);margin:10px 0}table{border-collapse:collapse;width:100%;min-width:720px;font-size:13px}th{font:11px var(--mono);letter-spacing:.06em;text-align:left;color:var(--sub);border-bottom:2px solid var(--ink);padding:9px 10px}td{border-bottom:1px solid var(--line);padding:8px 10px;vertical-align:top}tr:last-child td{border-bottom:0}
+.chip,.tag,.priority{display:inline-block;font:10px var(--mono);padding:2px 7px;border:1px solid var(--line);margin:0 5px 3px 0}.priority.urgent{background:#7F1D1D;border-color:#7F1D1D;color:#fff}.priority.week{background:#FEF3C7;border-color:#D97706;color:#78350F}.priority.log{color:var(--sub)}
+.feedbar,.filters{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:12px 0}.act,.filters button{appearance:none;cursor:pointer;font:11px var(--mono);padding:7px 11px}.act{background:var(--ink);color:#fff;border:0}.filters button{background:var(--panel);border:1px solid var(--line);color:var(--sub)}.filters button.on{background:var(--ink);color:#fff}.status,.result-count{font:10.5px var(--mono);color:var(--sub)}
+.metric b{display:block;font:22px var(--mono);line-height:1.2}.metric span{font-size:11px;color:var(--sub)}.intel-list,.usecase-list{display:grid;gap:10px}.intel{border-top:1px solid var(--line);border-left-width:4px}.intel-head{display:flex;justify-content:space-between;gap:10px}.intel h3{margin:4px 0 7px;line-height:1.45}.intel-meta{font:10px var(--mono);color:var(--sub);white-space:nowrap}.intel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}.intel-block{border-top:1px solid var(--line);padding-top:7px;font-size:12px}.intel-block b{display:block;font:9.5px var(--mono);letter-spacing:.08em;color:var(--sub)}
+.toolgrid{display:grid;grid-template-columns:2fr 1fr;gap:10px}.field label{display:block;font:10px var(--mono);color:var(--sub);margin-bottom:4px}.field input,.field select{width:100%;border:1px solid var(--line);background:#fff;padding:9px 10px;font:inherit}.usecase h3{margin:2px 0}.service-cell{background:#F8FAFC;border:1px solid var(--line);padding:9px 10px;font-size:11.5px}.service-cell b{display:block;font:9.5px var(--mono);color:var(--sub)}
+.cost-card .amount{display:block;font:23px var(--mono);margin:5px 0}.sku{font-size:11px;color:var(--sub)}.cost-bar{height:7px;background:#E8EDF1;margin:9px 0}.cost-bar i{display:block;height:100%;background:var(--ink)}
+footer{border-top:1px solid var(--line)}.fwrap{padding:16px 20px;font:11px var(--mono);color:var(--sub)}
+@media(max-width:900px){.grid4,.service-quad,.cost-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.headrow{display:block}.lang-switch{width:max-content;margin-top:12px}.toolgrid,.service-quad,.cost-grid,.intel-grid{grid-template-columns:1fr}.intel-head{display:block}.intel-meta{white-space:normal}}
+</style>
+</head>
+<body>
+<header>
+  <div class="rail"><i></i><i></i><i></i><i></i></div>
+  <div class="hwrap"><div class="headrow">
+    <div><div class="kicker">AWS / AZURE / GOOGLE CLOUD / OCI — MULTI-CLOUD DESIGN &amp; OPERATIONS</div><h1>CLOUD HUB</h1>
+      <div class="sub">Understand four clouds through resource boundaries, failure domains, policy inheritance, and operator responsibility—not name matching. Compare architecture, operations, official releases, services, and traceable public-price baselines.</div></div>
+    <div class="lang-switch" aria-label="Display language"><a href="cloud-hub.html" lang="ja">日本語</a><a href="cloud-hub.en.html" lang="en" aria-current="page">English</a></div>
+  </div></div>
+</header>
+<nav><div class="tabs" role="tablist" aria-label="CLOUD HUB views">
+  <button class="on" data-t="release">Release intelligence</button><button data-t="design">Cloud design</button><button data-t="services">Services &amp; cost</button><button data-t="identity">Network &amp; IAM</button><button data-t="operations">Operations</button><button data-t="learning">Learning</button>
+</div></nav>
+<main>
+<section id="release" class="panel on">
+  <h2>Release intelligence</h2>
+  <p class="lead">The daily digest classifies official AWS, Azure, Google Cloud, and OCI feeds locally. It adds lifecycle stage and review priority without sending feed data to an external AI API.</p>
+  <div class="callout"><b>READ EACH RELEASE IN FOUR PASSES</b><ol><li>Stage: preview, GA, security, deprecation, or retirement.</li><li>Design: which scope, identity, network, data, or failure-domain assumption changed?</li><li>Operations: what changes in inventory, defaults, quotas, metrics, pricing, runbooks, or rollback?</li><li>Cross-cloud: compare implementations that satisfy the same business outcome, including operator responsibility.</li></ol></div>
+  <div class="feedbar"><button class="act" id="reload-digest">Reload analysis</button><span class="status" id="digest-status" aria-live="polite">Not loaded</span></div>
+  <div class="metrics" id="digest-metrics"></div>
+  <div class="filters" id="digest-filters" aria-label="Digest filters"><button class="on" data-filter="all">Priority</button><button data-filter="urgent">Review now</button><button data-filter="aws">AWS</button><button data-filter="azure">Azure</button><button data-filter="gcp">Google Cloud</button><button data-filter="oci">OCI</button></div>
+  <div class="intel-list" id="digest-list" aria-live="polite"><div class="card status">Loading analyzed releases…</div></div>
+  <p class="small">Primary sources: <a href="https://aws.amazon.com/about-aws/whats-new/recent/feed/">AWS RSS</a> / <a href="https://www.microsoft.com/releasecommunications/api/v2/azure/rss">Azure RSS</a> / <a href="https://cloud.google.com/feeds/gcp-release-notes.xml">Google Cloud Atom</a> / <a href="https://docs.oracle.com/en-us/iaas/releasenotes/feed/">OCI RSS</a>. This is triage, not a claim of feature equivalence or production impact.</p>
+</section>
+
+<section id="design" class="panel">
+  <h2>Four cloud design philosophies</h2>
+  <p class="lead">Start with the isolation and governance model before looking for an equivalent product name. These are design tendencies derived from official landing-zone and well-architected guidance, not a ranking.</p>
+  <div class="grid2">
+    <div class="card aws"><h3>AWS — COMPOSABLE PRIMITIVES</h3><p>Compose small service primitives across account and Region boundaries. Establish multi-account governance, central logging, SCPs, and network boundaries early.</p><ul><li>Primary isolation: account / OU</li><li>Ask: which account, Region, and service responsibility boundary?</li><li>Watch both identity and resource policies.</li></ul></div>
+    <div class="card azure"><h3>AZURE — ENTERPRISE CONTROL PLANE</h3><p>Govern the enterprise through Entra, ARM, Management Groups, and Policy. A subscription is a policy, quota, billing, and operating boundary.</p><ul><li>Primary isolation: subscription / Management Group</li><li>Ask: which tenant and inherited policy?</li><li>Entra directory roles and Azure RBAC are separate.</li></ul></div>
+    <div class="card gcp"><h3>GOOGLE CLOUD — GLOBAL PLATFORM &amp; SRE</h3><p>Bring project boundaries, global infrastructure, managed data, and SRE into the design. Confirm whether each resource is zonal, regional, or global.</p><ul><li>Primary isolation: project / folder</li><li>Ask: what is the user SLO and resource scope?</li><li>A project also scopes APIs, quotas, billing, and IAM.</li></ul></div>
+    <div class="card oci"><h3>OCI — COMPARTMENTS &amp; DATABASE</h3><p>Use nested compartments to segment IAM, quotas, and operations, with explicit database-centered enterprise architecture.</p><ul><li>Primary isolation: compartment</li><li>Ask: which compartment, AD/FD, and database topology?</li><li>Read both policy verbs and resource types.</li></ul></div>
+  </div>
+  <h2>Five checks for an “equivalent” service</h2>
+  <div class="tbl"><table><thead><tr><th>Dimension</th><th>Verify</th><th>Name-matching failure</th></tr></thead><tbody>
+    <tr><td>Resource scope</td><td>Global, regional, or zonal</td><td>Two “load balancers” or “databases” can have different failure domains.</td></tr>
+    <tr><td>Isolation boundary</td><td>Account, subscription, project, or compartment</td><td>Treating all resource containers as the same control boundary.</td></tr>
+    <tr><td>Policy inheritance</td><td>Parent denies, exceptions, and data-plane policy</td><td>Mapping IAM role names while missing evaluation semantics.</td></tr>
+    <tr><td>Failure behavior</td><td>Existing data-plane behavior during control-plane failure</td><td>Comparing only SLA percentages.</td></tr>
+    <tr><td>Operator responsibility</td><td>Patching, backup, scaling, and failover</td><td>Assuming “managed” means the same responsibility split.</td></tr>
+  </tbody></table></div>
+  <p class="small"><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/cloud-philosophies.md">Cloud philosophies guide</a> / <a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/multicloud-design.md">Multi-cloud design guide</a></p>
+</section>
+
+<section id="services" class="panel">
+  <h2>Purpose-based service search</h2><p class="lead">Search by workload outcome, then compare service boundaries and official documentation across all four providers.</p>
+  <div class="toolbox"><div class="toolgrid"><div class="field"><label for="service-search">WORKLOAD OR REQUIREMENT</label><input id="service-search" type="search" placeholder="Examples: PostgreSQL, private endpoint, queue, RAG"></div><div class="field"><label for="service-category">CATEGORY</label><select id="service-category"><option value="all">All categories</option></select></div></div><div class="result-count" id="service-result-count">Loading catalog…</div></div>
+  <div class="usecase-list" id="service-results"></div>
+  <h2>Comparable public-price baselines</h2><p class="lead">These are normalized list-price baselines, not bills or performance benchmarks. Confirm discounts, taxes, storage, networking, support, and the exact production SKU in official calculators.</p>
+  <div class="toolbox"><div class="toolgrid"><div class="field"><label for="cost-scenario">SCENARIO</label><select id="cost-scenario"></select></div><div class="field"><label id="cost-units-label" for="cost-units">UNITS</label><input id="cost-units" type="number" min="0" step="1"></div></div><div class="field" id="cost-usage-field"><label id="cost-usage-label" for="cost-usage">USAGE</label><input id="cost-usage" type="number" min="0" step="1"></div><div class="result-count" id="cost-status">Loading price baseline…</div></div>
+  <div class="cost-grid" id="cost-results"></div><div class="callout"><b>FORMULA AND SCOPE</b><p id="cost-formula"></p><ul id="cost-assumptions"></ul></div>
+  <p class="small"><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/service-and-cost-comparison.md">Service and cost comparison method</a></p>
+</section>
+
+<section id="identity" class="panel">
+  <h2>Network boundaries</h2><div class="tbl"><table><thead><tr><th>Concept</th><th>AWS</th><th>Azure</th><th>Google Cloud</th><th>OCI</th></tr></thead><tbody>
+    <tr><td>Virtual network</td><td>VPC is regional; subnets are zonal.</td><td>VNet and subnets are regional.</td><td>VPC is global; subnets are regional.</td><td>VCN and subnets are regional; subnets can be regional.</td></tr>
+    <tr><td>Private PaaS access</td><td>PrivateLink / VPC endpoints</td><td>Private Link / private endpoints</td><td>Private Service Connect</td><td>Service Gateway / private endpoints by service</td></tr>
+    <tr><td>Hybrid dedicated link</td><td>Direct Connect</td><td>ExpressRoute</td><td>Cloud Interconnect</td><td>FastConnect</td></tr>
+    <tr><td>DNS responsibility</td><td>Route 53 Resolver and private hosted zones</td><td>Private DNS zones and resolver</td><td>Cloud DNS policies and zones</td><td>Private DNS / resolver endpoints</td></tr>
+  </tbody></table></div>
+  <h2>IAM evaluation questions</h2><div class="grid2"><div class="card"><h3>BOUNDARY FIRST</h3><ul><li>Which organization, tenant, account, subscription, project, or compartment owns the resource?</li><li>Which parent policies can deny the request?</li><li>Is authorization evaluated on the control plane, data plane, or both?</li></ul></div><div class="card"><h3>WORKLOAD IDENTITY</h3><ul><li>Prefer short-lived workload identity over static access keys.</li><li>Separate human administration, deployment automation, and runtime identity.</li><li>Test the effective policy and audit trail, not only the assigned role name.</li></ul></div></div>
+</section>
+
+<section id="operations" class="panel">
+  <h2>Operations comparison</h2><p class="lead">Normalize the operating model around user signals and ownership. Provider-native products differ, but the questions about SLOs, telemetry, alert actionability, cost allocation, and rollback remain comparable.</p>
+  <div class="tbl"><table><thead><tr><th>Practice</th><th>Cross-cloud decision</th><th>Evidence to retain</th></tr></thead><tbody>
+    <tr><td>SLO and availability</td><td>Define a user-visible SLI before mapping provider metrics. Document zonal, regional, and global dependencies.</td><td>SLO, error budget, dependency map, tested failover RTO/RPO.</td></tr>
+    <tr><td>Telemetry</td><td>Choose collection, retention, cardinality, and export boundaries explicitly.</td><td>Metric/log/trace inventory, retention policy, sampling and cost model.</td></tr>
+    <tr><td>Alerts</td><td>Page only for actionable user impact; route capacity and hygiene signals separately.</td><td>Owner, runbook, escalation, suppression, and post-incident follow-up.</td></tr>
+    <tr><td>Change safety</td><td>Track release stage, defaults, quota, data-plane behavior, and rollback.</td><td>Inventory query, canary, validation gate, rollback trigger.</td></tr>
+    <tr><td>FinOps</td><td>Allocate by business owner and environment; separate commitments from architecture.</td><td>Tags/labels, budgets, anomaly alerts, unit economics, commitment coverage.</td></tr>
+  </tbody></table></div>
+  <p class="small"><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/operations-comparison.md">Operations comparison guide</a> / <a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/release-intelligence.md">Release intelligence guide</a></p>
+</section>
+
+<section id="learning" class="panel">
+  <h2>Certification and learning</h2><p class="lead">Use certification material as a structured map of provider decisions. Return from wrong answers to the decision rule, instead of replaying every course.</p>
+  <div class="grid2">
+    <div class="card aws"><h3>AWS AIP-C01</h3><ul><li><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/domain-guide.md">Domain decision guide</a></li><li><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/flashcards.md">50 flashcards</a></li><li><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/scenario-drills.md">20 scenario drills</a></li><li><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/wrong-answers.en.md">Wrong-answer log</a></li></ul></div>
+    <div class="card gcp"><h3>Google Cloud PDE</h3><ul><li><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/gcp-pde/domain-1-notes.en.md">Domain 1 notes</a></li><li><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/gcp-pde/wrong-answers.en.md">Wrong-answer log</a></li><li><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/certification-watch.en.md">Certification watch</a></li></ul></div>
+  </div>
+  <div class="callout"><b>MISTAKE-FOCUSED LOOP</b><ol><li>Record only wrong answers, lucky guesses, and questions narrowed to two choices.</li><li>Write the missed requirement word, the wrong decision, and one rule for next time. Do not copy exam questions.</li><li>Recall the rule after one, three, and seven days; retire it after three successful explanations.</li></ol></div>
+  <p class="small"><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/README.en.md">English learning index</a> / <a href="https://github.com/hjosugi/cloud-hub/blob/main/README.en.md">English project guide</a></p>
+</section>
+</main>
+<footer><div class="rail"><i></i><i></i><i></i><i></i></div><div class="fwrap">CLOUD HUB — multi-cloud design / operations / release intelligence. Static, no tracking. Validate final decisions against linked official sources.</div></footer>
+<script>
+try{localStorage.setItem('cloud-hub-language','en')}catch(_){}
+const tabs=[...document.querySelectorAll('.tabs button')];
+tabs.forEach(button=>button.addEventListener('click',()=>{tabs.forEach(item=>item.classList.remove('on'));document.querySelectorAll('.panel').forEach(panel=>panel.classList.remove('on'));button.classList.add('on');document.getElementById(button.dataset.t).classList.add('on');history.replaceState(null,'','#'+button.dataset.t);window.scrollTo(0,0)}));
+const initialTab=location.hash.slice(1);if(initialTab){const button=tabs.find(item=>item.dataset.t===initialTab);if(button)button.click()}
+function esc(value){const node=document.createElement('div');node.textContent=String(value??'');return node.innerHTML}
+function attr(value){return esc(value).replaceAll('"','&quot;').replaceAll("'",'&#39;')}
+const VENDORS={aws:'AWS',azure:'AZURE',gcp:'GOOGLE CLOUD',oci:'OCI'};
+
+const CATEGORY_EN={compute:'Compute',containers:'Containers',storage:'Storage',database:'Database',data:'Data & analytics',integration:'Integration',network:'Network',security:'Security',operations:'Operations',ai:'AI'};
+const SERVICE_EN={
+  'virtual-machine':['Run an existing application on virtual machines','Retain OS access and existing middleware while migrating.'],
+  'serverless-http':['Run an HTTP API without managing servers','Scale with requests and reduce idle infrastructure.'],
+  'managed-kubernetes':['Operate multiple services on Kubernetes','Use the Kubernetes API as a common surface while comparing control-plane and node responsibility.'],
+  'object-storage':['Store images, logs, and backups as objects','Compare redundancy, request volume, retrieval, transfer, and minimum retention—not capacity alone.'],
+  'relational-database':['Operate managed PostgreSQL or MySQL','Compare HA, backups, replicas, connections, storage IOPS, and engine compatibility.'],
+  'global-database':['Provide low-latency data access across regions','Choose consistency, write region, conflict policy, RPO, and RTO first.'],
+  'analytics-warehouse':['Analyze large datasets with SQL','Serverless, provisioned, and lakehouse designs have different cost drivers.'],
+  'stream-events':['Deliver and process events in real time','Queues, pub/sub, ordered streams, and Kafka-compatible services are not interchangeable.'],
+  'task-queue':['Level asynchronous work with a queue','Separate producers and workers; manage bursts, retries, and dead letters.'],
+  'private-service-access':['Reach PaaS without the public internet','Verify private-endpoint DNS, routing, endpoint charges, and service-side policy.'],
+  'hybrid-network':['Connect on-premises networks by dedicated link','Compare the whole design: ports, providers, circuits, routing, and redundant paths.'],
+  'workload-identity':['Grant cloud access without long-lived keys','Use workload identity and short-lived credentials to reduce static access keys.'],
+  'secrets-keys':['Centralize keys and secrets','Design rotation and data-plane access separately for keys, passwords, and certificates.'],
+  'observability':['Unify metrics, logs, and traces','Break down collection, retention, search, cardinality, and alerting cost.'],
+  'generative-ai-rag':['Answer from internal documents with generative AI','Compare ingestion, embeddings, vector search, guardrails, and evaluation—not only the model.']
+};
+let serviceUseCases=[];
+function renderServices(){
+  const query=document.getElementById('service-search').value.trim().toLowerCase();const category=document.getElementById('service-category').value;
+  const items=serviceUseCases.filter(item=>{if(category!=='all'&&item.category!==category)return false;const translated=SERVICE_EN[item.id]||[item.id,''];const haystack=[...translated,item.category,...Object.values(item.services).map(service=>service.name)].flat().join(' ').toLowerCase();return !query||query.split(/\s+/).every(term=>haystack.includes(term))});
+  document.getElementById('service-result-count').textContent=`${items.length} of ${serviceUseCases.length} use cases`;
+  document.getElementById('service-results').innerHTML=items.length?items.map(item=>{const text=SERVICE_EN[item.id]||[item.id,''];const cells=['aws','azure','gcp','oci'].map(vendor=>{const service=item.services[vendor];return `<div class="service-cell ${vendor}"><b>${VENDORS[vendor]}</b><a href="${attr(service.url)}" target="_blank" rel="noopener">${esc(service.name)}</a></div>`}).join('');const cost=item.cost_scenario?`<button class="act open-cost" data-scenario="${attr(item.cost_scenario)}">Compare this cost scenario</button>`:'';return `<article class="usecase"><span class="tag">${esc(CATEGORY_EN[item.category]||item.category)}</span><h3>${esc(text[0])}</h3><p>${esc(text[1])}</p><div class="service-quad">${cells}</div>${cost}</article>`}).join(''):'<div class="card">No matching use case. Shorten the query or reset the category.</div>';
+  document.querySelectorAll('.open-cost').forEach(button=>button.addEventListener('click',()=>{document.getElementById('cost-scenario').value=button.dataset.scenario;selectCost();document.getElementById('cost-scenario').scrollIntoView()}));
+}
+async function loadServices(){try{const response=await fetch('data/service-catalog.json');if(!response.ok)throw new Error(response.status);const data=await response.json();serviceUseCases=data.use_cases||[];const categories=[...new Set(serviceUseCases.map(item=>item.category))];document.getElementById('service-category').insertAdjacentHTML('beforeend',categories.map(value=>`<option value="${attr(value)}">${esc(CATEGORY_EN[value]||value)}</option>`).join(''));renderServices()}catch(error){document.getElementById('service-result-count').textContent='Could not load the service catalog.'}}
+document.getElementById('service-search').addEventListener('input',renderServices);document.getElementById('service-category').addEventListener('change',renderServices);
+
+const COST_EN={
+  'linux-vm-2vcpu-8gb':{title:'Linux VM: 2 vCPU / 8 GiB',unit:'instances',usage:'monthly running hours',assumptions:['Linux x86 on-demand / pay-as-you-go list price','Representative US region','2 vCPU and 8 GiB RAM','Compute only; disk, public IPv4, load balancing, and transfer excluded','CPU generation, burst model, network, and disk performance are not identical']},
+  'hot-object-storage':{title:'Hot object storage',unit:'stored GB/GiB-month',usage:'',assumptions:['Frequently accessed standard or hot tier','Representative US location','Redundancy selected with a zone failure in mind','First 1 TB equivalent','Requests, retrieval, versions, soft delete, replication, and egress excluded','Approximation includes provider GB/GiB billing differences']}
+};
+const HOT_CAPACITY={aws:'Regional, multiple Availability Zones, first 50 TB tier',azure:'Hot, zone-redundant, 0–50 TB tier',gcp:'Regional Standard; hourly GiB rate normalized to 730 hours',oci:'Regional Standard published list rate'};
+let costData=null;
+function money(value){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(value)}
+function costScenario(){return costData?.scenarios.find(item=>item.id===document.getElementById('cost-scenario').value)}
+function renderCost(){const scenario=costScenario();if(!scenario)return;const units=Math.max(0,Number(document.getElementById('cost-units').value)||0);const usage=Math.max(0,Number(document.getElementById('cost-usage').value)||0);const estimates=Object.entries(scenario.providers).map(([vendor,item])=>({vendor,item,total:item.hourly_rate!==undefined?item.hourly_rate*units*usage:item.monthly_rate*units}));const max=Math.max(...estimates.map(value=>value.total),.000001);document.getElementById('cost-results').innerHTML=estimates.map(({vendor,item,total})=>{const capacity=scenario.id==='hot-object-storage'?HOT_CAPACITY[vendor]:item.capacity;return `<article class="cost-card ${vendor}"><h3>${VENDORS[vendor]}</h3><span class="amount">${money(total)}</span><div class="sku">Monthly estimate / ${esc(item.service)}<br>${esc(item.sku)} · ${esc(item.region)}</div><div class="cost-bar"><i style="width:${Math.max(2,total/max*100).toFixed(1)}%"></i></div><div class="sku">${esc(capacity)}<br><a href="${attr(item.source)}" target="_blank" rel="noopener">Official price source</a></div></article>`}).join('');document.getElementById('cost-status').textContent=`Prices checked ${costData.checked_at} · ${costData.currency} · ${scenario.comparison_level} · before discounts`;document.getElementById('cost-formula').textContent=`Formula: ${scenario.formula}. Input: ${units} ${COST_EN[scenario.id].unit}${COST_EN[scenario.id].usage?` × ${usage} ${COST_EN[scenario.id].usage}`:''}.`}
+function selectCost(){const scenario=costScenario();if(!scenario)return;const translated=COST_EN[scenario.id];document.getElementById('cost-units-label').textContent=translated.unit.toUpperCase();document.getElementById('cost-units').value=scenario.default_units;document.getElementById('cost-usage-field').hidden=!translated.usage;document.getElementById('cost-usage-label').textContent=translated.usage.toUpperCase();document.getElementById('cost-usage').value=scenario.default_usage;document.getElementById('cost-assumptions').innerHTML=translated.assumptions.map(item=>`<li>${esc(item)}</li>`).join('');renderCost()}
+async function loadCost(){try{const response=await fetch('data/cost-baselines.json');if(!response.ok)throw new Error(response.status);costData=await response.json();document.getElementById('cost-scenario').innerHTML=costData.scenarios.map(item=>`<option value="${attr(item.id)}">${esc(COST_EN[item.id].title)}</option>`).join('');selectCost()}catch(error){document.getElementById('cost-status').textContent='Could not load the price baseline.'}}
+document.getElementById('cost-scenario').addEventListener('change',selectCost);document.getElementById('cost-units').addEventListener('input',renderCost);document.getElementById('cost-usage').addEventListener('input',renderCost);
+
+const PRIORITY_EN={'今すぐ確認':'Review now','今週確認':'Review this week','記録のみ':'Record only'};const CATEGORY_LABEL={deprecation:'Deprecation & migration',genai:'Generative AI',data:'Data',network:'Network',security:'Security',operations:'Operations & reliability',cost:'Cost'};const CONFIDENCE_EN={'高':'high','中':'medium','低':'low'};
+const GUIDANCE={deprecation:['Validate the replacement architecture, compatibility, lifecycle date, and rollback path.','Query affected inventory; assign an owner and dated migration issue; test the replacement before the deadline.','Compare successor services by lifecycle and responsibility, not by the retired product name.'],security:['Review identity, encryption, network, data exposure, and default-policy assumptions.','Check affected inventory, audit signals, patch or configuration action, validation, and rollback.','Compare the control and data-plane boundary and who owns remediation.'],network:['Confirm scope, routing, DNS, endpoint, and failure-domain changes.','Validate routes, quotas, metrics, connection tests, rollout order, and rollback.','Compare topology and operator responsibility rather than endpoint names.'],data:['Review consistency, durability, locality, schema, and recovery assumptions.','Check migration compatibility, backup/restore, quotas, metrics, and cost impact.','Compare data guarantees, scaling boundaries, and operational ownership.'],genai:['Review model lifecycle, data boundary, grounding, tool authority, and evaluation gates.','Pin versions where possible; run quality, safety, latency, and rollback evaluation.','Compare the complete model/RAG/agent system and its control boundary.'],operations:['Review SLO, failure behavior, telemetry, automation, and operator responsibility.','Update dashboards, alerts, runbooks, quotas, rollout validation, and rollback.','Compare user outcomes and operating evidence, not console feature names.'],cost:['Review the architecture and usage assumptions behind the price change.','Recalculate unit economics with inventory and contract discounts; update budgets and anomaly thresholds.','Compare normalized capacity and excluded costs before drawing a provider conclusion.']};
+let digestItems=[],activeFilter='all';
+function priorityClass(value){return value==='今すぐ確認'?'urgent':value==='今週確認'?'week':'log'}
+function renderDigest(){let items=digestItems;if(activeFilter==='urgent')items=items.filter(item=>item.priority==='今すぐ確認');else if(['aws','azure','gcp','oci'].includes(activeFilter))items=items.filter(item=>item.vendor===activeFilter);const list=document.getElementById('digest-list');if(!items.length){list.innerHTML='<div class="card status">No releases match this filter.</div>';return}list.innerHTML=items.map(item=>{const guide=GUIDANCE[item.category]||GUIDANCE.operations;const date=item.published_at?item.published_at.slice(0,10):'date unavailable';const title=esc(item.title||'(no title)');const link=item.url?`<a href="${attr(item.url)}" target="_blank" rel="noopener">${title}</a>`:title;return `<article class="intel ${attr(item.vendor)}"><div class="intel-head"><div><span class="chip">${esc(VENDORS[item.vendor]||item.vendor)}</span><span class="priority ${priorityClass(item.priority)}">${esc(PRIORITY_EN[item.priority]||item.priority)} ${esc(item.score)}</span><h3>${link}</h3></div><div class="intel-meta">${esc(date)}<br>Category: ${esc(CATEGORY_LABEL[item.category]||item.category)}<br>Stage: ${esc(item.release_stage||'update')}<br>Confidence: ${esc(CONFIDENCE_EN[item.confidence]||item.confidence)}</div></div><div class="intel-grid"><div class="intel-block"><b>DESIGN VIEW</b>${esc(guide[0])}</div><div class="intel-block"><b>OPERATIONS VIEW</b>${esc(guide[1])}</div><div class="intel-block"><b>CROSS-CLOUD</b>${esc(guide[2])}</div></div></article>`}).join('')}
+function renderMetrics(data){const summary=data.summary;const urgent=summary.priorities?.['今すぐ確認']||0;const week=summary.priorities?.['今週確認']||0;const lifecycle=(summary.stages?.retirement||0)+(summary.stages?.deprecation||0);document.getElementById('digest-metrics').innerHTML=`<div class="metric"><b>${urgent}</b><span>Review now</span></div><div class="metric"><b>${week}</b><span>Review this week</span></div><div class="metric"><b>${lifecycle}</b><span>Deprecation / retirement</span></div><div class="metric"><b>${esc(summary.total_items)}</b><span>Analyzed releases</span></div><div class="metric"><b>${esc(summary.source_success+'/'+summary.source_total)}</b><span>Official feeds loaded</span></div>`}
+async function loadDigest(){const status=document.getElementById('digest-status');status.textContent='Loading analysis…';try{const response=await fetch('data/feed-digest.json?v='+Date.now(),{signal:AbortSignal.timeout(12000)});if(!response.ok)throw new Error(response.status);const data=await response.json();if(!data.items||!data.summary)throw new Error('invalid digest');digestItems=data.items;renderMetrics(data);renderDigest();status.textContent=`Last analyzed: ${new Date(data.generated_at).toLocaleString('en-US')} — ${data.analyzer.name}`}catch(error){status.textContent='Could not load the analyzed feed.';document.getElementById('digest-list').innerHTML='<div class="card status">Serve the site over HTTP (for example, <span class="code">python3 -m http.server -d site 8000</span>) rather than opening the HTML file directly.</div>'}}
+document.getElementById('reload-digest').addEventListener('click',loadDigest);document.querySelectorAll('#digest-filters button').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('#digest-filters button').forEach(item=>item.classList.remove('on'));button.classList.add('on');activeFilter=button.dataset.filter;renderDigest()}));
+loadDigest();loadServices();loadCost();
+</script>
+</body>
+</html>

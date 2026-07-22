@@ -1,59 +1,59 @@
 <!-- i18n: language-switcher -->
 [English](release-intelligence.md) | [日本語](release-intelligence.ja.md)
 
-# クラウドリリースを設計・運用の観点で読む
+# Reading cloud releases for design and operations
 
-新機能の件数ではなく、既存architectureの前提が変わるreleaseを拾う。
+Track releases that change an existing architecture assumption, not the number of new features.
 
-## 8つの確認
+## Eight checks
 
-1. Stage: Preview / GA / deprecation / retirement / security fix
-2. Scope: global / Region / zone / account等
-3. Existing resources: 自動適用かopt-inか、新規だけか
-4. Data plane: traffic/data format/consistencyが変わるか
-5. Control plane: API、IAM、policy、defaultが変わるか
-6. Operations: metric、log、quota、runbook、backupが変わるか
-7. Economics: pricing、commitment、egress、licenseが変わるか
-8. Cross-cloud: 他cloudの同等機能と責任範囲はどう違うか
+1. Stage: preview, GA, deprecation, retirement, or security fix.
+2. Scope: global, regional, zonal, account-level, or another boundary.
+3. Existing resources: automatic, opt-in, new resources only, or all resources.
+4. Data plane: traffic, data formats, or consistency changes.
+5. Control plane: API, IAM, policy, or default changes.
+6. Operations: metric, log, quota, runbook, or backup changes.
+7. Economics: pricing, commitments, egress, or licensing changes.
+8. Cross-cloud: how the responsibility boundary differs from an equivalent capability elsewhere.
 
-## stage別の行動
+## Actions by stage
 
-| Stage | 設計者 | 運用者 |
+| Stage | Architect | Operator |
 |---|---|---|
-| Preview | architecture optionとして記録、production依存は避ける | sandbox検証、SLA/support/Regionを確認 |
-| GA | 既存ADRの制約を再評価 | metric、quota、cost、runbookを検証 |
-| default change | security/availability前提の差分を確認 | existing/new resourceの適用範囲をinventoryで特定 |
-| deprecation | replacementとmigration architectureを決定 | deadline、owner、対象resource、rollbackをIssue化 |
-| security | exposureとcompensating controlを評価 | patch/mitigation、evidence、完了確認 |
+| Preview | Record as an option; avoid production dependency | Validate in a sandbox; check SLA, support, and Regions |
+| GA | Revisit constraints in existing ADRs | Validate metrics, quotas, cost, and runbooks |
+| Default change | Diff security and availability assumptions | Inventory whether existing or new resources are affected |
+| Deprecation | Select the replacement and migration architecture | Create a dated issue with owner, inventory, and rollback |
+| Security | Evaluate exposure and compensating controls | Apply the patch or mitigation and retain completion evidence |
 
-## cloudごとの読み方
+## Provider-specific reading
 
 ### AWS
 
-service単位のreleaseが多い。Region availability、IAM action、service quota、既存resourceへの適用、CloudFormation/API supportを確認する。
+Releases are often service-specific. Check Region availability, IAM actions, service quotas, existing-resource behavior, and CloudFormation/API support.
 
 ### Azure
 
-Preview→GAだけでなく、Azure Policy、API version、SKU retirement、Entra/Defenderとの統合変更を見る。subscription/MGへ展開するpolicy影響を確認する。
+Follow preview-to-GA transitions as well as Azure Policy, API versions, SKU retirements, and Entra/Defender integration. Check the effect of rollout across subscriptions and management groups.
 
 ### Google Cloud
 
-product release notesは日単位に複数serviceがまとまる。launch stage、global/regional scope、quota、data/ML model version、deprecated APIを確認する。
+Product release notes often group several services by day. Check launch stage, global or regional scope, quota, data/model versions, and deprecated APIs.
 
 ### OCI
 
-database version、Region/AD availability、shape、network、IAM policy例、console/API/CLI supportの差を見る。annual certification codeは実務releaseと分離する。
+Check database versions, Region and Availability Domain coverage, shapes, network behavior, IAM policy examples, and differences between console, API, CLI, and SDK support.
 
-## release review record
+## Review record
 
 ```markdown
 ## <date> <release title>
-- provider / service:
-- stage / deadline:
-- affected inventory:
-- design impact:
-- operations impact:
-- cross-cloud equivalent and difference:
-- action / owner / due date:
-- official source:
+- Provider / service:
+- Stage / deadline:
+- Affected inventory:
+- Design impact:
+- Operations impact:
+- Cross-cloud equivalent and difference:
+- Action / owner / due date:
+- Official source:
 ```

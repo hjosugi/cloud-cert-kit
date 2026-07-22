@@ -1,186 +1,186 @@
 <!-- i18n: language-switcher -->
 [English](scenario-drills.md) | [日本語](scenario-drills.ja.md)
 
-# AIP-C01 シナリオ演習
+# AIP-C01 scenario drills
 
-既存模試の転載ではないオリジナル演習。各問で「要件語→候補→消去理由」を声に出してから答えを開く。
+These are original exercises, not copied exam questions. For each one, say the requirement words, candidate design, and elimination reason aloud before opening the answer.
 
-## 1. RAGの版管理
+## 1. Version-aware RAG
 
-複数部門が同じ規定の異なる版をS3へ保存している。質問には常に対象部門の最新承認版だけを使いたい。最小運用の改善は？
+Several departments store different versions of one policy in S3. Answers must use only the latest approved version for the requested department. What is the lowest-operations improvement?
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-`business_unit`、`approved`、`effective_at`をmetadataとして取込み、retrieval時にfilterする。embedding次元を増やしても版や承認状態は保証できない。
+Ingest `business_unit`, `approved`, and `effective_at` as metadata and filter at retrieval time. More embedding dimensions cannot guarantee version or approval state.
 </details>
 
-## 2. exact IDと症状
+## 2. Exact IDs and symptoms
 
-運用assistantは`DB-781`でも「接続が断続的に切れる」でも同じrunbookへ到達する必要がある。
+An operations assistant must reach the same runbook for `DB-781` and “connections drop intermittently.”
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-error code fieldのkeyword searchと本文のvector searchを組み合わせるhybrid search。必要に応じてtop candidatesをrerankする。
+Combine keyword search over error-code fields with vector search over the narrative text. Rerank top candidates when needed.
 </details>
 
-## 3. chunkの粒度
+## 3. Chunk size
 
-100ページの契約書で、例外条項は2文だが、回答には同じ節全体の条件が必要。
+In a 100-page contract, an exception is two sentences long, but the answer needs the conditions from its full section.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-hierarchical chunking。小さいchildで例外条項を検索し、大きいparentをcontextとして返す。
+Use hierarchical chunking: search a small child containing the exception and return its larger parent as context.
 </details>
 
-## 4. 更新頻度
+## 4. Frequently changing facts
 
-製品価格表が毎日更新される。最新価格を回答させるためにcustom modelを毎週fine-tuneする案が出た。
+A product price list changes daily. A team proposes fine-tuning a custom model every week to keep answers current.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-fine-tuningではなくRAGまたはdeterministic data tool。更新をindex/databaseへ反映し、価格は取得結果からのみ回答する。
+Use RAG or a deterministic data tool, not fine-tuning. Update the index or database and answer prices only from retrieved results.
 </details>
 
-## 5. webhook
+## 5. Webhook acknowledgement
 
-partner webhookは2秒以内にACKが必要。生成した説明をCRM、通知、監査の3系統へ送り、将来consumerを増やす。
+A partner webhook needs a response within two seconds. Generated explanations go to CRM, notification, and audit systems, and more consumers will be added later.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-API Gateway→Lambdaで署名検証→EventBridgeへpublishしてACK。後段でBedrockを呼び、生成eventをrulesでfan-outする。
+Validate the signature in API Gateway/Lambda, publish to EventBridge, and acknowledge. Invoke Bedrock downstream and fan out the generated event with rules.
 </details>
 
-## 6. burst
+## 6. Bursty ingestion
 
-on-premises装置はHTTPSだけ使える。交代時間に数千件が集中し、Bedrock停止中も受信を失いたくない。
+On-premises devices can use only HTTPS. Thousands of events arrive at shift change, and events must survive a Bedrock outage.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-API Gateway→SQS service integration→Lambda consumer→Bedrock。queueがburstと一時停止を吸収する。
+Use API Gateway → SQS service integration → Lambda consumer → Bedrock. The queue absorbs the burst and temporary outage.
 </details>
 
-## 7. agent loop
+## 7. Agent loops
 
-外部API障害中、agentが同じtoolを何度も要求してtoken費用が増える。
+During an external API outage, an agent repeatedly requests the same tool and increases token cost.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-Step Functionsでtool failure counterとChoiceによる停止条件を持つ。共有circuit breakerをDynamoDB+TTLへ置き、cooldown中はfail fastする。
+Track tool failures in Step Functions and stop with a Choice condition. Put a shared circuit breaker in DynamoDB with TTL and fail fast during cooldown.
 </details>
 
-## 8. tool parameter
+## 8. Tool parameters
 
-FMが`customerId`を文字列ではなく空配列でtoolへ渡すことがある。
+The model sometimes sends an empty array instead of a string for `customerId`.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-typed schemaに加えtool側で厳格にvalidationし、`INVALID_CUSTOMER_ID`のような構造化errorを返す。retryだけでは直らない。
+Use a typed schema, strict server-side validation, and a structured error such as `INVALID_CUSTOMER_ID`. Retries alone do not repair the contract.
 </details>
 
-## 9. 人手承認
+## 9. Human approval
 
-生成した拒否通知は有資格者が編集・承認してから送信する。承認は数時間かかる。
+A qualified reviewer must edit and approve a generated denial notice before sending it. Review can take hours.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-Step Functions callback/wait pattern、API endpointでapproval/editを受け、DynamoDBへdraft・final・reviewer feedbackを保存する。
+Use a Step Functions callback/wait pattern, accept edits and approval through an API, and store draft, final text, and reviewer feedback in DynamoDB.
 </details>
 
 ## 10. PII
 
-customer chatの氏名と電話番号をFMへ送らず、同一人物の会話関係は維持したい。
+Names and phone numbers from customer chat must not reach the model, but references to the same person must remain consistent.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-ComprehendでPIIを検出し、`<NAME_1>`等の一貫したplaceholderへ置換。Guardrailsのinput/output maskingを追加防御にする。
+Detect PII with Comprehend and replace it with stable placeholders such as `<NAME_1>`. Add Guardrails input/output masking as defense in depth.
 </details>
 
-## 11. policy validation
+## 11. Policy validation
 
-融資communication policyとの論理矛盾を検出し、違反時は必ず送信を止めたい。
+The system must detect logical conflict with a lending-communication policy and always prevent sending when a conflict exists.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-Automated Reasoning checksでpolicyとの整合findingを得る。ただしdetect modeなので、Lambda等がfindingを検査してblock/rewrite/fallbackを決定する。
+Use Automated Reasoning checks for policy findings, then have application code inspect those findings and block, rewrite, or fall back. The checks operate in detection mode.
 </details>
 
-## 12. audit
+## 12. Audit evidence
 
-監査人が「誰がAPIを呼んだか」と「どのsourceでこの回答を作ったか」の両方を要求した。
+An auditor asks both who invoked an API and which sources produced a particular answer.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-前者はCloudTrail。後者はapplication decision logにmodel ID、prompt version、retrieved source IDs、response metadataを記録する。
+Use CloudTrail for API identity/activity. Use an application decision log for the model ID, prompt version, retrieved source IDs, and response metadata.
 </details>
 
-## 13. private connectivity
+## 13. Private connectivity
 
-private subnetのLambdaからBedrock、Athena、S3へpublic Internetを使わず接続したい。
+A Lambda function in a private subnet must reach Bedrock, Athena, and S3 without using the public internet.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-Bedrock/Athena interface VPC endpointsとS3 gateway endpoint。NAT Gateway経由のpublic endpointはprivate service path要件を満たさない。
+Use interface VPC endpoints for Bedrock and Athena and a gateway endpoint for S3. A NAT Gateway to public endpoints does not satisfy a private service-path requirement.
 </details>
 
-## 14. deterministic SQL
+## 14. Deterministic SQL
 
-FMが生成する任意SQLをAthenaへ実行する案があるが、SELECT以外を絶対に禁止したい。
+A proposal lets a model generate arbitrary Athena SQL, but non-`SELECT` operations must be impossible.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-intentをallowlisted parameterized SELECT templateへmapする。自由生成SQLを文字列検査するだけにしない。
+Map intent to allowlisted, parameterized `SELECT` templates. Do not rely only on string inspection of freely generated SQL.
 </details>
 
-## 15. perceived latency
+## 15. Perceived latency
 
-trafficはburstyで専用capacityを買いたくないが、chat離脱を減らしたい。
+Traffic is bursty, the team does not want dedicated capacity, and chat abandonment must decrease.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-ConverseStream等でtokenを逐次表示しTTFTを下げる。Provisioned Throughputは必須ではない。
+Stream tokens with `ConverseStream` to reduce time to first token. Provisioned Throughput is not required by this requirement.
 </details>
 
-## 16. nightly workload
+## 16. Nightly workload
 
-50万件のtranscriptを毎晩要約し、朝までにS3へ結果を置く。同期invocationはthrottleされる。
+Five hundred thousand transcripts must be summarized to S3 overnight, and synchronous invocations are throttled.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-Bedrock batch inference。input/outputをS3に置き、offline jobとして処理する。
+Use Bedrock batch inference with S3 input and output as an offline job.
 </details>
 
-## 17. predictable peak
+## 17. Predictable peak
 
-平日9時から30分だけ同期requestが10倍になり、同一Region・同一modelを使い続ける必要がある。
+Synchronous requests grow 10× for 30 minutes at 09:00 on weekdays, and the workload must stay on one model in one Region.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-予測RPM/TPMからProvisioned Throughputをsizeし、provisioned model ARNをinvokeする。
+Size Provisioned Throughput from forecast requests/tokens per minute and invoke the provisioned model ARN.
 </details>
 
-## 18. context overflow
+## 18. Context overflow
 
-全会話履歴とRAG chunkを毎回送ってcontext上限を超える。
+Sending every conversation turn and every RAG chunk exceeds the context limit.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-CountTokensで事前budgetを確認し、古いturnをrunning summaryへ圧縮、recent turnsだけ残し、retrieved chunk数を制限する。
+Use `CountTokens` before invocation, compress old turns into a running summary, retain recent turns, and cap retrieved chunks.
 </details>
 
-## 19. release gate
+## 19. Release gate
 
-prompt変更後も文章は毎回少し異なる。以前の品質を保ったまま自動判定したい。
+Answers vary slightly after a prompt change, but quality must remain at least as good as the previous version under an automated gate.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-固定prompt datasetでbaseline/candidateをModel Evaluationsまたはjudge modelにより比較し、quality thresholdをCI/CD gateにする。exact matchは使わない。
+Compare baseline and candidate on a fixed prompt dataset with Model Evaluations or a judge model and gate on a quality threshold. Do not use exact matching.
 </details>
 
-## 20. agent評価
+## 20. Agent evaluation
 
-endpointは常にHTTP 200だが、agentが不要なtoolを3回呼んでから回答する。
+The endpoint always returns HTTP 200, but the agent calls three unnecessary tools before answering.
 
-<details><summary>答え</summary>
+<details><summary>Answer</summary>
 
-goal attainment、tool selection/parameter accuracyをagent evaluationで測り、traceからtool countとloopを分析する。HTTP availabilityだけでは不十分。
+Measure goal attainment and tool/parameter accuracy, then inspect traces for tool count and loops. Availability alone does not measure task success.
 </details>

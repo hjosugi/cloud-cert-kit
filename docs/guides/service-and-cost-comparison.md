@@ -1,31 +1,31 @@
 <!-- i18n: language-switcher -->
 [English](service-and-cost-comparison.md) | [日本語](service-and-cost-comparison.ja.md)
 
-# 用途検索と費用比較の方法
+# Service discovery and cost comparison
 
-## 用途から探す
+## Search by purpose
 
-サービス名を知っていることを前提にしない。最初に「何を実現するか」を選び、4クラウドの候補と次の確認事項を表示する。
+Do not assume that the reader already knows a product name. Start from the outcome, then compare candidates in all four clouds against:
 
-1. resource scopeとisolation boundary
-2. availability、replication、failover
-3. identityとprivate access
-4. operatorが担当するpatch、backup、scaling、upgrade
-5. 課金meterと無料枠・commitmentの適用条件
+1. Resource scope and isolation boundary.
+2. Availability, replication, and failover.
+3. Identity and private access.
+4. Operator-owned patching, backup, scaling, and upgrades.
+5. Billing meters and eligibility for free tiers or commitments.
 
-カタログは候補を絞るための入口であり、セル内のサービスが完全互換という意味ではない。
+The catalog narrows the search. Services in the same row are not guaranteed to be interchangeable.
 
-## 費用比較のレベル
+## Levels of cost comparison
 
-| Level | 揃えるもの | 揃わないもの |
+| Level | Normalized | Still different |
 |---|---|---|
-| capacity-match | vCPU、memory、稼働時間、台数 | CPU世代、burst、network、disk性能 |
-| durability-intent-match | access tier、location、zone障害への意図、容量 | durability値、request unit、data transfer、復旧機能 |
-| workload benchmark | 実データ、同じSLO、load test、運用手順 | provider固有の実装差は残る |
+| Capacity match | vCPU, memory, running hours, instance count | CPU generation, burst model, network, and disk performance |
+| Durability-intent match | Access tier, location, zone-failure intent, capacity | Durability figures, request units, transfer, and recovery features |
+| Workload benchmark | Real data, common SLO, load test, operating procedure | Provider-specific implementation differences remain |
 
-サイトの金額は最初の2段階まで。採用判断には3段階目のbenchmarkが必要。
+The public site supports the first two levels. A purchase decision requires the third.
 
-## 計算式
+## Formulas
 
 ### Linux VM baseline
 
@@ -33,26 +33,26 @@
 monthly compute = public hourly rate × instance count × running hours
 ```
 
-2 vCPU・8 GiBの公開On-Demand/Pay-as-you-go単価を使用する。disk、public IPv4、load balancer、network、monitoring、backupは含めない。
+The comparison uses public on-demand/pay-as-you-go prices for 2 vCPU and 8 GiB. It excludes disks, public IPv4, load balancers, networking, monitoring, and backup.
 
-### Hot object storage baseline
+### Hot object-storage baseline
 
 ```text
 monthly storage = public storage rate × stored GB/GiB-month
 ```
 
-request、retrieval、versioning、soft delete、replication、egressは含めない。AzureはLRSではなくZRSを使い、単一location内のzone障害を意識した比較に寄せる。
+It excludes requests, retrieval, versioning, soft delete, replication, and egress. Azure uses ZRS rather than LRS to align the baseline with protection from a zone failure inside one location.
 
-## 単価の管理
+## Maintaining price data
 
-- 基準日、currency、region、SKU、formula、公式sourceを`site/data/cost-baselines.json`へ保存する。
-- 単価変更はsourceとchecked dateを同時に更新する。
-- 最安値を推奨理由にしない。性能、SLO、運用工数、既存skill、data gravityを含める。
-- 契約割引やprivate offerは公開単価と分け、組織固有の比較表で上書きする。
+- Store the reference date, currency, Region, SKU, formula, and official source in `site/data/cost-baselines.json`.
+- Update the source and verification date with every price change.
+- Never recommend the lowest list price without performance, SLO, operating work, existing skills, and data gravity.
+- Keep contract discounts and private offers outside the public baseline and apply them in an organization-specific comparison.
 
-## 最終見積もり
+## Final estimate
 
-サイトの概算後、各社公式calculatorへ同じ要件を入力する。
+After the site estimate, enter the same requirements in each official calculator:
 
 - [AWS Pricing Calculator](https://calculator.aws/)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)

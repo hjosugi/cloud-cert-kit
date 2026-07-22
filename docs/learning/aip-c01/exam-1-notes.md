@@ -1,5 +1,5 @@
-<!-- i18n: language-switcher -->
-[English](exam-1-notes.md) | [日本語](exam-1-notes.ja.md)
+<!-- i18n: Japanese-only practice notes -->
+[日本語（クラウド用語併記）](exam-1-notes.md) | [日本語](exam-1-notes.ja.md)
 
 # AIP-C01 模試#1 (Kane/Maarek) — 75問圧縮ノート
 

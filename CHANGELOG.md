@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.2.0 — 2026-07-23
+
+### Added
+
+- 公開サイトのネイティブ英語版と、日本語・英語の相互言語切替
+- browser言語、明示的な`?lang=`指定、保存済み選択に対応する入口
+- 英語版のrelease intelligence、用途検索、費用比較、設計・IAM・運用・学習view
+- repository内の主要README・guide・学習資料の日英ペアとリンク整合テスト
+
+### Fixed
+
+- 動的に生成するURL属性をHTML attributeとしてescapeし、表示文字列用escapeと分離
+- browser storageが利用不能でも言語選択とinteractive viewを停止させないfallback
+- GitHub Pages workflowの権限をbuildとdeployの必要範囲へ分離
+- 日本語版と英語版のsection構造、repositoryリンク、主要interactive viewをCIで検証
+- English document本文への日本語混入をCIで検知
+
 ## 2.1.1 — 2026-07-11
 
 ### Changed

@@ -7,11 +7,11 @@
 
 ## AIP-C01
 
-1. [ドメイン別ガイド](aip-c01/domain-guide.md) — 試験範囲を設計判断へ変換
-2. [頻出比較とフラッシュカード](aip-c01/flashcards.md) — 似たサービスを短時間で識別
-3. [シナリオ演習](aip-c01/scenario-drills.md) — オリジナル問題で判断軸を確認
+1. [ドメイン別ガイド](aip-c01/domain-guide.ja.md) — 試験範囲を設計判断へ変換
+2. [頻出比較とフラッシュカード](aip-c01/flashcards.ja.md) — 似たサービスを短時間で識別
+3. [シナリオ演習](aip-c01/scenario-drills.ja.md) — オリジナル問題で判断軸を確認
 4. [間違い問題ノート](aip-c01/wrong-answers.md) — 誤答だけを反復
-5. [模試#1圧縮ノート](aip-c01/exam-1-notes.md) — 75問の一行要約
+5. [模試#1圧縮ノート](aip-c01/exam-1-notes.ja.md) — 75問の一行要約
 
 ## GCP PDE
 

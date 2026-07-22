@@ -10,13 +10,18 @@ Materials designed not to track test scores, but to correct mistaken judgments.
 1. [Domain-specific Guide](aip-c01/domain-guide.md) — Convert exam scope into design decisions
 2. [Frequent Comparison and Flashcards](aip-c01/flashcards.md) — Quickly identify similar services
 3. [Scenario Drills](aip-c01/scenario-drills.md) — Confirm judgment criteria with original questions
-4. [Wrong Answer Notebook](aip-c01/wrong-answers.md) — Repeatedly review only incorrect answers
-5. [Mock Exam #1 Summary Notes](aip-c01/exam-1-notes.md) — One-line summaries of 75 questions
+4. [Wrong Answer Notebook](aip-c01/wrong-answers.en.md) — Repeatedly review only incorrect answers
+
+The third-party practice-exam compression notes remain Japanese-only; the domain guide and original drills provide the maintained English coverage.
 
 ## GCP PDE
 
-1. [Domain 1 Summary Notes](gcp-pde/domain-1-notes.md)
-2. [Wrong Answer Notebook](gcp-pde/wrong-answers.md)
+1. [Domain 1 Summary Notes](gcp-pde/domain-1-notes.en.md)
+2. [Wrong Answer Notebook](gcp-pde/wrong-answers.en.md)
+
+## Monthly maintenance
+
+- [Certification status watch](certification-watch.en.md) — Primary sources, update decisions, and observation log
 
 ## Recording Mistaken Questions
 

@@ -21,7 +21,7 @@ class LearningContentTests(unittest.TestCase):
         self.assertEqual(20, len(re.findall(r"^## \d+\.", text, re.MULTILINE)))
 
     def test_local_markdown_links_exist(self):
-        files = [ROOT / "README.md"]
+        files = [ROOT / "README.md", ROOT / "README.en.md"]
         files.extend((ROOT / "docs").rglob("*.md"))
         missing = []
         for source in files:
@@ -49,7 +49,10 @@ class LearningContentTests(unittest.TestCase):
             self.assertIn(provider, watch)
 
     def test_site_repository_links_exist(self):
-        html = (ROOT / "site/cloud-hub.html").read_text(encoding="utf-8")
+        html = "\n".join(
+            path.read_text(encoding="utf-8")
+            for path in (ROOT / "site/cloud-hub.html", ROOT / "site/cloud-hub.en.html")
+        )
         missing = [
             path
             for path in REPOSITORY_LINK_RE.findall(html)
@@ -109,9 +112,80 @@ class LearningContentTests(unittest.TestCase):
         self.assertAlmostEqual(60.955, vm["providers"]["aws"]["hourly_rate"] * 730, places=3)
 
     def test_site_exposes_purpose_search_and_cost_comparison(self):
-        html = (ROOT / "site/cloud-hub.html").read_text(encoding="utf-8")
-        for expected in ('id="service-search"', 'id="service-results"', 'id="cost-scenario"', 'id="cost-results"', "capacity-match"):
+        for site_name in ("cloud-hub.html", "cloud-hub.en.html"):
+            html = (ROOT / "site" / site_name).read_text(encoding="utf-8")
+            for expected in (
+                'id="service-search"',
+                'id="service-results"',
+                'id="cost-scenario"',
+                'id="cost-results"',
+                "comparison_level",
+            ):
+                self.assertIn(expected, html)
+
+    def test_site_has_native_japanese_and_english_entrypoints(self):
+        japanese = (ROOT / "site/cloud-hub.html").read_text(encoding="utf-8")
+        english = (ROOT / "site/cloud-hub.en.html").read_text(encoding="utf-8")
+        index = (ROOT / "site/index.html").read_text(encoding="utf-8")
+        self.assertIn('<html lang="ja">', japanese)
+        self.assertIn('<html lang="en">', english)
+        self.assertIn('href="cloud-hub.en.html"', japanese)
+        self.assertIn('href="cloud-hub.html"', english)
+        self.assertIn("localStorage.setItem('cloud-hub-language', 'ja')", japanese)
+        self.assertIn("localStorage.setItem('cloud-hub-language','en')", english)
+        self.assertIn("try { stored = localStorage.getItem", index)
+        self.assertIn("navigator.language", index)
+        self.assertIn("requested === 'ja' || requested === 'en'", index)
+
+    def test_english_document_bodies_do_not_mix_japanese(self):
+        english_docs = [
+            ROOT / "README.en.md",
+            ROOT / "docs/README.md",
+            ROOT / "docs/feed-intelligence.en.md",
+            ROOT / "docs/learning/README.en.md",
+            ROOT / "docs/learning/certification-watch.en.md",
+            ROOT / "docs/learning/aip-c01/domain-guide.md",
+            ROOT / "docs/learning/aip-c01/flashcards.md",
+            ROOT / "docs/learning/aip-c01/scenario-drills.md",
+            ROOT / "docs/learning/aip-c01/wrong-answers.en.md",
+            ROOT / "docs/learning/gcp-pde/domain-1-notes.en.md",
+            ROOT / "docs/learning/gcp-pde/wrong-answers.en.md",
+        ]
+        english_docs.extend(
+            path
+            for path in (ROOT / "docs/guides").glob("*.md")
+            if not path.name.endswith(".ja.md")
+        )
+        for path in english_docs:
+            body = "\n".join(path.read_text(encoding="utf-8").splitlines()[3:])
+            self.assertNotRegex(
+                body,
+                r"[\u3040-\u30ff\u3400-\u9fff]",
+                msg=f"Japanese text found in English document: {path.relative_to(ROOT)}",
+            )
+
+    def test_english_site_covers_primary_interactive_views(self):
+        html = (ROOT / "site/cloud-hub.en.html").read_text(encoding="utf-8")
+        for expected in (
+            'id="release"',
+            'id="design"',
+            'id="services"',
+            'id="identity"',
+            'id="operations"',
+            'id="learning"',
+            "SERVICE_EN",
+            "COST_EN",
+            "PRIORITY_EN",
+            "DESIGN VIEW",
+            "OPERATIONS VIEW",
+            "CROSS-CLOUD",
+        ):
             self.assertIn(expected, html)
+
+    def test_site_sections_are_balanced(self):
+        for site_name in ("cloud-hub.html", "cloud-hub.en.html"):
+            html = (ROOT / "site" / site_name).read_text(encoding="utf-8")
+            self.assertEqual(len(re.findall(r"<section(?:\s|>)", html)), html.count("</section>"))
 
 
 if __name__ == "__main__":

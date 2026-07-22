@@ -5,7 +5,9 @@
 
 A multi-cloud design and operation site to understand AWS / Azure / Google Cloud / OCI not by service names, but by differences in **philosophy, resource boundaries, failure domains, and operator responsibilities**.
 
-- Public site: https://hjosugi.github.io/cloud-hub/
+- Public site: https://hjosugi.github.io/cloud-hub/ (selects Japanese / English from the browser language)
+- Japanese: https://hjosugi.github.io/cloud-hub/cloud-hub.html
+- English: https://hjosugi.github.io/cloud-hub/cloud-hub.en.html
 - Latest Release: https://github.com/hjosugi/cloud-hub/releases/latest
 - Repository: https://github.com/hjosugi/cloud-hub
 
@@ -61,15 +63,15 @@ Static JSON / Markdown
 GitHub Pages
 ```
 
-No always-on servers, databases, paid AI APIs, or public CORS proxies are used. For details, see [Feed intelligence architecture](docs/feed-intelligence.md).
+No always-on servers, databases, paid AI APIs, or public CORS proxies are used. For details, see [Feed intelligence architecture](docs/feed-intelligence.en.md).
 
 ## Certifications and learning as an auxiliary layer
 
 - [AIP-C01 Domain Guide](docs/learning/aip-c01/domain-guide.md)
 - [AIP-C01 Flashcards](docs/learning/aip-c01/flashcards.md)
 - [AIP-C01 Scenario Exercises](docs/learning/aip-c01/scenario-drills.md)
-- [GCP PDE Domain 1 condensed notes](docs/learning/gcp-pde/domain-1-notes.md)
-- [Review only incorrect questions](docs/learning/README.md)
+- [GCP PDE Domain 1 condensed notes](docs/learning/gcp-pde/domain-1-notes.en.md)
+- [Review only incorrect questions](docs/learning/README.en.md)
 
 Don’t just stop at obtaining certifications—connect the judgment criteria of each question to the design and operations guides.
 
@@ -81,7 +83,9 @@ cloud-hub/
 │   ├── guides/                    Multi-cloud design and operation comparison
 │   ├── learning/                  Certification materials, mock exam notes, mistake records
 │   └── feed-intelligence.md       Release analysis design
-├── site/cloud-hub.html             Main GitHub Pages site
+├── site/index.html                 Automatic language-selection entry point
+├── site/cloud-hub.html             Japanese GitHub Pages site
+├── site/cloud-hub.en.html          English GitHub Pages site
 ├── site/data/service-catalog.json  Purpose-based candidate clouds
 ├── site/data/cost-baselines.json   Configuration, unit prices, formulas, official sources
 ├── config/cloud-perspectives.json  Cloud philosophies and corresponding domains
@@ -99,4 +103,4 @@ python3 -m http.server -d site 8000
 
 Open `http://localhost:8000/`.
 
-Reference date: 2026-07-11. Final judgments on specifications and SLAs should be based on each cloud’s official documentation.
+Reference date: 2026-07-23. Final judgments on specifications and SLAs should be based on each cloud’s official documentation.

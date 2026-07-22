@@ -1,70 +1,70 @@
 <!-- i18n: language-switcher -->
 [English](operations-comparison.md) | [日本語](operations-comparison.ja.md)
 
-# マルチクラウド運用モデル比較
+# Comparing multi-cloud operating models
 
-運用で最も危険なのは、同じ単語を同じ責任範囲だと思うこと。`monitoring`、`HA`、`backup`、`policy`の中身を分解する。
+The most dangerous operating assumption is that the same word implies the same responsibility boundary. Decompose terms such as monitoring, HA, backup, and policy.
 
-## telemetry
+## Telemetry
 
-| 種別 | AWS | Azure | GCP | OCI | 比較時の注意 |
+| Type | AWS | Azure | Google Cloud | OCI | Compare |
 |---|---|---|---|---|---|
-| metrics | CloudWatch Metrics | Azure Monitor Metrics | Cloud Monitoring | Monitoring | retention、dimension/cardinality、custom metric料金 |
-| logs | CloudWatch Logs | Log Analytics Workspace | Cloud Logging | Logging | ingestion/exclusion/archive経路 |
-| audit | CloudTrail | Activity Log + Entra audit | Cloud Audit Logs | Audit | control/data plane、read eventのdefault |
-| config/compliance | AWS Config | Azure Policy | Asset Inventory/Org Policy | Cloud Guard/Security Zones | detectとdenyを区別 |
-| trace/APM | X-Ray / ADOT | Application Insights | Cloud Trace/OpenTelemetry | APM | trace samplingとvendor-neutral export |
+| Metrics | CloudWatch Metrics | Azure Monitor Metrics | Cloud Monitoring | Monitoring | Retention, dimensions/cardinality, custom-metric charges |
+| Logs | CloudWatch Logs | Log Analytics Workspace | Cloud Logging | Logging | Ingestion, exclusion, and archive paths |
+| Audit | CloudTrail | Activity Log + Entra audit | Cloud Audit Logs | Audit | Control/data planes and default read-event coverage |
+| Config/compliance | AWS Config | Azure Policy | Asset Inventory / Organization Policy | Cloud Guard / Security Zones | Detection versus prevention |
+| Tracing/APM | X-Ray / ADOT | Application Insights | Cloud Trace / OpenTelemetry | APM | Sampling and vendor-neutral export |
 
-## alert設計
+## Alert design
 
-共通化するのはtoolではなくalert policy。
+Standardize the policy, not the tool.
 
-- page: user SLOを現在侵害しており、operator actionが必要
-- ticket: 将来risk、capacity、certificate expiry、policy drift
-- log only: forensic evidence、成功event、変更履歴
+- **Page:** a user SLO is currently violated and an operator must act.
+- **Ticket:** future risk, capacity, certificate expiry, or policy drift.
+- **Log only:** forensic evidence, successful events, and change history.
 
-provider default alertをそのままpageへ送らない。症状alertを主、原因alertを補助にする。
+Do not page directly from provider defaults. Lead with symptom alerts and use cause alerts as supporting evidence.
 
-## availabilityを読む
+## Reading availability claims
 
-| 確認項目 | 質問 |
+| Check | Question |
 |---|---|
-| resource scope | zonal/regional/globalのどれか |
-| replication | sync/async、誰が構成するか |
-| failover | automatic/manual、RTO、endpoint変化 |
-| backup | HA replicaと独立しているか、cross-region copyはあるか |
-| control plane | API停止中にexisting data planeは継続するか |
-| quota | failover先にcapacity/quotaがあるか |
-| test | production相当のrecovery testをいつ実行したか |
+| Resource scope | Is it zonal, regional, or global? |
+| Replication | Is it synchronous or asynchronous, and who configures it? |
+| Failover | Is it automatic or manual; what is the RTO; does the endpoint change? |
+| Backup | Is it independent of the HA replica; is cross-region copy available? |
+| Control plane | Does the existing data plane continue while APIs are unavailable? |
+| Quota | Is capacity and quota reserved in the failover location? |
+| Test | When did a production-equivalent recovery test last succeed? |
 
-## change management
+## Change management
 
-releaseを適用する前に次を分ける。
+Classify a release before applying it:
 
-1. provider-managed change: platform側で自動適用
-2. opt-in feature: operatorが有効化
-3. default change: 新規resourceだけか既存resourceも変わるか
-4. API/version retirement: deadlineまでにmigrationが必要
-5. regional rollout: target Regionへ到達済みか
+1. Provider-managed change: the platform applies it automatically.
+2. Opt-in feature: the operator must enable it.
+3. Default change: determine whether it affects new resources, existing resources, or both.
+4. API or version retirement: migration must finish before a deadline.
+5. Regional rollout: confirm that it has reached every target Region.
 
-## cost operations
+## Cost operations
 
-- billing exportを共通warehouseへ集めても、allocation unitは各cloudのhierarchyに合わせる。
-- discount modelを単純比較しない。commitment term、instance flexibility、data transfer、managed operationを含める。
-- egress削減のためにdata gravityとconsumer locationをarchitecture decisionへ含める。
-- idle resource削除だけでなく、log retention、snapshot、public IP、NAT/data processing chargeを確認する。
+- A common billing warehouse is useful, but allocation must respect each cloud's hierarchy.
+- Compare commitments, instance flexibility, transfer, and operating work—not discount percentages alone.
+- Include data gravity and consumer location in architecture decisions intended to reduce egress.
+- Review retention, snapshots, public IPs, NAT, and data-processing charges as well as idle compute.
 
-## operator handoff template
+## Operator handoff template
 
-| 項目 | 内容 |
+| Field | Content |
 |---|---|
-| owner | service/team/on-call |
-| user SLO | availability/latency/freshness |
-| dashboard | golden signals + business signal |
-| dependencies | identity/network/data/external API |
-| failure domains | zone/region/global service |
-| rollback | artifact/config/data rollback |
-| backup restore | last tested date and result |
-| quota | current/headroom/failover Region |
-| break glass | credential location, approval, audit |
-| provider release | subscribed feeds and review owner |
+| Owner | Service, team, and on-call rotation |
+| User SLO | Availability, latency, and freshness |
+| Dashboard | Golden signals plus business signals |
+| Dependencies | Identity, network, data, and external APIs |
+| Failure domains | Zone, Region, and global services |
+| Rollback | Artifact, configuration, and data rollback |
+| Backup restore | Date and result of the latest test |
+| Quota | Current use, headroom, and failover-Region capacity |
+| Break glass | Credential location, approval, and audit path |
+| Provider releases | Subscribed feeds and responsible reviewer |

@@ -1,243 +1,172 @@
 <!-- i18n: language-switcher -->
 [English](domain-guide.md) | [日本語](domain-guide.ja.md)
 
-# AIP-C01 ドメイン別判断ガイド
+# AIP-C01 domain decision guide
 
-公式ブループリントは D1 31%、D2 26%、D3 20%、D4 12%、D5 11%。合格には全サービスの暗記より、要件語から設計パターンを固定する力が必要になる。
+The official blueprint weights the domains at D1 31%, D2 26%, D3 20%, D4 12%, and D5 11%. Success depends less on memorizing every service than on mapping requirement words to defensible design patterns.
 
-公式: [AWS Certified Generative AI Developer - Professional Exam Guide](https://docs.aws.amazon.com/aws-certification/latest/ai-professional-01.html)
+Official source: [AWS Certified Generative AI Developer - Professional Exam Guide](https://docs.aws.amazon.com/aws-certification/latest/ai-professional-01.html)
 
 ## Domain 1: Foundation Model Integration, Data Management, and Compliance — 31%
 
-### このドメインで問われること
+This domain covers model and embedding selection, RAG ingestion and retrieval, structured and unstructured data, and lifecycle management for models, prompts, and configurations.
 
-- FMとembedding modelの選択
-- RAGの取込、chunking、検索、reranking、metadata
-- 構造化・非構造化・マルチモーダルデータの準備
-- モデル、prompt、設定の外部化とライフサイクル
-- Knowledge Bases、OpenSearch、Aurora pgvector等の統合
+### RAG decision order
 
-### RAGの判断順序
+1. If knowledge changes frequently, prefer RAG over fine-tuning.
+2. If exact identifiers matter, prefer hybrid search over vector-only search.
+3. If a precise clause and its larger context are both needed, use hierarchical chunking.
+4. If version, department, Region, or access limits matter, use metadata filtering.
+5. If the right result is already in top-k but ranked poorly, add a reranker.
 
-1. 情報は頻繁に変わるか。変わるならfine-tuningではなくRAG。
-2. exact IDが重要か。重要ならvector-onlyではなくhybrid search。
-3. 小さい条項と周辺文脈の両方が必要か。必要ならhierarchical chunking。
-4. 最新版・部署・地域を限定するか。限定するならmetadata filtering。
-5. 初期検索結果に正解が含まれるが順位が悪いか。含まれるならreranker。
-
-### 検索方式の比較
-
-| 方式 | 強み | 弱み | 合図 |
+| Method | Strength | Limitation | Signal |
 |---|---|---|---|
-| keyword | ID、固有名詞、完全一致 | 言い換えに弱い | CVE、ERR-1042、型番 |
-| vector | 意味、言い換え | exact IDを落とす | 自然文、類似症状 |
-| hybrid | exact+意味 | index設計が必要 | IDと自然文が混在 |
-| reranking | top-kの順位改善 | 追加遅延・費用 | 正解候補は取得済み |
-| metadata filter | 版、部署、権限を限定 | metadata品質に依存 | latest、business unit |
+| Keyword | IDs, names, exact matches | Weak on paraphrases | CVE, error code, model number |
+| Vector | Meaning and paraphrases | Can miss exact IDs | Natural language, similar symptoms |
+| Hybrid | Exact and semantic retrieval | Requires a deliberate index design | IDs mixed with prose |
+| Reranking | Improves top-k order | Adds latency and cost | Correct candidate already retrieved |
+| Metadata filter | Limits version, department, or access | Depends on metadata quality | Latest, approved, business unit |
 
-### chunking
+### Chunking
 
-| 戦略 | 選ぶ条件 | 注意 |
+| Strategy | Choose when | Caution |
 |---|---|---|
-| fixed | 安価、単純、文書構造が均一 | 境界で意味が切れる |
-| semantic | 意味境界が重要 | 取込時にFM費用が増える |
-| hierarchical | 小さい条項でヒットし、広い文脈を返す | childとparentの関係を理解する |
-| no chunking | 文書単位検索が本当に必要 | 長文・多トピックでは精度低下 |
+| Fixed | Documents are uniform and ingestion must stay simple | Meaning can split at arbitrary boundaries |
+| Semantic | Meaningful boundaries matter | Adds model cost during ingestion |
+| Hierarchical | Search a precise child and return a broader parent | Preserve and understand the parent-child link |
+| No chunking | Whole-document retrieval is truly required | Accuracy degrades on long, multi-topic documents |
 
-### データ処理のサービス選択
+### Data-service choices
 
-| 入力 | 最小運用の選択 |
+| Input or requirement | Low-operations choice |
 |---|---|
-| S3文書をRAG | Bedrock Knowledge Base |
-| SharePoint / Confluence | Knowledge Baseの対応コネクタ |
-| SalesforceをS3にも保管 | AppFlow→S3→Knowledge Base |
-| PDF・画像・音声の構造化 | Bedrock Data Automation |
-| CSVの正規化 | AWS Glue |
-| PIIのリアルタイム検出 | Comprehend / Guardrails |
-| S3蓄積データのPII発見 | Macie |
+| RAG over S3 documents | Bedrock Knowledge Bases |
+| SharePoint or Confluence | Supported Knowledge Base connector |
+| Salesforce data also retained in S3 | AppFlow → S3 → Knowledge Base |
+| Structured extraction from PDF, image, or audio | Bedrock Data Automation |
+| CSV normalization | AWS Glue |
+| Real-time PII detection | Comprehend and/or Guardrails |
+| PII discovery in stored S3 data | Macie |
 
-### 間違いやすい境界
-
-- DynamoDBは一般的なk-NN vector searchの答えにしない。
-- Titan Text Embeddingsで画像は扱えない。画像とテキストを同一空間で比較するならmultimodal embeddings。
-- Prompt Managementはprompt版管理。モデル版管理はModel Registryやモデル固有のライフサイクル。
-- Knowledge BaseはRAGであり、会話の短期・長期memoryではない。
+Remember that DynamoDB is not the general answer for k-NN search, text-only embeddings do not embed images, Prompt Management versions prompts rather than models, and Knowledge Bases are retrieval—not conversation memory.
 
 ## Domain 2: Implementation and Integration — 26%
 
-### 同期・非同期・イベント駆動
-
-| 要件 | パターン |
+| Requirement | Pattern |
 |---|---|
-| 即時応答 | API Gateway→Lambda→Bedrock Runtime |
-| token streaming | WebSocket/SSE→ConverseStream |
-| 長時間処理、結果は後でよい | API→SQS→worker→結果store+job ID |
-| 夜間大量 | Bedrock batch inference、S3 input/output |
-| webhookを即ACK | API Gateway→検証→EventBridgeまたはSQS |
-| 複数消費者へfan-out | EventBridge rules |
+| Immediate response | API Gateway → Lambda → Bedrock Runtime |
+| Token streaming | WebSocket/SSE → `ConverseStream` |
+| Long-running asynchronous work | API → SQS → worker → result store and job ID |
+| Large nightly workload | Bedrock batch inference with S3 input/output |
+| Immediate webhook acknowledgement | API Gateway → validation → EventBridge or SQS |
+| Fan-out to several consumers | EventBridge rules |
 
-### オーケストレーターの選択
+### Choose the orchestrator
 
-| サービス | 使う場面 | 使わない場面 |
+| Service | Use it for | Avoid it for |
 |---|---|---|
-| Step Functions | 分岐、再試行、承認待ち、Parallel、監査履歴、agent loop上限 | 単純なfan-outだけ |
-| EventBridge | 疎結合fan-out、content routing、消費者追加 | 状態を持つ順序制御 |
-| SQS | バースト吸収、再処理、backpressure | 1メッセージを複数消費者へ同報 |
-| Bedrock Flows | 非開発者がprompt chain・条件分岐を編集 | 厳密な長時間業務workflow |
+| Step Functions | Branches, retries, approval waits, parallel work, audit history, bounded agent loops | Stateless fan-out only |
+| EventBridge | Decoupled fan-out, content routing, adding consumers | Stateful ordering |
+| SQS | Bursts, backpressure, and replay | Broadcasting one message to every consumer |
+| Bedrock Flows | Prompt chains editable by non-developers | Strict, long-running business workflows |
 
-### agent toolの安全境界
+### Agent-tool boundary
 
-- tool schemaに型、必須項目、説明を定義する。
-- Lambda側でも入力を再検証する。FMのtool callを信用しない。
-- エラーは構造化して返し、agentが不足情報を質問できるようにする。
-- tool execution roleは特定table、bucket、secretへresource-levelで限定する。
-- tool失敗回数とloop回数はworkflow側で上限を持つ。
-- cooldownを跨ぐcircuit breakerはDynamoDB等の共有状態へ置く。Lambdaのメモリ変数は使わない。
+- Define types, required fields, and descriptions in the tool schema.
+- Validate again in the tool; never trust model-generated parameters.
+- Return structured errors that let the agent request missing information.
+- Restrict the execution role to the exact table, bucket, and secret resources.
+- Bound tool failures and loop count in the workflow.
+- Store a cross-invocation circuit breaker in shared state such as DynamoDB with TTL, not Lambda memory.
 
-### 認証
-
-- Bedrock Runtime APIはIAMとSigV4。ブラウザJWTを直接渡して認可しない。
-- workforce SSOはIAM Identity Centerと外部IdPを連携し、短期credentialsを使う。
-- inference-only roleは`InvokeModel`、`InvokeModelWithResponseStream`、`Converse`等の必要actionと対象modelに限定する。
+Bedrock Runtime uses IAM and SigV4. Do not send a browser JWT directly. For workforce SSO, federate an external IdP through IAM Identity Center and issue short-lived credentials with model-scoped inference permissions.
 
 ## Domain 3: AI Safety, Security, and Governance — 20%
 
-### Guardrailsの役割分担
+| Guardrail component | Purpose |
+|---|---|
+| Content filter | Harmful content and prompt attacks |
+| Denied topics | Business-prohibited subjects |
+| Word filter | Prohibited exact phrases |
+| Sensitive-information filter | Block or mask PII |
+| Contextual-grounding check | Source grounding and query relevance |
+| Automated Reasoning checks | Return findings about logical consistency with policy rules |
 
-| 部品 | 対象 | 試験での使い方 |
-|---|---|---|
-| content filter | harmful content、prompt attacks | 入出力をfilter/block |
-| denied topics | 業務上禁止された話題 | topic単位でblock |
-| word filter | 禁止語、固有表現 | exact phraseをblock |
-| sensitive information filter | PII | blockまたはmask |
-| contextual grounding check | sourceとのgrounding・query relevance | unsupported responseを検知 |
-| Automated Reasoning checks | policy ruleとの論理整合 | findingを返し、アプリが判断 |
+Automated Reasoning checks are a detection layer. The application must decide whether to serve, rewrite, clarify, or fall back. They do not replace prompt-injection defenses or denied-topic controls.
 
-重要: Automated Reasoning checksは検証層であり、findingを返すdetect mode。自動的なblockではない。アプリケーションがserve、rewrite、clarification、fallbackを決める。またprompt injection防御やoff-topic検出の代替ではない。
-
-公式: [Automated Reasoning checks](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-automated-reasoning-checks.html)
-
-### defense in depth
+### Defense in depth
 
 ```text
-WAF/API validation
-      ↓
-入力正規化・PII placeholder化
-      ↓
+WAF and API validation
+        ↓
+input normalization and stable PII placeholders
+        ↓
 Bedrock Guardrails
-      ↓
-FM / Knowledge Base / Agent tools
-      ↓
-決定的な出力schema検証・PII再確認
-      ↓
-安全なresponse contract
+        ↓
+model, Knowledge Base, and agent tools
+        ↓
+deterministic output-schema and PII validation
+        ↓
+safe response contract
 ```
 
-WAFはWeb攻撃、GuardrailsはGenAI内容、IAMはAWS resource、Lambda validationは決定的業務ルールを担当する。1つで全部を解こうとしない。
+WAF owns web exploits, Guardrails own generative-AI content controls, IAM owns AWS resource authorization, and application validation owns deterministic business rules.
 
-### deterministic data access
+### Deterministic data access
 
-取引額、在庫、承認状態などの厳密値はFMの記憶や自由生成に任せない。
+For exact values such as transaction amount, inventory, or approval state:
 
-1. user intentをallowlistされたoperationへmapする。
-2. parameterized read-only queryまたは型付きtoolを実行する。
-3. 結果setだけをFMへ渡す。
-4. source ID、query template version、model IDをdecision logへ残す。
+1. Map user intent to an allowlisted operation.
+2. Execute a parameterized read-only query or typed tool.
+3. Give the model only that result set.
+4. Log the source ID, query-template version, and model ID.
 
-### auditの違い
-
-| 必要な証跡 | 選択 |
-|---|---|
-| 誰がAWS APIを呼んだか | CloudTrail |
-| アプリのprompt/model/source/result | application logs / CloudWatch Logs |
-| agentがどのKB/toolを使ったか | agent trace |
-| モデルの用途・制限・版 | model card |
-| データsource・変換 | Glue Catalog / lineage metadata |
+CloudTrail answers who called an AWS API. Application logs record prompt/model/source/result decisions. Agent trace records Knowledge Base and tool orchestration. Do not substitute one for another.
 
 ## Domain 4: Operational Efficiency and Optimization — 12%
 
-### まず最適化対象を特定する
-
-| 症状 | 施策 |
+| Symptom | Primary response |
 |---|---|
-| 画面が待たされる | streamingでTTFTを下げる |
-| 同一の質問が大量 | deterministic fingerprint+edge cache |
-| system promptが長い | prompt caching |
-| simple requestに高価なmodel | intelligent prompt routing/model cascade |
-| 夜間大量処理 | batch inference |
-| 予測可能な同期ピーク | provisioned throughput |
-| Region障害・quota spike | cross-Region inference profile |
-| context window超過 | CountTokens、prune、summary、retrieved chunk制限 |
-| Lambda接続setupが遅い | SDK client再利用、keep-alive |
-| OpenSearch shard fan-out | fewer, appropriately sized shards |
+| Users wait for the first output | Streaming to reduce time to first token |
+| Many identical deterministic requests | Fingerprinted edge cache |
+| Long shared system prompt | Prompt caching |
+| Expensive model receives simple requests | Intelligent prompt routing or model cascade |
+| Large nightly workload | Batch inference |
+| Predictable synchronous peak | Provisioned Throughput |
+| Regional impairment or quota spike | Cross-Region inference profile |
+| Context-window overflow | `CountTokens`, pruning, summarization, and fewer retrieved chunks |
+| Lambda connection setup is slow | Reuse SDK clients and keep-alive connections |
 
-### キャッシュを混同しない
-
-- edge cache: FMを呼ばない。verbatimで決定的な応答向け。
-- prompt caching: FMは呼ぶ。共通prefixのtoken処理を再利用。
-- semantic cache: 類似promptを再利用。embedding費用と誤hit thresholdの責任が増える。
-
-### throughputを混同しない
-
-- retry/backoffは一時障害を吸収するがcapacityを増やさない。
-- provisioned throughputは単一modelの予測可能なcapacity。
-- cross-Region inferenceは利用可能Regionへrouteする。異なるmodel間の複雑度routingではない。
-- batch inferenceはinteractive responseの答えにしない。
+An edge cache avoids the model call. Prompt caching still calls the model and reuses shared-prefix processing. Semantic caching adds embedding cost and false-hit threshold management. Retry/backoff smooths transient failures but does not add capacity.
 
 ## Domain 5: Testing, Validation, and Troubleshooting — 11%
 
-### 評価対象を分ける
-
-| 対象 | 代表指標 |
+| Target | Representative metrics |
 |---|---|
-| model response | correctness、helpfulness、fluency、robustness |
-| retrieval | context relevance、coverage、precision |
-| RAG generation | faithfulness/groundedness、answer relevance、citation quality |
-| agent | goal attainment、tool selection、tool parameter accuracy、loop count |
-| production API | latency、error、availability、token usage |
+| Model response | Correctness, helpfulness, fluency, robustness |
+| Retrieval | Context relevance, coverage, precision |
+| RAG generation | Faithfulness, answer relevance, citation quality |
+| Agent | Goal attainment, tool selection, parameter accuracy, loop count |
+| Production API | Latency, error, availability, token usage |
 
-Amazon Bedrock evaluationsはmodelとKnowledge Base/RAGを自動評価またはjudge modelで評価できる。RAG評価ではpromptだけでなく期待するretrieved textやresponseを含むground truth datasetが必要になる。
+Use a ground-truth dataset that includes expected retrieved text or reference responses, not prompts alone. Compare baseline and candidate with Model Evaluations, gate deployment on quality, roll out with canary or linear traffic, automatically roll back on operational alarms, and continuously exercise representative workflows with synthetics.
 
-公式: [Evaluate Amazon Bedrock resources](https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation.html)
+Reject exact-string matching as the sole generation metric, latency or token count as a quality proxy, and HTTP 200 as proof of agent success.
 
-### release前後
+## Fifteen final rules
 
-```text
-固定dataset
-   ↓
-baselineとcandidateをModel Evaluationsで比較
-   ↓ quality threshold
-CI/CD quality gate
-   ↓
-canary/linear rollout
-   ↓ error・latency alarm
-automatic rollback
-   ↓
-synthetic workflowで継続監視
-```
-
-### 見たら切る誤答
-
-- exact string matchだけで生成品質を判定
-- latency/token数をqualityとみなす
-- RAG faithfulnessをcosine similarityだけで代用
-- prompt変更を本番へ直接入れてログを人手確認
-- agent評価をHTTP 200だけで済ませる
-
-## 最後に覚える15行
-
-1. 最新文書はRAG、挙動・形式はprompt、policyはGuardrails、専門styleは必要時だけcustomization。
-2. exact ID+自然文はhybrid search。
-3. child検索+parent文脈はhierarchical chunking。
-4. metadataは本文へ混ぜずfilterする。
-5. Step Functionsは状態、EventBridgeはfan-out、SQSはbuffer、Flowsはprompt workflow。
-6. FMが作るtool引数はtool側で再検証する。
-7. PII liveはComprehend/Guardrails、S3発見はMacie。
-8. Automated Reasoningはdetect mode。アプリがfindingを処理する。
-9. CloudTrailはAPI活動、agent traceはorchestration過程。
-10. 厳密値はallowlist query/tool結果から返す。
-11. streamingは体感遅延、provisionedはcapacity、batchはoffline。
-12. edge cacheはFMを回避、prompt cacheはFMを呼ぶ。
-13. CountTokensは呼出前budget、maxTokensは出力量上限。
-14. quality gateは固定dataset+評価、運用監視はsynthetic+alarm。
-15. fine-tuning、GPU hosting、自作pipelineは「必要性が明示されたときだけ」。
+1. Use RAG for current knowledge, prompts for behavior and format, Guardrails for policy, and customization only for a demonstrated stable need.
+2. Combine exact IDs and natural language with hybrid search.
+3. Search children and return parent context with hierarchical chunking.
+4. Keep metadata structured and filterable instead of copying it into prose.
+5. Step Functions holds state, EventBridge fans out, SQS buffers, and Flows models prompt workflows.
+6. Revalidate every model-generated tool argument at the tool boundary.
+7. Use Comprehend/Guardrails for live PII and Macie for discovery in S3.
+8. Automated Reasoning returns findings; application code enforces the outcome.
+9. CloudTrail records API activity; agent trace records orchestration.
+10. Return exact values only from an allowlisted query or tool result.
+11. Streaming improves perceived latency, provisioned capacity handles predictable load, and batch handles offline work.
+12. Edge caching avoids a model call; prompt caching does not.
+13. `CountTokens` budgets input before a call; `maxTokens` caps output.
+14. Use fixed-dataset quality gates before release and synthetics plus alarms after release.
+15. Choose fine-tuning, GPU hosting, or custom pipelines only when the requirement explicitly justifies them.

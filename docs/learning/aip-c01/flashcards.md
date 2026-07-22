@@ -1,316 +1,266 @@
 <!-- i18n: language-switcher -->
 [English](flashcards.md) | [日本語](flashcards.ja.md)
 
-# AIP-C01 頻出比較とフラッシュカード
+# AIP-C01 comparisons and flashcards
 
-答えを隠して1問10秒。説明できなかったカードだけを [間違い問題ノート](wrong-answers.md) へ追加する。
+Hide each answer and allow ten seconds. Add only cards you cannot explain to the [wrong-answer log](wrong-answers.en.md).
 
-## RAG・データ
+## RAG and data
 
 ### 1
 
-Q. CVE IDやエラーコードをvector searchが落とす。最初に変えるものは？
-
-A. keywordとvectorを組み合わせるhybrid search。IDをkeyword clauseまたはmetadata filterへ抽出する。
+**Q.** Vector search misses CVE IDs and error codes. What should change first?<br>
+**A.** Use hybrid keyword and vector search. Extract IDs into a keyword clause or metadata filter.
 
 ### 2
 
-Q. 正しいchunkはtop-k内にあるが順位が低い。何を追加する？
-
-A. reranker。初期retrievalに正解がない場合はrerankerでは救えない。
+**Q.** The correct chunk is in the top-k set but ranks too low. What should you add?<br>
+**A.** A reranker. It cannot recover an answer that initial retrieval never returned.
 
 ### 3
 
-Q. 小さい条項へ精密にhitし、回答には周辺文脈も必要。chunkingは？
-
-A. hierarchical chunking。childをindex/searchし、対応するparentを返す。
+**Q.** A small clause must match precisely, but the answer needs surrounding context. Which chunking strategy fits?<br>
+**A.** Hierarchical chunking: index and search child chunks, then return the corresponding parent.
 
 ### 4
 
-Q. 「最新の人事規定」「欧州部門の規定」を正確に選ぶ方法は？
-
-A. timestamp、business_unit、region等をmetadataとして保持し、filterする。
+**Q.** How do you select the latest approved policy for a specific region or business unit?<br>
+**A.** Store fields such as timestamp, approval state, region, and business unit as metadata and filter on them.
 
 ### 5
 
-Q. metadataを全chunk本文へコピーする欠点は？
-
-A. tokenとnoiseが増え、chunkingで断片化し、構造化filterを使えない。
+**Q.** What is wrong with copying all metadata into every chunk body?<br>
+**A.** It adds tokens and noise, can fragment during chunking, and loses reliable structured filtering.
 
 ### 6
 
-Q. 写真queryとtext queryを同じ商品indexへ投げたい。modelは？
-
-A. multimodal embedding model。text-only embeddingでは画像を表現できない。
+**Q.** One product index must accept both image and text queries. Which model class is required?<br>
+**A.** A multimodal embedding model; a text-only embedding cannot represent images.
 
 ### 7
 
-Q. S3文書で最小運用のRAGは？
-
-A. Bedrock Knowledge Base + embedding model + managed vector store + RetrieveAndGenerate。
+**Q.** What is a low-operations RAG pattern for documents in S3?<br>
+**A.** Bedrock Knowledge Bases with an embedding model, a managed vector store, and RetrieveAndGenerate.
 
 ### 8
 
-Q. S3文書更新をnear real timeでKBへ反映するpatternは？
-
-A. S3 event→EventBridge→Lambda→StartIngestionJob。
+**Q.** How can S3 updates reach a Knowledge Base near real time?<br>
+**A.** S3 event → EventBridge → Lambda → `StartIngestionJob`.
 
 ### 9
 
-Q. conversation memoryとKnowledge Baseの違いは？
-
-A. memoryはsession/actorの会話状態・嗜好、KBは共有document corpusのretrieval。
+**Q.** How does conversation memory differ from a Knowledge Base?<br>
+**A.** Memory stores per-session or per-actor state and preferences; a Knowledge Base retrieves from a shared document corpus.
 
 ### 10
 
-Q. PDF、画像、音声を構造化JSONへ抽出するmanaged serviceは？
+**Q.** Which managed service extracts structured JSON from PDFs, images, and audio?<br>
+**A.** Bedrock Data Automation; combine it with Glue for tabular formats such as CSV when needed.
 
-A. Bedrock Data Automation。CSV等のtabular変換はGlueと組み合わせる。
-
-## 実装・agent
+## Implementation and agents
 
 ### 11
 
-Q. ReAct loop、分岐、retry、timeout、監査履歴を最小コードで実装するには？
-
-A. Step Functions。
+**Q.** How can you implement a ReAct loop, branches, retries, timeouts, and audit history with little custom orchestration code?<br>
+**A.** AWS Step Functions.
 
 ### 12
 
-Q. webhookを即ACKし、後からconsumerを増やしたい。何を使う？
-
-A. API Gateway/Lambdaで検証後、EventBridgeへpublish。rulesでfan-outする。
+**Q.** A webhook needs an immediate acknowledgement and future fan-out to more consumers. What pattern fits?<br>
+**A.** Validate with API Gateway/Lambda, publish to EventBridge, and fan out with rules.
 
 ### 13
 
-Q. burstをbufferし、1つのworker群で非同期処理するには？
-
-A. SQS。
+**Q.** How do you buffer a burst for asynchronous processing by one worker pool?<br>
+**A.** Amazon SQS.
 
 ### 14
 
-Q. 非開発者がprompt chainと条件分岐を変更したい。何を使う？
-
-A. Bedrock Flows。
+**Q.** Non-developers need to edit prompt chains and conditional branches. What should they use?<br>
+**A.** Bedrock Flows.
 
 ### 15
 
-Q. 2つのFMで別成果物を最短時間で作り、最後に統合するには？
-
-A. Step Functions Parallel state→Lambdaでdeterministic merge。
+**Q.** Two foundation models should produce separate artifacts concurrently and merge them deterministically. What design fits?<br>
+**A.** A Step Functions Parallel state followed by a Lambda merge.
 
 ### 16
 
-Q. agentが空のorderIdでtoolを呼ぶ。modelを大きくする前に何を直す？
-
-A. typed tool schema、tool側validation、structured error。agentに不足情報を聞き直させる。
+**Q.** An agent calls a tool with an empty `orderId`. What should be fixed before changing models?<br>
+**A.** Use a typed tool schema, server-side validation, and structured errors so the agent asks for missing information.
 
 ### 17
 
-Q. Lambda内のin-memory circuit breakerが不適切な理由は？
-
-A. concurrent execution environment間で共有されず、再利用も保証されない。DynamoDB+TTL等を使う。
+**Q.** Why is an in-memory circuit breaker inside Lambda unreliable?<br>
+**A.** State is not shared across concurrent execution environments and reuse is not guaranteed. Use a shared store such as DynamoDB with TTL.
 
 ### 18
 
-Q. Bedrock Runtime APIへCognito JWTを直接送れるか？
-
-A. 送れない。AWS credentialsでSigV4署名し、IAMで認可する。
+**Q.** Can a Cognito JWT be sent directly to the Bedrock Runtime API?<br>
+**A.** No. The API uses AWS credentials, SigV4 signing, and IAM authorization.
 
 ### 19
 
-Q. WorkforceがOkta SSOでlocal scriptからBedrockを使う安全な方法は？
-
-A. IAM Identity Center federated with Okta→permission set→short-lived credentials。
+**Q.** How can an Okta workforce use Bedrock securely from local scripts?<br>
+**A.** Federate Okta with IAM Identity Center, assign a permission set, and use short-lived credentials.
 
 ### 20
 
-Q. ConverseStreamの会話履歴の基本schemaは？
+**Q.** What is the basic conversation-history schema for `ConverseStream`?<br>
+**A.** A `messages` array whose turns contain `role` and `content`.
 
-A. `messages` arrayに各turnの`role`と`content`を入れる。
-
-## Safety・governance
+## Safety and governance
 
 ### 21
 
-Q. harmful topicとprofanityをリアルタイムでfilterするmanaged controlは？
-
-A. Bedrock Guardrailsのcontent/topic/word filters。
+**Q.** Which managed control filters harmful topics and profanity in real time?<br>
+**A.** Bedrock Guardrails content, denied-topic, and word filters.
 
 ### 22
 
-Q. PIIを会話構造を壊さずFMの前で隠す方法は？
-
-A. Comprehendで検出し、一貫したplaceholderへ置換。Guardrails maskingも重ねる。
+**Q.** How can you hide PII before the model while preserving conversation relationships?<br>
+**A.** Detect it with Comprehend and replace entities with stable placeholders; add Guardrails masking as defense in depth.
 
 ### 23
 
-Q. S3 audit bucketにPIIが残っていないか継続発見するserviceは？
-
-A. Macie。
+**Q.** Which service continuously discovers PII left in an S3 audit bucket?<br>
+**A.** Amazon Macie.
 
 ### 24
 
-Q. Contextual grounding checkは何を測る？
-
-A. responseがsourceにgroundedか、queryにrelevantか。PII filterやprompt injection防御とは別。
+**Q.** What do contextual-grounding checks measure?<br>
+**A.** Whether a response is grounded in its source and relevant to the query—not PII filtering or prompt-injection defense.
 
 ### 25
 
-Q. Automated Reasoning checksは違反responseを自動blockするか？
-
-A. しない。detect modeでfindingを返し、applicationがblock/rewrite/clarify/fallbackを決める。
+**Q.** Do Automated Reasoning checks automatically block a violating response?<br>
+**A.** No. They return findings; the application must block, rewrite, clarify, or fall back.
 
 ### 26
 
-Q. Automated Reasoning checksがprompt injection対策にならない理由は？
-
-A. 与えられたcontentをpolicyに対して検証する機能で、悪意あるinstruction自体を検出・blockしない。
+**Q.** Why are Automated Reasoning checks not a prompt-injection defense?<br>
+**A.** They validate supplied content against a policy; they do not identify and block malicious instructions themselves.
 
 ### 27
 
-Q. CloudTrailだけで「どのsourceを使って回答したか」を再構成できるか？
-
-A. 不十分。CloudTrailはAPI activity。source ID、prompt version、response metadataはapplication decision logへ残す。
+**Q.** Can CloudTrail reconstruct which sources supported an answer?<br>
+**A.** No. It records API activity. Log source IDs, prompt versions, and response metadata in an application decision log.
 
 ### 28
 
-Q. agentがどのKBとaction groupを使ったかを見るには？
-
-A. agent trace。
+**Q.** How can you see which Knowledge Base and action group an agent used?<br>
+**A.** Inspect the agent trace.
 
 ### 29
 
-Q. transaction amountをhallucinateさせない基本patternは？
-
-A. allowlisted parameterized read-only query/toolを実行し、そのresult setだけから回答する。
+**Q.** What pattern prevents a model from inventing transaction amounts?<br>
+**A.** Execute an allowlisted, parameterized, read-only query or tool and answer only from its result set.
 
 ### 30
 
-Q. WAFとGuardrailsの役割の違いは？
+**Q.** How do WAF and Guardrails differ?<br>
+**A.** WAF protects the HTTP surface from web exploits; Guardrails apply safety controls to natural-language inputs and outputs.
 
-A. WAFはHTTP/Web exploit、Guardrailsはnatural-language input/output safety。
-
-## Cost・performance
+## Cost and performance
 
 ### 31
 
-Q. 同一質問・決定的応答でFM invocation自体を減らすには？
-
-A. normalized prompt+model configのfingerprintをkeyにCloudFront edge cache。
+**Q.** How can repeated deterministic requests avoid a foundation-model invocation entirely?<br>
+**A.** Cache by a fingerprint of the normalized prompt and model configuration, for example at CloudFront.
 
 ### 32
 
-Q. prompt cachingでFM invocationはなくなるか？
-
-A. なくならない。共通prefixのtoken処理を再利用する。
+**Q.** Does prompt caching remove the model invocation?<br>
+**A.** No. It reuses processing of a shared prompt prefix.
 
 ### 33
 
-Q. semantic cacheがverbatim cacheより難しい点は？
-
-A. query embedding費用と誤hitを防ぐsimilarity threshold調整が必要。
+**Q.** What makes a semantic cache harder than an exact cache?<br>
+**A.** It adds query-embedding cost and needs a similarity threshold that avoids incorrect hits.
 
 ### 34
 
-Q. user perceived latencyを最も直接下げる方法は？
-
-A. streamingでTTFTを下げる。full completion latencyとは分けて計測する。
+**Q.** What most directly reduces user-perceived latency?<br>
+**A.** Stream output to reduce time to first token; measure it separately from full-completion latency.
 
 ### 35
 
-Q. 夜間数十万件の要約を最も効率よく処理するには？
-
-A. Bedrock batch inference、S3 input/output。
+**Q.** How should hundreds of thousands of nightly summaries be processed?<br>
+**A.** Bedrock batch inference with input and output in S3.
 
 ### 36
 
-Q. 毎朝45分だけ予測可能な10倍同期traffic。単一Region。何を検討する？
-
-A. Provisioned Throughput。必要RPM/TPMからsizeする。
+**Q.** Traffic grows predictably by 10× for 45 minutes each morning in one Region. What should you evaluate?<br>
+**A.** Provisioned Throughput sized from the required requests and tokens per minute.
 
 ### 37
 
-Q. Region impairmentとquota spikeをUS内で吸収するには？
-
-A. US geographic cross-Region inference profile。
+**Q.** How can a US workload absorb a regional impairment or quota spike?<br>
+**A.** Use an appropriate US geographic cross-Region inference profile.
 
 ### 38
 
-Q. retry/backoffはthrottling capacityを増やすか？
-
-A. 増やさない。一時障害を平滑化するだけ。
+**Q.** Do retries and backoff increase throttling capacity?<br>
+**A.** No. They smooth transient failures but do not create capacity.
 
 ### 39
 
-Q. context window超過を呼出前に防ぐには？
-
-A. CountTokens→budget超過なら古いturn、retrieved chunkを減らす。必要なら履歴をsummary化。
+**Q.** How can context-window overflow be prevented before invocation?<br>
+**A.** Use `CountTokens`, remove old turns or retrieved chunks when over budget, and summarize history when needed.
 
 ### 40
 
-Q. Lambdaから毎回TLS setupが発生する。修正は？
+**Q.** Lambda creates a new TLS connection on every invocation. What should change?<br>
+**A.** Initialize the SDK or HTTP client outside the handler and use connection pooling/keep-alive.
 
-A. SDK/HTTP clientをhandler外で初期化し、connection pooling/keep-aliveを使う。
-
-## Evaluation・release
+## Evaluation and release
 
 ### 41
 
-Q. prompt/model変更のpre-deployment regression testは？
-
-A. 固定prompt datasetでBedrock Model Evaluationsを実行し、baselineとの品質差をgateにする。
+**Q.** What is an appropriate pre-deployment regression test for a prompt or model change?<br>
+**A.** Run Bedrock Model Evaluations on a fixed prompt dataset and gate on quality relative to the baseline.
 
 ### 42
 
-Q. 生成responseのexact string matchが不適切な理由は？
-
-A. 正しい意味でも表現が変わるため。semanticな品質指標やjudge modelを使う。
+**Q.** Why is exact-string matching unsuitable for generated answers?<br>
+**A.** Correct meaning can have different wording. Use semantic quality metrics or a judge model.
 
 ### 43
 
-Q. ROUGE/BLEUだけでfactualityを測れるか？
-
-A. 測れない。文字列重複はhallucination、consistency、fluencyを十分評価しない。
+**Q.** Can ROUGE or BLEU alone measure factuality?<br>
+**A.** No. String overlap does not adequately measure hallucination, consistency, or fluency.
 
 ### 44
 
-Q. RAG evaluation datasetにprompt以外で必要なものは？
-
-A. 期待retrieved textやreference response等のground truth。
+**Q.** What does a RAG evaluation dataset need besides prompts?<br>
+**A.** Ground truth such as expected retrieved text or reference responses.
 
 ### 45
 
-Q. RAGのretrievalとgenerationで分けて見る指標は？
-
-A. retrievalはcontext relevance/coverage、generationはfaithfulness/answer relevance/citation quality。
+**Q.** Which RAG metrics should be separated?<br>
+**A.** Retrieval context relevance/coverage versus generation faithfulness, answer relevance, and citation quality.
 
 ### 46
 
-Q. agentのHTTP 200だけでtask successを判断できるか？
-
-A. できない。goal attainment、tool selection、parameter accuracy、loop countを見る。
+**Q.** Is HTTP 200 enough to prove agent task success?<br>
+**A.** No. Measure goal attainment, tool selection, parameter accuracy, and loop count.
 
 ### 47
 
-Q. rollout中にerror/latencyが悪化したら自動で戻す構成は？
-
-A. canary/linear deployment + CloudWatch alarms + automatic rollback。
+**Q.** How can a rollout automatically revert when error rate or latency degrades?<br>
+**A.** Use canary or linear deployment with CloudWatch alarms and automatic rollback.
 
 ### 48
 
-Q. productionの継続的な回帰検知は？
-
-A. CloudWatch Syntheticsで代表workflowを定期実行し、alarmを設定する。
+**Q.** How can production regressions be detected continuously?<br>
+**A.** Run representative workflows on a schedule with CloudWatch Synthetics and alarms.
 
 ### 49
 
-Q. model qualityとoperational performanceを混ぜない例は？
-
-A. correctness/helpfulnessは品質、latency/error/token countは運用。両方測るが代替しない。
+**Q.** Give an example of separating model quality from operational performance.<br>
+**A.** Correctness/helpfulness are quality; latency, errors, and token count are operational. Measure both without treating one as a substitute.
 
 ### 50
 
-Q. fine-tuningを選ぶ前に確認することは？
-
-A. RAG、prompt、Guardrails、deterministic validationで解けない恒常的なbehavior/style要件か。更新頻度とlifecycle費用も確認する。
+**Q.** What should be checked before choosing fine-tuning?<br>
+**A.** Confirm that RAG, prompting, Guardrails, and deterministic validation cannot solve a stable behavior/style requirement; include update cadence and lifecycle cost.

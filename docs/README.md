@@ -1,19 +1,21 @@
 <!-- i18n: language-switcher -->
 [English](README.md) | [日本語](README.ja.md)
 
-# ドキュメント
+# Documentation
 
-## マルチクラウド設計・運用ガイド
+## Multi-cloud design and operations guides
 
-サービス名の対応ではなく、各cloudのresource boundary、control plane、failure domain、operating modelの違いから設計する。
+Design from the differences in resource boundaries, control planes, failure domains, and operating models—not from a service-name crosswalk.
 
-1. [4クラウドの思想](guides/cloud-philosophies.md)
-2. [マルチクラウド設計判断](guides/multicloud-design.md)
-3. [運用モデル比較](guides/operations-comparison.md)
-4. [リリースの読み方](guides/release-intelligence.md)
-5. [用途検索と費用比較](guides/service-and-cost-comparison.md)
+1. [Cloud philosophies](guides/cloud-philosophies.md)
+2. [Multi-cloud design decisions](guides/multicloud-design.md)
+3. [Operations model comparison](guides/operations-comparison.md)
+4. [Reading cloud releases](guides/release-intelligence.md)
+5. [Service discovery and cost comparison](guides/service-and-cost-comparison.md)
 
-## その他
+## Learning content
 
-- [リリース・インテリジェンスの設計](feed-intelligence.md)
-- [資格学習コンテンツ](learning/README.md)
+- [Learning index](learning/README.en.md)
+- [Feed-intelligence architecture](feed-intelligence.en.md)
+
+Every final architecture decision should be checked against the provider documentation linked from these guides.

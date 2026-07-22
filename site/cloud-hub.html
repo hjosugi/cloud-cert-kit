@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CLOUD HUB — AWS / Azure / Google Cloud / OCI 設計・運用比較</title>
+<meta name="description" content="AWS、Azure、Google Cloud、OCIの設計・運用・リリース・費用を比較する日本語CLOUD HUB。">
+<link rel="alternate" hreflang="ja" href="cloud-hub.html">
+<link rel="alternate" hreflang="en" href="cloud-hub.en.html">
+<link rel="alternate" hreflang="x-default" href="index.html">
 <style>
 :root{
   --paper:#F2F4F6; --panel:#FFFFFF; --ink:#182430; --sub:#5A6B7A; --line:#D7DEE5;
@@ -26,6 +30,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--azure);outline-offs
 .rail i:nth-child(4){background:var(--oci)}
 header{background:var(--panel);border-bottom:1px solid var(--line)}
 .hwrap{max-width:1180px;margin:0 auto;padding:26px 20px 18px}
+.headrow{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.lang-switch{display:flex;border:1px solid var(--line);flex:none}
+.lang-switch a{border:0;padding:5px 9px;font-family:var(--mono);font-size:10.5px;color:var(--sub)}
+.lang-switch a[aria-current="page"]{background:var(--ink);color:#fff}
 .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--sub);text-transform:uppercase}
 h1{font-family:var(--mono);font-size:clamp(20px,3.4vw,30px);letter-spacing:.06em;margin:6px 0 4px}
 .sub{color:var(--sub);font-size:13px;max-width:70ch}
@@ -136,16 +144,24 @@ button.act:hover{opacity:.85}
 footer{border-top:1px solid var(--line);background:var(--panel)}
 .fwrap{max-width:1180px;margin:0 auto;padding:16px 20px;font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:.05em}
 @media (max-width:900px){.service-quad,.cost-grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:720px){body{font-size:14px} td,th{padding:7px 8px}.intel-grid,.toolgrid,.service-quad,.cost-grid,.assumptions{grid-template-columns:1fr}.intel-head{display:block}.intel-meta{white-space:normal}}
+@media (max-width:720px){body{font-size:14px} td,th{padding:7px 8px}.headrow{display:block}.lang-switch{width:max-content;margin-top:12px}.intel-grid,.toolgrid,.service-quad,.cost-grid,.assumptions{grid-template-columns:1fr}.intel-head{display:block}.intel-meta{white-space:normal}}
 </style>
 </head>
 <body>
 <header>
   <div class="rail"><i></i><i></i><i></i><i></i></div>
   <div class="hwrap">
-    <div class="kicker">AWS / AZURE / GOOGLE CLOUD / OCI — MULTI-CLOUD DESIGN &amp; OPERATIONS</div>
-    <h1>CLOUD HUB</h1>
-    <div class="sub">4クラウドを名前で対応付けるだけでなく、思想・resource boundary・failure domain・operator responsibilityの違いから理解する。設計比較、運用判断、公式リリースの影響分析を一つの場所で扱う。</div>
+    <div class="headrow">
+      <div>
+        <div class="kicker">AWS / AZURE / GOOGLE CLOUD / OCI — MULTI-CLOUD DESIGN &amp; OPERATIONS</div>
+        <h1>CLOUD HUB</h1>
+        <div class="sub">4クラウドを名前で対応付けるだけでなく、思想・resource boundary・failure domain・operator responsibilityの違いから理解する。設計比較、運用判断、公式リリースの影響分析を一つの場所で扱う。</div>
+      </div>
+      <div class="lang-switch" aria-label="表示言語">
+        <a href="cloud-hub.html" lang="ja" aria-current="page">日本語</a>
+        <a href="cloud-hub.en.html" lang="en">English</a>
+      </div>
+    </div>
   </div>
 </header>
 <nav><div class="tabs" role="tablist">
@@ -239,7 +255,7 @@ footer{border-top:1px solid var(--line);background:var(--panel)}
 <tr><td class="cat">Failure behavior</td><td>control plane停止時のexisting data plane</td><td>SLAの数字だけで可用性を比較する</td></tr>
 <tr><td class="cat">Operator responsibility</td><td>patch、backup、scaling、failover</td><td>「managed」を同じ責任範囲だと考える</td></tr>
 </tbody></table></div>
-<p class="small"><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/cloud-philosophies.md">思想比較の詳細</a> / <a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/multicloud-design.md">設計判断ガイド</a></p>
+<p class="small"><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/cloud-philosophies.ja.md">思想比較の詳細</a> / <a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/multicloud-design.ja.md">設計判断ガイド</a></p>
 </section>
 <!-- ================= CERTIFICATIONS ================= -->
 <section id="cert" class="panel">
@@ -383,7 +399,7 @@ footer{border-top:1px solid var(--line);background:var(--panel)}
   <div class="card"><h3>この概算に含めないもの</h3><ul id="cost-exclusions"></ul></div>
 </div>
 <div class="killer"><b>比較結果の読み方</b><p id="cost-formula"></p><p>容量一致は性能一致ではない。候補を絞った後は同じapplication、data、SLO、load patternでbenchmarkし、公式calculatorへdisk、LB、IP、request、backup、監視、通信、supportを追加する。</p></div>
-<p class="small"><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/service-and-cost-comparison.md">比較方法と算入範囲</a> / <a href="https://calculator.aws/">AWS Calculator</a> / <a href="https://azure.microsoft.com/pricing/calculator/">Azure Calculator</a> / <a href="https://cloud.google.com/products/calculator">Google Cloud Calculator</a> / <a href="https://www.oracle.com/cloud/costestimator.html">OCI Estimator</a></p>
+<p class="small"><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/service-and-cost-comparison.ja.md">比較方法と算入範囲</a> / <a href="https://calculator.aws/">AWS Calculator</a> / <a href="https://azure.microsoft.com/pricing/calculator/">Azure Calculator</a> / <a href="https://cloud.google.com/products/calculator">Google Cloud Calculator</a> / <a href="https://www.oracle.com/cloud/costestimator.html">OCI Estimator</a></p>
 </section>
 <!-- ================= NETWORK ================= -->
 <section id="net" class="panel">
@@ -487,7 +503,7 @@ footer{border-top:1px solid var(--line);background:var(--panel)}
 <div class="killer"><b>症状をpage、原因をdiagnosticへ</b>
 <ul><li><b>Page:</b> user SLOを現在侵害し、operator actionが必要</li><li><b>Ticket:</b> capacity、certificate expiry、policy driftなど将来risk</li><li><b>Log only:</b> forensic evidence、成功event、変更履歴</li></ul>
 </div>
-<p class="small"><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/operations-comparison.md">運用比較の詳細</a> / <a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/release-intelligence.md">リリースの読み方</a></p>
+<p class="small"><a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/operations-comparison.ja.md">運用比較の詳細</a> / <a href="https://github.com/hjosugi/cloud-hub/blob/main/docs/guides/release-intelligence.ja.md">リリースの読み方</a></p>
 </section>
 <!-- ================= STUDY ================= -->
 <section id="study" class="panel">
@@ -546,10 +562,10 @@ footer{border-top:1px solid var(--line);background:var(--panel)}
 </div>
 
 <div class="grid2">
-  <a class="study-link" href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/domain-guide.md"><b>ドメイン別判断ガイド</b><span>D1〜D5をサービス暗記ではなく要件→設計判断として整理。</span></a>
-  <a class="study-link" href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/flashcards.md"><b>50フラッシュカード</b><span>RAG、agent、Guardrails、性能、評価の頻出比較を10秒回答。</span></a>
-  <a class="study-link" href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/scenario-drills.md"><b>20シナリオ演習</b><span>オリジナル設問で要件語、消去理由、正解patternを確認。</span></a>
-  <a class="study-link" href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/exam-1-notes.md"><b>模試#1 75問圧縮</b><span>全問一行要約、ひっかけ、横断判断軸を20分で周回。</span></a>
+  <a class="study-link" href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/domain-guide.ja.md"><b>ドメイン別判断ガイド</b><span>D1〜D5をサービス暗記ではなく要件→設計判断として整理。</span></a>
+  <a class="study-link" href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/flashcards.ja.md"><b>50フラッシュカード</b><span>RAG、agent、Guardrails、性能、評価の頻出比較を10秒回答。</span></a>
+  <a class="study-link" href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/scenario-drills.ja.md"><b>20シナリオ演習</b><span>オリジナル設問で要件語、消去理由、正解patternを確認。</span></a>
+  <a class="study-link" href="https://github.com/hjosugi/cloud-hub/blob/main/docs/learning/aip-c01/exam-1-notes.ja.md"><b>模試#1 75問圧縮</b><span>全問一行要約、ひっかけ、横断判断軸を20分で周回。</span></a>
 </div>
 
 <h2>公式ドメイン配分</h2>
@@ -597,7 +613,9 @@ const COST_URL = 'data/cost-baselines.json';
 let digestItems = [];
 let activeFilter = 'all';
 function esc(s){ const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function attr(s){ return esc(String(s)).replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
 const VENDOR_NAMES = {aws:'AWS',azure:'AZURE',gcp:'GOOGLE CLOUD',oci:'OCI'};
+try { localStorage.setItem('cloud-hub-language', 'ja'); } catch (_) {}
 
 // ---- purpose-based service catalog ----
 let serviceUseCases = [];
@@ -615,9 +633,9 @@ function renderServiceCatalog(){
   document.getElementById('service-results').innerHTML = items.length ? items.map(item => {
     const cells = ['aws','azure','gcp','oci'].map(vendor => {
       const service = item.services[vendor];
-      return '<div class="service-cell ' + vendor + '"><b>' + VENDOR_NAMES[vendor] + '</b><a href="' + esc(service.url) + '" target="_blank" rel="noopener">' + esc(service.name) + '</a><span>' + esc(service.note) + '</span></div>';
+      return '<div class="service-cell ' + vendor + '"><b>' + VENDOR_NAMES[vendor] + '</b><a href="' + attr(service.url) + '" target="_blank" rel="noopener">' + esc(service.name) + '</a><span>' + esc(service.note) + '</span></div>';
     }).join('');
-    const costLink = item.cost_scenario ? '<button class="act open-cost" data-scenario="' + esc(item.cost_scenario) + '">この用途を費用比較</button>' : '';
+    const costLink = item.cost_scenario ? '<button class="act open-cost" data-scenario="' + attr(item.cost_scenario) + '">この用途を費用比較</button>' : '';
     return '<article class="usecase"><span class="tag">' + esc(item.category_label) + '</span><h3>' + esc(item.title) + '</h3><p>' + esc(item.summary) + '</p>' +
       '<div class="service-quad">' + cells + '</div><div class="questions"><b>比較前に確認:</b> ' + item.questions.map(esc).join(' / ') + '</div>' + costLink + '</article>';
   }).join('') : '<div class="card">該当する用途がありません。語を短くするか、カテゴリを「すべて」に戻してください。</div>';
@@ -661,7 +679,7 @@ function renderCostComparison(){
     '<article class="cost-card ' + vendor + '"><h3>' + VENDOR_NAMES[vendor] + '</h3><span class="amount">' + money(total) + '</span>' +
     '<div class="sku">月額概算 / ' + esc(item.service) + '<br>' + esc(item.sku) + ' · ' + esc(item.region) + '</div>' +
     '<div class="cost-bar"><i style="width:' + Math.max(2,(total/max*100)).toFixed(1) + '%"></i></div>' +
-    '<div class="sku">' + esc(item.capacity) + '<br><a href="' + esc(item.source) + '" target="_blank" rel="noopener">公式価格source</a></div></article>'
+    '<div class="sku">' + esc(item.capacity) + '<br><a href="' + attr(item.source) + '" target="_blank" rel="noopener">公式価格source</a></div></article>'
   ).join('');
   document.getElementById('cost-status').textContent = '単価確認日 ' + costData.checked_at + ' · ' + costData.currency + ' · ' + scenario.comparison_level + ' · 割引前';
   document.getElementById('cost-formula').textContent = '式: ' + scenario.formula + '。入力: ' + units + ' ' + scenario.unit_label + (scenario.usage_label ? ' × ' + usage + ' ' + scenario.usage_label : '') + '。';
@@ -707,7 +725,7 @@ function renderDigest(){
   list.innerHTML = items.map(i => {
     const date = i.published_at ? esc(i.published_at.slice(0,10)) : '日付不明';
     const title = esc(i.title || '(no title)');
-    const titleLink = i.url ? '<a href="' + esc(i.url) + '" target="_blank" rel="noopener">' + title + '</a>' : title;
+    const titleLink = i.url ? '<a href="' + attr(i.url) + '" target="_blank" rel="noopener">' + title + '</a>' : title;
     const tags = (i.tags || []).map(t => '<span class="tag">' + esc(t) + '</span>').join('');
     return '<article class="intel ' + esc(i.vendor) + '">' +
       '<div class="intel-head"><div><span class="chip ' + esc(i.vendor) + '">' + esc(i.vendor.toUpperCase()) + '</span>' +

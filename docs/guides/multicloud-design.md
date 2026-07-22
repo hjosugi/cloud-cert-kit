@@ -1,52 +1,52 @@
 <!-- i18n: language-switcher -->
 [English](multicloud-design.md) | [日本語](multicloud-design.ja.md)
 
-# マルチクラウド設計判断ガイド
+# Multi-cloud design decision guide
 
-「全cloudで同じ構成」を目標にしない。business requirementを共通化し、各cloudではnativeな実装を選ぶ。
+Do not aim for an identical topology in every cloud. Standardize business requirements, then choose a native implementation in each provider.
 
-## 設計の順序
+## Design sequence
 
-### 1. なぜ複数cloudか
+### 1. Why use more than one cloud?
 
-| 理由 | 妥当な設計 | 危険な設計 |
+| Reason | Defensible design | Dangerous design |
 |---|---|---|
-| 規制・data residency | workload/dataを地域・provider境界で明示分割 | 全dataを常時相互複製 |
-| M&A・既存投資 | identity、observability、governanceを段階統合 | 最初から全platformを共通化 |
-| best-of-breed | capability単位でproviderを選びcontractを定義 | serviceごとに無秩序に分散 |
-| outage risk | business processの代替経路を設計 | databaseを異種cloud間で同期すれば安全と考える |
-| commercial leverage | portabilityの高い層を選別 | すべてを最低共通機能へ落とす |
+| Regulation or data residency | Partition workloads and data explicitly by geography and provider | Replicate all data everywhere at all times |
+| M&A or existing investment | Integrate identity, observability, and governance incrementally | Standardize every platform first |
+| Best of breed | Select providers by bounded capability and define contracts | Scatter individual services without ownership boundaries |
+| Outage risk | Design alternate paths for the business process | Assume cross-cloud database synchronization automatically creates safety |
+| Commercial leverage | Identify the layers that genuinely need portability | Reduce everything to the lowest common feature set |
 
-「cloud障害対策」だけを理由にactive-active multi-cloudを選ぶと、通常はdata consistency、identity、network、test、operationの複雑性が可用性利益を上回る。
+Active-active multi-cloud chosen only for “cloud outage protection” usually adds more consistency, identity, network, testing, and operating complexity than the availability benefit justifies.
 
-### 2. 共通化するもの
+### 2. Standardize these outcomes
 
-- business SLO / RTO / RPO
-- data classificationとretention
-- identity lifecycleとbreak-glass原則
-- telemetry schema、incident severity、ownership
-- IaC review、artifact provenance、release approval
-- ADRのdecision criteria
+- Business SLO, RTO, and RPO.
+- Data classification and retention.
+- Identity lifecycle and break-glass principles.
+- Telemetry schema, incident severity, and ownership.
+- IaC review, artifact provenance, and release approval.
+- Decision criteria recorded in ADRs.
 
-### 3. cloud nativeに残すもの
+### 3. Keep these cloud-native
 
-- IAM policy language
-- network topologyとprivate service access
-- managed database HA/backup mechanism
-- autoscaling signalとquota
-- audit log category
-- service-specific failover procedure
+- IAM policy languages.
+- Network topology and private service access.
+- Managed-database HA and backup mechanisms.
+- Autoscaling signals and quotas.
+- Audit-log categories.
+- Service-specific failover procedures.
 
-## 6つの設計軸
+## Six decision axes
 
-| 軸 | 共通質問 | AWS | Azure | GCP | OCI |
+| Axis | Common question | AWS | Azure | Google Cloud | OCI |
 |---|---|---|---|---|---|
-| Organization | 隔離・quota・billing単位は？ | account/OU | subscription/MG | project/folder | compartment |
-| Identity | workload identityと人のaccessは？ | role/Identity Center | managed identity/Entra | service account/WIF | dynamic group/resource principal |
-| Network | scopeとtransitive routingは？ | VPC/TGW | VNet/vWAN | VPC/NCC | VCN/DRG |
-| Data | consistency、location、DRは？ | service別 | service別 | global managed dataが豊富 | Oracle DB選択肢が中心 |
-| Operations | log、metric、change evidenceは？ | CloudWatch/CloudTrail/Config | Monitor/Activity Log/Policy | Operations suite/Cloud Audit Logs | Monitoring/Logging/Audit |
-| Governance | 上位denyとexceptionは？ | SCP+resource policy | Policy+RBAC | Org Policy+IAM deny | IAM policy+Security Zones |
+| Organization | What is the isolation, quota, and billing unit? | Account / OU | Subscription / management group | Project / folder | Compartment |
+| Identity | How do humans and workloads authenticate? | Roles / IAM Identity Center | Managed identities / Entra | Service accounts / WIF | Dynamic groups / resource principals |
+| Network | What is the scope and transit-routing model? | VPC / TGW | VNet / vWAN | VPC / NCC | VCN / DRG |
+| Data | What are the consistency, location, and DR guarantees? | Service-specific | Service-specific | Broad global managed-data portfolio | Oracle Database-centered choices |
+| Operations | Where are logs, metrics, and change evidence? | CloudWatch / CloudTrail / Config | Monitor / Activity Log / Policy | Operations suite / Cloud Audit Logs | Monitoring / Logging / Audit |
+| Governance | How do inherited denies and exceptions work? | SCP + resource policies | Policy + RBAC | Organization Policy + IAM deny | IAM policies + Security Zones |
 
 ## ADR template
 
@@ -54,36 +54,36 @@
 # ADR-NNN: <decision>
 
 ## Business outcome
-- user impact / compliance / deadline
+- User impact / compliance / deadline
 
 ## Measurable requirements
 - SLO:
-- RTO/RPO:
-- data residency:
-- expected load:
-- cost ceiling:
+- RTO / RPO:
+- Data residency:
+- Expected load:
+- Cost ceiling:
 
 ## Cloud-specific facts
-- resource scope:
-- failure domains:
-- identity boundary:
-- data plane behavior during control plane failure:
-- quota and regional availability:
+- Resource scope:
+- Failure domains:
+- Identity boundary:
+- Data-plane behavior during a control-plane outage:
+- Quotas and regional availability:
 
 ## Options
 | Option | Reliability | Security | Operations | Cost | Lock-in |
 
 ## Decision and consequences
-- chosen option:
-- accepted risks:
-- validation test:
-- exit criteria:
+- Selected option:
+- Accepted risk:
+- Validation test:
+- Exit criteria:
 ```
 
-## portabilityの3段階
+## Three levels of portability
 
-1. Operational portability: 同じSLO、dashboard、incident processで運用できる。
-2. Deployment portability: IaC/module interfaceは共通だが、内部resourceはcloud native。
-3. Runtime portability: container/VM/applicationが別cloudでも動く。
+1. Operational portability: operate to the same SLO, dashboard vocabulary, and incident process.
+2. Deployment portability: share IaC or module interfaces while keeping the internal resources cloud-native.
+3. Runtime portability: run the same container, VM, or application in another cloud.
 
-通常は1を最優先し、2を必要な範囲で行い、3は明確なexit requirementがあるworkloadだけに適用する。
+Prioritize level 1, apply level 2 where it pays for itself, and require level 3 only for workloads with a concrete exit requirement.

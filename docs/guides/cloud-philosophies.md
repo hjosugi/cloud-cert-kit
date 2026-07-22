@@ -1,82 +1,73 @@
 <!-- i18n: language-switcher -->
 [English](cloud-philosophies.md) | [日本語](cloud-philosophies.ja.md)
 
-# 4クラウドの思想を比較する
+# Comparing four cloud philosophies
 
-これは優劣表ではない。各社の公式landing zone、resource hierarchy、Well-Architected guidanceから、設計時に現れやすい傾向を抽出したもの。個々のserviceは例外を持つため、最終判断はresource scopeとSLAを確認する。
+This is not a ranking. It extracts recurring design tendencies from each provider's landing-zone, resource-hierarchy, and Well-Architected guidance. Individual services have exceptions, so verify the exact resource scope and SLA before deciding.
 
-## 一枚比較
+## At a glance
 
-| 観点 | AWS | Azure | Google Cloud | OCI |
+| Perspective | AWS | Azure | Google Cloud | OCI |
 |---|---|---|---|---|
-| 出発点 | 小さいbuilding blockを組み合わせる | enterprise control planeへworkloadを載せる | global infrastructureとmanaged platformを活用する | database・enterprise workloadを明確な区画で動かす |
-| 主要な隔離単位 | account | subscription | project | compartment |
-| 上位階層 | Organization→OU→Account | Entra tenant→Management Group→Subscription→Resource Group | Organization→Folder→Project | Tenancy→nested Compartment |
-| 統制 | SCP、Control Tower、Config | Azure Policy、Management Group、Landing Zone | Organization Policy、hierarchical firewall、IAM deny | IAM Policy、Security Zone、Quota |
-| identityの癖 | resource policyとidentity policyの両面 | Entra IDとAzure RBACの二層 | principal+role binding、resource hierarchy継承 | subjectが何をどこでできるかをpolicy文で表す |
-| networkの癖 | VPCはregional、subnetはAZ。serviceごとのendpoint設計 | VNetはregional、ARM/Entra/Policyとのenterprise統合 | global/regional resourceが混在。global LBとproject設計が強い | VCNはregional、DRG/compartmentとenterprise networkを構成 |
-| reliabilityの癖 | failure isolationをaccount/AZ/Regionへ明示的に組む | zone/regionに加えcentral platform運用との整合 | SLO、error budget、global traffic、managed dataを重視 | Availability Domain/Fault DomainとDB service特性を明示 |
-| 運用の中心 | CloudWatch、CloudTrail、Config、Systems Manager | Azure Monitor、Activity Log、Policy、Defender | Cloud Monitoring/Logging/Trace、SRE practice | Monitoring、Logging、Audit、Cloud Guard |
-| 設計者への問い | どのaccount・Region・service責任境界に置くか | どのtenant/MG/subscription policyで統制するか | user experience SLOとglobal/regional scopeは何か | どのcompartment・AD/FD・DB構成に置くか |
+| Starting point | Compose small building blocks | Place workloads under an enterprise control plane | Use a global infrastructure and managed platform | Run database and enterprise workloads in explicit administrative partitions |
+| Primary isolation unit | Account | Subscription | Project | Compartment |
+| Hierarchy | Organization → OU → account | Entra tenant → management group → subscription → resource group | Organization → folder → project | Tenancy → nested compartment |
+| Governance | SCP, Control Tower, Config | Azure Policy, management groups, Landing Zones | Organization Policy, hierarchical firewall policies, IAM deny | IAM policies, Security Zones, quotas |
+| Identity characteristic | Identity and resource policies both matter | Entra ID and Azure RBAC are separate layers | Principals receive role bindings inherited through the resource hierarchy | Policy statements define what a subject may do and where |
+| Network characteristic | VPCs are regional; subnets are zonal | VNets are regional and integrate with ARM, Entra, and Policy | Global and regional resources coexist; global load balancing and project design are prominent | VCNs are regional; DRGs and compartments shape enterprise networks |
+| Reliability characteristic | Explicitly compose isolation across accounts, AZs, and Regions | Align zone and region design with the central platform operating model | Emphasize SLOs, error budgets, global traffic, and managed data | Make Availability Domains, Fault Domains, and database characteristics explicit |
+| Core question | Which account, Region, and service responsibility boundary owns this? | Which tenant, management-group, and subscription policies govern this? | What user SLO and global or regional scope does this require? | Which compartment, AD/FD, and database design owns this? |
 
-## AWS: composable primitivesとaccount isolation
+## AWS: composable primitives and account isolation
 
-AWSはserviceごとの責任境界が明確で、IAM、network、event、storageを組み合わせてarchitectureを作る傾向が強い。自由度が高いぶん、account vending、central logging、guardrailを先に作らないと構成差が拡大する。
+AWS exposes clear service-level responsibility boundaries and encourages architectures that compose identity, networking, events, and storage. That flexibility makes early account vending, centralized logging, and guardrails important.
 
-設計時の観点:
+- Separate production, non-production, security, log archive, and network concerns with accounts.
+- Build OUs around common controls and operating needs, not the organization chart.
+- Verify both the data path and authorization for VPC endpoints, resource policies, and KMS key policies.
+- Check each managed service's exact multi-AZ and multi-Region responsibility split.
 
-- production/non-production、security、log archive、networkをaccountで分離する。
-- OUは組織図ではなく、共通controlとsecurity/operational needで作る。
-- VPC endpoint、resource policy、KMS key policyのようにdata pathとauthorizationをserviceごとに確認する。
-- managed serviceでもmulti-AZ/multi-Regionの責任範囲はserviceごとに違う。
+Official guidance: [AWS multi-account design principles](https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/design-principles-for-your-multi-account-strategy.html)
 
-公式: [AWS multi-account design principles](https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/design-principles-for-your-multi-account-strategy.html)
+## Azure: enterprise hierarchy and policy-driven governance
 
-## Azure: enterprise hierarchyとpolicy-driven governance
+Azure organizes enterprise identity, policy, and hybrid environments around the Microsoft Entra tenant, management groups, subscriptions, and Azure Resource Manager. A subscription is a policy, quota, and management boundary as well as a billing boundary.
 
-AzureはMicrosoft Entra tenant、Management Group、Subscription、Azure Resource Managerを軸に、enterprise全体のidentity・policy・hybrid environmentを統制する思想が強い。subscriptionはbillingだけでなくpolicy、quota、management boundaryでもある。
+- Separate platform landing zones from application landing zones.
+- Group management hierarchy nodes by common policy needs rather than the organization chart.
+- Distribute guardrails with Azure Policy and give workload teams autonomy through subscription vending.
+- Do not confuse Entra directory roles with Azure RBAC roles.
 
-設計時の観点:
+Official guidance: [Azure landing-zone design principles](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-principles)
 
-- platform landing zoneとapplication landing zoneを分ける。
-- Management Group hierarchyは組織図のコピーではなく、同じpolicyを必要とするworkload typeでまとめる。
-- Azure Policyでguardrailを配りつつ、subscription vendingでworkload teamへ自治を渡す。
-- Entra directory roleとAzure RBAC roleを混同しない。
+## Google Cloud: project boundaries, a global platform, and SRE
 
-公式: [Azure landing zone design principles](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-principles)
+Google Cloud treats projects as practical API, quota, billing, and IAM units, with policy inherited from organizations and folders. Global and regional resources coexist, while data, Kubernetes, global load balancing, and SRE practices strongly influence architecture.
 
-## Google Cloud: project boundary、global platform、SRE
+- Treat projects as lifecycle, quota, IAM, and billing boundaries—not folders.
+- Identify whether every resource is zonal, regional, global, or multi-regional.
+- Define user-facing SLIs/SLOs and data correctness, not only service uptime.
+- Design the hierarchy around policy, environments, and team autonomy.
 
-Google CloudはprojectをAPI、quota、billing、IAMの実務単位として扱い、Organization/Folderからpolicyを継承する。global resourceとregional resourceが混在し、data/analytics、Kubernetes、global load balancing、SREの考え方がarchitectureへ入りやすい。
+Official guidance: [Resource hierarchy](https://docs.cloud.google.com/architecture/landing-zones/decide-resource-hierarchy) / [Reliability pillar](https://docs.cloud.google.com/architecture/framework/reliability)
 
-設計時の観点:
+## OCI: compartment governance and database-centered enterprise design
 
-- projectを単なるresource groupとして扱わず、lifecycle・quota・IAM・billing boundaryとして設計する。
-- resourceがzonal/regional/global/multi-regionalのどれかを最初に確認する。
-- availabilityではservice稼働だけでなく、user-facing SLI/SLOとdata correctnessを定義する。
-- hierarchyは組織図よりpolicy、environment、team autonomyから決める。
+OCI partitions a tenancy with nested compartments, creating boundaries for IAM, operations, quotas, networking, security, and cost. Its Oracle Database and enterprise-system focus makes performance, licensing, and data residency especially explicit.
 
-公式: [Google Cloud resource hierarchy](https://docs.cloud.google.com/architecture/landing-zones/decide-resource-hierarchy) / [Reliability pillar](https://docs.cloud.google.com/architecture/framework/reliability)
+- Treat compartments as IAM, operating, and quota boundaries—not folders.
+- Read the policy verb (`inspect`, `read`, `use`, or `manage`), resource type, and location together.
+- Verify the Region, Availability Domain, and Fault Domain combination.
+- Separate database-specific HA, backup, and DR responsibilities from the application layer.
 
-## OCI: compartment governanceとdatabase-centered enterprise
+Official guidance: [OCI Cloud Adoption Framework](https://docs.oracle.com/en-us/iaas/Content/cloud-adoption-framework/home.htm) / [OCI Core Landing Zone](https://docs.oracle.com/en-us/iaas/Content/cloud-adoption-framework/oci-core-landing-zone.htm)
 
-OCIはtenancy内をnested compartmentで区画化し、IAM policy、quota、network、security、costの運用境界を作る。Oracle Databaseや既存enterprise systemとの接続で、性能・license・data residencyを明示的に扱いやすい。
+## Five checks for an “equivalent” service
 
-設計時の観点:
+1. Resource scope: global, regional, or zonal.
+2. Isolation boundary: account, subscription, project, or compartment.
+3. Control inheritance: how higher-level policies inherit and deny.
+4. Data-plane failure behavior: whether existing traffic continues during a control-plane outage.
+5. Operator responsibility: who patches, backs up, scales, and fails over.
 
-- compartmentをfolderではなくIAM/operation/quota boundaryとして扱う。
-- policyのverb (`inspect/read/use/manage`) とresource type、locationを読む。
-- Region、Availability Domain、Fault Domainの組合せを確認する。
-- DB service固有のHA/backup/DR責任とapplication tierを分けて考える。
-
-公式: [OCI Cloud Adoption Framework](https://docs.oracle.com/en-us/iaas/Content/cloud-adoption-framework/home.htm) / [OCI Core Landing Zone](https://docs.oracle.com/en-us/iaas/Content/cloud-adoption-framework/oci-core-landing-zone.htm)
-
-## 同等サービス比較で必ず見る5点
-
-1. resource scope: global / regional / zonal
-2. isolation boundary: account / subscription / project / compartment
-3. control inheritance: 上位policyがどう継承・denyされるか
-4. data plane failure: control plane停止時も既存trafficが流れるか
-5. operator responsibility: patch、backup、scaling、failoverのどこまでmanagedか
-
-名前が似ていても、この5点が違えば移植時のarchitectureは同じにならない。
+Similar names do not imply a portable architecture when these five properties differ.

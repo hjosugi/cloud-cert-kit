@@ -7,11 +7,11 @@
 
 サービス名の対応ではなく、各クラウドのリソース境界、コントロールプレーン、障害ドメイン、運用モデルの違いから設計する。
 
-1. [4クラウドの思想](guides/cloud-philosophies.md)
-2. [マルチクラウド設計判断](guides/multicloud-design.md)
-3. [運用モデル比較](guides/operations-comparison.md)
-4. [リリースの読み方](guides/release-intelligence.md)
-5. [用途検索と費用比較](guides/service-and-cost-comparison.md)
+1. [4クラウドの思想](guides/cloud-philosophies.ja.md)
+2. [マルチクラウド設計判断](guides/multicloud-design.ja.md)
+3. [運用モデル比較](guides/operations-comparison.ja.md)
+4. [リリースの読み方](guides/release-intelligence.ja.md)
+5. [用途検索と費用比較](guides/service-and-cost-comparison.ja.md)
 
 ## その他
 
